@@ -79,6 +79,12 @@ extension CGFloat {
     }
 }
 
+extension CGFloat {
+    static var deviceFontScale: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 1.9 : 1.0
+    }
+}
+
 extension Date {
     func formatted(_ format: String) -> String {
         let formatter = DateFormatter()

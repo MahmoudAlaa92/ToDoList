@@ -30,8 +30,27 @@ extension Color {
         return Color(hex: "B1B1B1")
     }
     
+    static var lightPink: Color {
+        return Color(hex: "F5B5D6")
+    }
+    
+    static var lightBeige: Color {
+        return Color(hex: "FCF5E6")
+    }
+    
     static var darkGray: Color {
-        return Color(hex: "4C4F4D")
+        return Color(hex: "767676")
+    }
+    
+     static var LightGray: Color {
+        return Color(hex: "8C8C8C")
+    }
+    
+    static var lightGreen: Color {
+        return Color(hex: "83B8AE")
+    }
+    static var darkGreen: Color {
+        return Color(hex: "2A5674")
     }
     
     
