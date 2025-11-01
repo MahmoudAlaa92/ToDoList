@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-struct Home: View {
+struct HomeView: View {
+    
+    @StateObject var calenderVM: CalenderViewModel
+    
     var body: some View {
         ZStack {
             
@@ -15,10 +18,22 @@ struct Home: View {
                 HomeNavBar()
                 ScrollView {
                     HeaderView(name: "Calender", seeAll: "")
+                    ScrollView(.horizontal) {
+                        HStack(spacing: 24 * .deviceFontScale) {
+                            ForEach(calenderVM.days, id: \.self) { item in
+                                CalenderCard(title: item.day,
+                                             number: item.number,
+                                             progress: item.progress)
+                            }
+                        }
+                        .padding([.horizontal, .vertical], 8 * .deviceFontScale)
+                    }
+                    .padding(.bottom, 24 * .deviceFontScale)
+                    
                     AnnouncementCard()
                     HeaderView(name: "To day’s tasks")
-                    CardTask(name: "Mobile trading", title: "Client Review &Feedback")
-                    CardTask(name: "cubes", title: "Client Review &Feedback")
+                    TaskCard(imageName: "Mobile trading", title: "Client Review &Feedback")
+                    TaskCard(imageName: "cubes", title: "Client Review &Feedback")
                     HeaderView(name: "My Projects")
                     ProjectCell(name: "bag", title: "Some Purchases", subtitle: "5 tasks",
                                 colorCircle: .white, backgroundColor: .lightPink)
@@ -35,5 +50,5 @@ struct Home: View {
 }
 
 #Preview {
-    Home()
+    HomeView(calenderVM: CalenderViewModel())
 }

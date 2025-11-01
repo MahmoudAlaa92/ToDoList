@@ -14,6 +14,7 @@ struct CircleAndText: View {
     var colorSubTitle: Color = Color.LightGray
     var colorCircle: Color = Color.lightBeige
     var showCheckCircle: Bool = true
+    var showStrikeLine: Bool = false
     
     var body: some View {
         HStack {
@@ -34,6 +35,8 @@ struct CircleAndText: View {
                     Spacer().frame(width: 10, height: 10)
                     Text(title)
                         .font(.customfont(.medium, fontSize: 16 * .deviceFontScale))
+                        .strikethrough(showStrikeLine, color: .gray)
+
                     
                     Text(subTitle)
                         .foregroundStyle(colorSubTitle)

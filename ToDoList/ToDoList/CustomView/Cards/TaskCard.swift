@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-struct CardTask: View {
-    var name: String = "Mobile trading"
+struct TaskCard: View {
+    var imageName: String = "Mobile trading"
     var title: String = "Client Review &Feedback"
     
+    var showStrikeLine: Bool = false
+
     var body: some View {
         VStack {
-            CircleAndText(name: name, title: title)
+            CircleAndText(name: imageName, title: title, showStrikeLine: showStrikeLine)
             Divider()
                 .frame(height: 1)
                 .background(Color.darkGray.opacity(1))
@@ -31,5 +33,5 @@ struct CardTask: View {
 }
 
 #Preview {
-    CardTask()
+    TaskCard()
 }

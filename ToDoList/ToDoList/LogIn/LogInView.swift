@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LogIn: View {
+struct LogInView: View {
     var body: some View {
         ScrollView {
             ZStack(alignment: .top) {
@@ -61,12 +61,12 @@ struct LogIn: View {
 }
 
 #Preview {
-    LogIn()
+    LogInView()
 }
 
 // MARK: - Views
 //
-extension LogIn {
+extension LogInView {
     
     func backGround() -> some View {
         Image("backGround")

@@ -11,6 +11,7 @@ struct SemiCircleProgressView: View {
     var progress: Double // from 0.0 to 1.0
     var lineWidth: CGFloat = 8
     var color: Color = .blue
+    var forGroundColor: Color = .white
     
     var body: some View {
         ZStack {
@@ -26,7 +27,7 @@ struct SemiCircleProgressView: View {
             // Percentage Text
             Text("\(Int(progress * 100))%")
                 .font(.customfont(.semibold, fontSize: 14 * .deviceFontScale))
-                .foregroundColor(.white)
+                .foregroundColor(forGroundColor)
                 .offset(y: 2) // move down to stay inside the semicircle
         }
     }

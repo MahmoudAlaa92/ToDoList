@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeNavBar: View {
     var body: some View {
         HStack(spacing: 6) {
-            Image("ProfilePicture")
+            Image("ProfilePicture2")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 50 * .deviceFontScale,

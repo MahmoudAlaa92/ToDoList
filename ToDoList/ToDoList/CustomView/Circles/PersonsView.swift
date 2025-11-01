@@ -10,7 +10,7 @@ import SwiftUI
 struct PersonsView: View {
     var body: some View {
         HStack {
-            Text("Today - 11:42 am - 2:30pm ")
+            Text("Today - 11:42 am - 2:30 pm ")
                 .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
             Spacer()
             
