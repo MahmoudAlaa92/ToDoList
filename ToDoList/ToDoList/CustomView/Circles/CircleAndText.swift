@@ -15,7 +15,8 @@ struct CircleAndText: View {
     var colorCircle: Color = Color.lightBeige
     var showCheckCircle: Bool = true
     var showStrikeLine: Bool = false
-    
+    @State var isChecked = false
+
     var body: some View {
         HStack {
             Circle()
@@ -45,7 +46,7 @@ struct CircleAndText: View {
                 if showCheckCircle {
                     Spacer()
                     VStack {
-                        CheckCircleButton()
+                        CheckCircleButton(isChecked: isChecked)
                         Spacer() .frame(width: 10, height: 20)
                     }
                 }

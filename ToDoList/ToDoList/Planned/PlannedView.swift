@@ -17,7 +17,13 @@ struct PlannedView: View {
                 CustomNavBar()
                 VStack {
                     ForEach(PlannedVM.plannedCompleted, id: \.self) { task in
-                        TaskCard(imageName: task.imageName, title: task.title, showStrikeLine: true)
+                        TaskCard(imageName: task.imageName,
+                                 title: task.title,
+                                 showStrikeLine: true,
+                                 day: task.day,
+                                 start: task.start,
+                                 end: task.end,
+                                 isChecked: true)
                     }
                 }
                 .padding(.vertical, 14)

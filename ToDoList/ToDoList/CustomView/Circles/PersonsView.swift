@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct PersonsView: View {
+    var day: String = "Today"
+    var start: String = "11:42 am"
+    var end: String = "2:30 pm "
+    
     var body: some View {
         HStack {
-            Text("Today - 11:42 am - 2:30 pm ")
+            Text("\(day) - \(start) - \(end)")
                 .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
             Spacer()
             

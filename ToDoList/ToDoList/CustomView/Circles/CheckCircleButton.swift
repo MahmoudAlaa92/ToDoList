@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CheckCircleButton: View {
-    @State private var isChecked = false
+    @State var isChecked = false
 
     var body: some View {
         Button {
