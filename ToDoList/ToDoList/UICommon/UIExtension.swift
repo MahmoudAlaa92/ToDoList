@@ -86,9 +86,9 @@ extension CGFloat {
 }
 
 extension Date {
-    func formatted(_ format: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        return formatter.string(from: self)
-    }
+    func toString(_ format: String = "d MMMM, yyyy") -> String {
+         let formatter = DateFormatter()
+         formatter.dateFormat = format
+         return formatter.string(from: self)
+     }
 }

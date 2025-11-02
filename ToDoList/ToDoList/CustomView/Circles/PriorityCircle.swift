@@ -18,7 +18,7 @@ struct PriorityCircle: View {
         HStack {
             Text(title)
                 .foregroundStyle(isSelected ? Color.primaryApp : Color.darkGray)
-                .font(.customfont(.semibold, fontSize: 16))
+                .font(.customfont(.semibold, fontSize: 16 * .deviceFontScale))
             
             ZStack {
                 Circle()

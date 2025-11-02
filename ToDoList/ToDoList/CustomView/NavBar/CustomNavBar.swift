@@ -22,13 +22,13 @@ struct CustomNavBar: View {
                 Image("Search")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 26 * .deviceFontScale,
-                           height: 26 * .deviceFontScale)
+                    .frame(width: 28 * .deviceFontScale,
+                           height: 28 * .deviceFontScale)
                 Image("Notification")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 26 * .deviceFontScale,
-                           height: 26 * .deviceFontScale)
+                    .frame(width: 28 * .deviceFontScale,
+                           height: 28 * .deviceFontScale)
             }
         }
     }

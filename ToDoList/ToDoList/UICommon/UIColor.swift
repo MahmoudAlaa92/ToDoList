@@ -14,6 +14,11 @@ extension Color {
         
     }
     
+    static var darkPrimaryApp: Color {
+        return Color(hex: "273A3F")
+        
+    }
+    
     static var primaryText: Color {
         return Color(hex: "030303")
     }

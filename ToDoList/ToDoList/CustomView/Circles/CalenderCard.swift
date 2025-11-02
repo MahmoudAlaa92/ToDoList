@@ -12,14 +12,15 @@ struct CalenderCard: View {
     var number: Int = 6
     var progress: Double
     var lineWidth: CGFloat = 4
+    var textColor: Color = Color.LightGray
     var color: Color = .primaryApp
     var forGroundColor: Color = .primaryApp
     
     var body: some View {
         VStack {
             Text(title)
-                .font(.customfont(.regular, fontSize: 14))
-                .foregroundStyle(Color.LightGray)
+                .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
+                .foregroundStyle(textColor)
             
             ZStack {
                 
