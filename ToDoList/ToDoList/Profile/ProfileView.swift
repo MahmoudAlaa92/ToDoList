@@ -22,18 +22,20 @@ struct ProfileView: View {
                         Image("ProfilePicture2")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 260, height: 180)
+                            .frame(width: 260 * .deviceFontScale,
+                                   height: 180 * .deviceFontScale)
                         
                         Image("Edit")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 50, height: 40)
+                            .frame(width: 50 * .deviceFontScale,
+                                   height: 40 * .deviceFontScale)
                             .padding(10)
                             .background(Circle().fill(Color.white))
-                            .offset(y: 80)
+                            .offset(y: 80 * .deviceFontScale)
                             .onTapGesture {}
                     }
-                    .frame(height: 200)
+                    .frame(height: 200 * .deviceFontScale)
 
                     Text("Edite your photo")
                         .font(.customfont(.medium, fontSize: 16 * .deviceFontScale))
@@ -42,7 +44,7 @@ struct ProfileView: View {
                 .padding(.bottom, 8)
                 
                 
-                VStack(spacing: 16) {
+                VStack(spacing: 16 * .deviceFontScale) {
                     CustomTextField(title:"Full Name", placeholder: "Enter your full name", text: $changeFullName)
                     CustomTextField(title:"Email", placeholder: "Enter your email", text: $changeFullName)
                     CustomTextField(title:"Full Phone Number", placeholder: "+20 1142128919", text: $changeFullName)
