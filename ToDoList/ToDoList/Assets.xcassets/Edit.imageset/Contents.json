@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "pProfilePicture2.png 17-21-40-663.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "pProfilePicture2.png 17-21-40-663@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "pProfilePicture2.png 17-21-40-663@3x.png",
+      "filename" : "Edit.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -15,7 +15,7 @@ struct NotificationView: View {
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
-                navBar()
+                BackAndEllipsesNavBar()
                 HeaderView(name: "Notifications", seeAll: "")
                 notificationRows(days: Array(viewModel.notificationItem.keys))
                 
@@ -33,20 +33,6 @@ struct NotificationView: View {
 // MARK: - Views
 //
 extension NotificationView {
-    func navBar() -> some View {
-        HStack {
-            Image("Back")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 30, height: 30)
-            Spacer()
-            Image("Ellipsis")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 30, height: 30)
-        }
-        .padding(.bottom, 16)
-    }
     
     func notificationRows(days: [String]) -> some View {
         ForEach(days, id: \.self) { day in

@@ -14,7 +14,7 @@ struct PrimaryButton: View {
     var body: some View {
         Text(title)
             .font(.customfont(.medium, fontSize: 17))
-            .frame(width: .screenWidth * 0.9, height: 52)
+            .frame(width: .screenWidth * 0.9, height: 52 * .deviceFontScale)
             .foregroundStyle(.white)
             .background(
                 RoundedRectangle(cornerRadius: 12)
