@@ -33,7 +33,7 @@ struct MyProjectView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    AddProject {}
+                    AddProject(title: "Add Project", backGround: Color.primaryApp) {}
                 }
             }
             

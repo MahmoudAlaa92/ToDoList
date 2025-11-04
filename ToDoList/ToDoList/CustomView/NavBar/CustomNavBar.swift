@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CustomNavBar: View {
+    var showSearchIcon: Bool = true
+    
     var body: some View {
         HStack(spacing: 6) {
             Image("Back")
@@ -19,11 +21,13 @@ struct CustomNavBar: View {
             Spacer()
             
             HStack {
-                Image("Search")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 28 * .deviceFontScale,
-                           height: 28 * .deviceFontScale)
+                if showSearchIcon {
+                    Image("Search")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 28 * .deviceFontScale,
+                               height: 28 * .deviceFontScale)
+                }
                 Image("Notification")
                     .resizable()
                     .scaledToFit()
@@ -31,6 +35,7 @@ struct CustomNavBar: View {
                            height: 28 * .deviceFontScale)
             }
         }
+        .padding(.bottom, 16 * .deviceFontScale)
     }
 }
 

@@ -13,7 +13,7 @@ struct PrimaryButton: View {
     
     var body: some View {
         Text(title)
-            .font(.customfont(.medium, fontSize: 17))
+            .font(.customfont(.medium, fontSize: 17 * .deviceFontScale))
             .frame(width: .screenWidth * 0.9, height: 52 * .deviceFontScale)
             .foregroundStyle(.white)
             .background(

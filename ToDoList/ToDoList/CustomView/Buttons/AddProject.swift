@@ -8,27 +8,32 @@
 import SwiftUI
 
 struct AddProject: View {
+    var title: String
+    var titleColor: Color = .white
+    var backGround: Color
+    var plusCircleColor: Color = .white
     var action: (() -> Void)?
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
-                Image(systemName: "plus.circle")
+                Image("plus")
                     .resizable()
                     .scaledToFit()
-                    .foregroundStyle(Color.white)
-                    .frame(width: 20 * .deviceFontScale,
-                           height: 20 * .deviceFontScale)
+                    .foregroundStyle(plusCircleColor)
+                    .frame(width: 24 * .deviceFontScale,
+                           height: 24 * .deviceFontScale)
                 
                 
-                Text("Add project")
+                Text(title)
                     .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(titleColor)
                 
             }
-            .padding()
-            .background(Color.primaryApp)
+            .padding(backGround == .white ? 0 : 12)
+            .background(backGround)
             .clipShape(RoundedRectangle(cornerRadius: 14))
+            .padding(.vertical, 4 * .deviceFontScale)
             .onTapGesture {
                 action?()
             }
@@ -37,5 +42,5 @@ struct AddProject: View {
 }
 
 #Preview {
-    AddProject()
+    AddProject(title: "Add project", backGround: Color.primaryApp)
 }
