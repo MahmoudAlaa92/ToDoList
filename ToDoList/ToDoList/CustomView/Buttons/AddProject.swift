@@ -17,7 +17,7 @@ struct AddProject: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image("plus")
+                Image(systemName: "plus.circle")
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(plusCircleColor)

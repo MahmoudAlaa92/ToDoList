@@ -32,7 +32,8 @@ struct TaskActionBar: View {
             Image(name)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 30 * .deviceFontScale, height: 30 * .deviceFontScale)
+                .frame(width: 30 * .deviceFontScale,
+                       height: 30 * .deviceFontScale)
         }
         .buttonStyle(.plain)
     }
