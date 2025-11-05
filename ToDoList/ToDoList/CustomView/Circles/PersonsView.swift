@@ -24,12 +24,12 @@ struct PersonsView: View {
                     .scaledToFit()
                     .frame(width: 40 * .deviceFontScale,
                            height: 40 * .deviceFontScale)
-                Image("teenager girl")
+                Image("teenagerGirl")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40 * .deviceFontScale,
                            height: 40 * .deviceFontScale)
-                Image("young smiling man")
+                Image("youngSmilingMan")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40 * .deviceFontScale,

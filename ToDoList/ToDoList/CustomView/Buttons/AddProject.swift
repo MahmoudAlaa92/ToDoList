@@ -21,8 +21,8 @@ struct AddProject: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(plusCircleColor)
-                    .frame(width: 24 * .deviceFontScale,
-                           height: 24 * .deviceFontScale)
+                    .frame(width: 20 * .deviceFontScale,
+                           height: 20 * .deviceFontScale)
                 
                 
                 Text(title)

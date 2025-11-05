@@ -16,13 +16,13 @@ struct AssignPersons: View {
             Text("Assign To")
                 .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
             
-            HStack(spacing: 8) {
+            HStack(spacing: 0) {
                 ForEach(persons, id: \.self) { name in
                     Image(name)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 38 * .deviceFontScale,
-                               height: 38 * .deviceFontScale)
+                        .frame(width: 42 * .deviceFontScale,
+                               height: 42 * .deviceFontScale)
                 }
             }
             
