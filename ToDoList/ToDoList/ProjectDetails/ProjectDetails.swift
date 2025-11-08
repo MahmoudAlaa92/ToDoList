@@ -49,7 +49,7 @@ struct ProjectDetails: View {
                 AssignPersons(persons: ["ProfilePicture", "ProfilePicture2"])
                 CustomTextField(title: "Comment",
                                 placeholder: "Enter your comment",
-                                height: 100,
+                                height: 100 * .deviceFontScale,
                                 text: $changeComment)
                 PrimaryButton(title: "Add Your Comment", action: {})
                 

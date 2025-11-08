@@ -16,7 +16,7 @@ struct AssignPersons: View {
             Text("Assign To")
                 .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
             
-            HStack(spacing: 0) {
+            HStack(spacing: 2) {
                 ForEach(persons, id: \.self) { name in
                     Image(name)
                         .resizable()
