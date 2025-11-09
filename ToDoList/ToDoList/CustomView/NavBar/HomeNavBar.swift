@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeNavBar: View {
+    var onTappedNotification: () -> Void
+    
     var body: some View {
         HStack(spacing: 6) {
             Image("ProfilePicture2")
@@ -30,11 +32,14 @@ struct HomeNavBar: View {
                 .scaledToFit()
                 .frame(width: 26 * .deviceFontScale,
                        height: 26 * .deviceFontScale)
+                .onTapGesture {
+                    onTappedNotification()
+                }
             
         }
     }
 }
 
 #Preview {
-    HomeNavBar()
+    HomeNavBar(onTappedNotification: {})
 }

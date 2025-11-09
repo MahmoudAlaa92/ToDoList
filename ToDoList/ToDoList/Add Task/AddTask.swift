@@ -13,7 +13,8 @@ struct AddTask: View {
     @State var changeTaskTitle: String = ""
     @State var changeTaskSubTitle: String = ""
     @State var changeTaskDescription: String = ""
-    
+    let coordinator: AppCoordinator
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
@@ -28,10 +29,6 @@ struct AddTask: View {
         .scrollIndicators(.hidden)
         Spacer()
     }
-}
-
-#Preview {
-    AddTask()
 }
 // MARK: - Views
 //

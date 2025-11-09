@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TaskCard: View {
-    var imageName: String = "Mobile trading"
-    var title: String = "Client Review &Feedback"
+    var imageName: String
+    var title: String
     var showStrikeLine: Bool = false
     var day: String = "Today"
     var start: String = "11:42 am"
@@ -35,7 +35,8 @@ struct TaskCard: View {
         .padding(.bottom, 10 * .deviceFontScale)
     }
 }
-
+// MARK: - Preview
+//
 #Preview {
-    TaskCard()
+    TaskCard(imageName: "cubes", title: "Review you work")
 }

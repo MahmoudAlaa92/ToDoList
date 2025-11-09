@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AnnouncementCard: View {
+    
     var body: some View {
         ZStack(alignment: .leading) {
             Image("announcement")
@@ -38,7 +39,8 @@ struct AnnouncementCard: View {
             .offset(y: -4 * .deviceFontScale)
         }
         .padding(.top, -24 * .deviceFontScale)
-        .padding(.bottom, -38 * .deviceFontScale)    }
+        .padding(.bottom, -38 * .deviceFontScale)
+    }
 }
 
 #Preview {

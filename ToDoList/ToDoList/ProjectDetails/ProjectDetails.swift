@@ -10,6 +10,12 @@ import SwiftUI
 struct ProjectDetails: View {
     
     @State var changeComment: String = ""
+    @State var title: String = "Client Review &Feedback"
+    @State var subTitle: String = "Redesign app"
+    @State var imageName: String = "cubes"
+    @State var startDate: String = "11am"
+    @State var endDate: String = "9pm"
+    weak var coordinator: AppCoordinator?
     
     var body: some View {
         ScrollView {
@@ -18,17 +24,17 @@ struct ProjectDetails: View {
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Client Review &Feedback")
+                        Text(title)
                             .font(.customfont(.medium, fontSize: 18 * .deviceFontScale))
                         
-                        Text("Redesign app")
+                        Text(subTitle)
                             .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
                             .foregroundStyle(Color.LightGray)
                     }
                     Spacer()
                 }
                 
-                Image("cubes")
+                Image(imageName)
                     .resizable()
                     .scaledToFit()
                     .frame(width: .screenWidth / 1.5,
@@ -39,7 +45,7 @@ struct ProjectDetails: View {
                         .font(.customfont(.regular, fontSize: 18 * .deviceFontScale))
                         .foregroundStyle(Color.LightGray)
                     Spacer()
-                    Text("11am to 9pm")
+                    Text("\(startDate) to \(endDate)")
                         .font(.customfont(.regular, fontSize: 18 * .deviceFontScale))
                         .foregroundStyle(Color.LightGray)
                 }

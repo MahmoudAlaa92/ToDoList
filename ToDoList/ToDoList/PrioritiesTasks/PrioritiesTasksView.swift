@@ -11,7 +11,8 @@ struct PrioritiesTasksView: View {
     
     @State var viewModel: PrioritiesTasksViewModel
     @State var selectedIndex: Int?
-    
+    let coordinator: AppCoordinator
+
     var body: some View {
         ZStack {
             VStack {
@@ -69,6 +70,3 @@ struct PrioritiesTasksView: View {
     
 }
 
-#Preview {
-    PrioritiesTasksView(viewModel: PrioritiesTasksViewModel())
-}

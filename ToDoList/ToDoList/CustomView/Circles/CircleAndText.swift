@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CircleAndText: View {
-    var name: String = "Mobile trading"
-    var title: String = "Client Review &Feedback"
+    var name: String
+    var title: String
     var subTitle: String = "Redesign App"
     var colorSubTitle: Color = Color.LightGray
     var colorCircle: Color = Color.lightBeige
@@ -55,8 +55,8 @@ struct CircleAndText: View {
         }
     }
 }
-
+// MARK: - Preview
+//
 #Preview {
-    CircleAndText()
+    CircleAndText(name: "cubes", title: "Review your notes")
 }
-

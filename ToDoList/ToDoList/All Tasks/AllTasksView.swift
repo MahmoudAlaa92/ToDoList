@@ -11,7 +11,8 @@ struct AllTasksView: View {
     
     @State var viewModel: AllTasksViewModel
     @State var selectedIndex: Int?
-    
+    let coordinator: AppCoordinator
+
     var body: some View {
         ZStack {
             VStack {
@@ -33,10 +34,6 @@ struct AllTasksView: View {
         .padding(.horizontal, 20)
         .ignoresSafeArea()
     }
-}
-
-#Preview {
-    AllTasksView(viewModel: AllTasksViewModel())
 }
 // MARK: - Views
 //

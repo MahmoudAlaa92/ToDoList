@@ -11,25 +11,25 @@ import Foundation
 struct NotificationView: View {
     
     @StateObject var viewModel: NotificationViewModel
-    
+    let coordinator: AppCoordinator
+
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
-                BackAndEllipsesNavBar()
+                BackAndEllipsesNavBar(
+                    onTappedBack: { coordinator.goBack(from: .home)},
+                    onTappedEllipse: {})
+
                 HeaderView(name: "Notifications", seeAll: "")
                 notificationRows(days: Array(viewModel.notificationItem.keys))
                 
                 Spacer()
             }
         }
+        .navigationBarBackButtonHidden()
         .padding(.horizontal, 18)
     }
 }
-
-#Preview {
-    NotificationView(viewModel: NotificationViewModel())
-}
-
 // MARK: - Views
 //
 extension NotificationView {

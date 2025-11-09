@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     
     @State var changeFullName: String = ""
+    let coordinator: AppCoordinator
+
     var body: some View {
         
         ZStack {
@@ -69,8 +71,4 @@ struct ProfileView: View {
         
     }
     
-}
-
-#Preview {
-    ProfileView()
 }

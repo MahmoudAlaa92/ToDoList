@@ -10,7 +10,8 @@ import SwiftUI
 struct PlannedView: View {
     
     @State var PlannedVM: PlannedViewModel
-    
+    let coordinator: AppCoordinator
+
     var body: some View {
         ZStack {
             VStack {
@@ -35,6 +36,3 @@ struct PlannedView: View {
     }
 }
 
-#Preview {
-    PlannedView(PlannedVM: PlannedViewModel())
-}

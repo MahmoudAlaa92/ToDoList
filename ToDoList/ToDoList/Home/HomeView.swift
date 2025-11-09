@@ -9,46 +9,78 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var calenderVM: CalenderViewModel
+    @StateObject var viewModel: HomeViewModel
+    weak var coordinator: AppCoordinator?
     
     var body: some View {
         ZStack {
-            
             VStack {
-                HomeNavBar()
+                HomeNavBar(onTappedNotification: {
+                    coordinator?.pushToHomeTab(.notification)
+                })
                 ScrollView {
-                    HeaderView(name: "Calender", seeAll: "")
-                    ScrollView(.horizontal) {
-                        HStack(spacing: 24 * .deviceFontScale) {
-                            ForEach(calenderVM.days, id: \.self) { item in
-                                CalenderCard(title: item.day,
-                                             number: item.number,
-                                             progress: item.progress)
-                            }
-                        }
-                        .padding([.horizontal, .vertical], 8 * .deviceFontScale)
-                    }
-                    .padding(.bottom, 24 * .deviceFontScale)
-                    
+                    calenderSection()
                     AnnouncementCard()
-                    HeaderView(name: "To day’s tasks")
-                    TaskCard(imageName: "Mobile trading", title: "Client Review &Feedback")
-                    TaskCard(imageName: "cubes", title: "Client Review &Feedback")
-                    HeaderView(name: "My Projects")
-                    ProjectCell(name: "bag", title: "Some Purchases", subtitle: "5 tasks",
-                                colorCircle: .white, backgroundColor: .lightPink)
-                    ProjectCell(name: "cubes", title: "To Do List", subtitle: "3 tasks",
-                                colorCircle: .darkGreen, backgroundColor: .lightGreen)
+                    toDaysTasksSection()
+                    myProjectsSection()
                     Spacer()
                 }
                 .scrollIndicators(.hidden)
             }
         }
         .padding(.horizontal, 20)
+    }
+}
+// MARK: - Views
+//
+private extension HomeView {
+    
+    @ViewBuilder
+    func calenderSection() -> some View {
+        HeaderView(name: "Calender", seeAll: "")
+        
+        ScrollView(.horizontal) {
+            HStack(spacing: 24 * .deviceFontScale) {
+                ForEach(viewModel.days, id: \.self) { item in
+                    CalenderCard(title: item.day,
+                                 number: item.number,
+                                 progress: item.progress)
+                }
+            }
+            .padding([.horizontal, .vertical], 8 * .deviceFontScale)
+        }
+        .padding(.bottom, 24 * .deviceFontScale)
+    }
+    
+    @ViewBuilder
+    func toDaysTasksSection() -> some View {
+        HeaderView(name: "To day’s tasks")
+        
+        ForEach(viewModel.todaysTask, id: \.title) { task in
+            TaskCard(imageName: task.imageName, title: task.title)
+                .onTapGesture { onTappedTodaysTask(task: task)}
+        }
+    }
+    
+    @ViewBuilder
+    func myProjectsSection() -> some View {
+        HeaderView(name: "My Projects")
+        
+        ForEach(viewModel.projectCells, id: \.name) { cell in
+            ProjectCell(name: cell.name, title: cell.title, subtitle: cell.subtitle,
+                        colorCircle: cell.colorCircle, backgroundColor: cell.backgroundColor)
+        }
+    }
+}
+// MARK: - Actions
+//
+private extension HomeView {
+    func onTappedTodaysTask(task: TaskCard) {
         
     }
 }
-
+// MARK: - Preview
+//
 #Preview {
-    HomeView(calenderVM: CalenderViewModel())
+    HomeView(viewModel: HomeViewModel())
 }

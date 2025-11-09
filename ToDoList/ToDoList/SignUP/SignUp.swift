@@ -10,7 +10,8 @@ import SwiftUI
 struct SignUp: View {
     
     @State var nameText: String = ""
-    
+    let coordinator: AppCoordinator
+
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -46,8 +47,4 @@ struct SignUp: View {
         .padding(20)
         .ignoresSafeArea()
     }
-}
-
-#Preview {
-    SignUp(nameText: "")
 }

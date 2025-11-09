@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LogInView: View {
+    let coordinator: AppCoordinator
+
     var body: some View {
         ScrollView {
             ZStack(alignment: .top) {
@@ -58,10 +60,6 @@ struct LogInView: View {
         }
         .ignoresSafeArea()
     }
-}
-
-#Preview {
-    LogInView()
 }
 
 // MARK: - Views
