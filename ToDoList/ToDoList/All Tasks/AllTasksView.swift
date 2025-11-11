@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AllTasksView: View {
-    
+
     @State var viewModel: AllTasksViewModel
     @State var selectedIndex: Int?
     let coordinator: AppCoordinator
@@ -45,25 +45,27 @@ extension AllTasksView {
                     .foregroundStyle(.white)
                     .padding(.top, .topInsets)
                     .padding(.bottom, 12 * .deviceFontScale)
-                
+
                 HeaderView(name: Date.now.toString(), seeAll: "")
                     .foregroundStyle(.white)
-                
+
                 ScrollView(.horizontal) {
                     HStack(spacing: 24 * .deviceFontScale) {
                         ForEach(viewModel.days, id: \.self) { item in
-                            CalenderCard(title: item.day,
-                                         number: item.number,
-                                         progress: item.progress,
-                                         textColor: .white,
-                                         forGroundColor: .white)
+                            CalenderCard(
+                                title: item.day,
+                                number: item.number,
+                                progress: item.progress,
+                                textColor: .white,
+                                forGroundColor: .white
+                            )
                         }
                     }
                     .padding([.vertical], 8 * .deviceFontScale)
                 }
                 .scrollIndicators(.hidden)
                 .padding(.bottom, 24 * .deviceFontScale)
-                
+
                 Spacer()
             }
             .padding(.horizontal, 20)
@@ -71,14 +73,19 @@ extension AllTasksView {
         .frame(width: .screenWidth, height: .screenHeight * 0.38)
         .background(Color.darkPrimaryApp)
     }
-    
+
     func ProiritieTask() -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 16) {
-                ForEach(Array(viewModel.prioritieItems.enumerated()), id:\.offset) { index, priority in
-                    PriorityCircle(title: priority.title,
-                                   number: priority.number,
-                                   isSelected: selectedIndex == index) {
+                ForEach(
+                    Array(viewModel.prioritieItems.enumerated()),
+                    id: \.offset
+                ) { index, priority in
+                    PriorityCircle(
+                        title: priority.title,
+                        number: priority.number,
+                        isSelected: selectedIndex == index
+                    ) {
                         selectedIndex = (selectedIndex == index ? nil : index)
                     }
                 }
@@ -88,20 +95,25 @@ extension AllTasksView {
         .scrollIndicators(.hidden)
         .padding(.horizontal, 20)
     }
-    
+
     func scheduleTasks() -> some View {
-        ScrollView(.vertical){
+        ScrollView(.vertical) {
             VStack {
                 HeaderView(name: "Schedule", seeAll: "")
                 VStack {
                     ForEach(viewModel.prioritiesTasks, id: \.self) { task in
                         TaskCard(
-                            imageName: task.imageName,
-                            title: task.title,
-                            day: task.day,
-                            start: task.start,
-                            end: task.end,
-                            isChecked: false
+                            taskCardModel: .init(
+                                title: task.title,
+                                subTitle: task.subTitle,
+                                day: task.day,
+                                start: task.start,
+                                end: task.end,
+                                imageName: task.imageName,
+                                colorSubTitle: Color.LightGray,
+                                colorCircle: Color.lightBeige,
+                                backgroundColor: Color.lightPink
+                            )
                         )
                     }
                 }

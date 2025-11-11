@@ -8,23 +8,34 @@
 import SwiftUI
 
 struct TaskCard: View {
-    var imageName: String
-    var title: String
+    var taskCardModel: PlannedModel
     var showStrikeLine: Bool = false
-    var day: String = "Today"
-    var start: String = "11:42 am"
-    var end: String = "2:30 pm"
     @State var isChecked = false
 
     var body: some View {
         VStack {
-            CircleAndText(name: imageName, title: title, showStrikeLine: showStrikeLine, isChecked: isChecked)
+            CircleAndText(
+                circleItem: ProjectModel(
+                    name: taskCardModel.imageName,
+                    title: taskCardModel.title,
+                    subtitle: taskCardModel.subTitle,
+                    colorSubTitle: taskCardModel.colorSubTitle ?? .LightGray,
+                    colorCircle: taskCardModel.colorCircle ?? .primary,
+                    backgroundColor: taskCardModel.backgroundColor ?? .lightPink
+                ),
+                showStrikeLine: showStrikeLine,
+                isChecked: isChecked
+            )
             Divider()
                 .frame(height: 1)
                 .background(Color.darkGray.opacity(1))
                 .padding(.horizontal, 20 * .deviceFontScale)
-            
-            PersonsView(day: day, start: start, end: end)
+
+            PersonsView(
+                day: taskCardModel.day,
+                start: taskCardModel.start,
+                end: taskCardModel.end
+            )
         }
         .padding(.horizontal, 12 * .deviceFontScale)
         .padding(.vertical, 12 * .deviceFontScale)
@@ -38,5 +49,18 @@ struct TaskCard: View {
 // MARK: - Preview
 //
 #Preview {
-    TaskCard(imageName: "cubes", title: "Review you work")
+    TaskCard(
+        taskCardModel: .init(
+            title: "",
+            subTitle: "",
+        day: "",
+            start: "",
+            end: "",
+            imageName: "",
+            colorSubTitle: .red,
+            colorCircle: .red,
+            backgroundColor: .red
+        )
+    )
+
 }

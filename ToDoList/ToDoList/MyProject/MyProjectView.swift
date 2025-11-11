@@ -18,13 +18,8 @@ struct MyProjectView: View {
                CustomNavBar()
                 
                 ForEach(Array(viewModel.projectItems.enumerated()), id: \.offset) { (index, cellItem) in
-                    ProjectCell(name: cellItem.name,
-                                title: cellItem.title,
-                                subtitle: cellItem.subTitle,
-                                colorCircle: index % 2 == 0 ? .white : .darkPrimaryApp,
-                                backgroundColor: index % 2 != 0 ? .lightGreen : .lightPink)
+                    ProjectCell(projectItem: cellItem)
                 }
-              
              
                 Spacer()
             }

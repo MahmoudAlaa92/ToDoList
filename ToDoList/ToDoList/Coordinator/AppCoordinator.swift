@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 
-// MARK: - App Coordinator
 
 final class AppCoordinator: ObservableObject {
     
@@ -20,6 +19,7 @@ final class AppCoordinator: ObservableObject {
     // Tab-specific navigation paths
     @Published var homeTabPath = NavigationPath()
     @Published var todayTabPath = NavigationPath()
+    @Published var addTaskPath = NavigationPath()
     @Published var prioritiesTabPath = NavigationPath()
     @Published var plannedTabPath = NavigationPath()
     
@@ -38,7 +38,7 @@ final class AppCoordinator: ObservableObject {
         case main
     }
     
-    // MARK: - Initialization
+    // MARK: - Init
     
     init() {
         checkAuthState()
@@ -100,7 +100,27 @@ final class AppCoordinator: ObservableObject {
         authPath = NavigationPath()
     }
     
-    // MARK: - Tab Navigation
+    func resetAllPaths() {
+        authPath = NavigationPath()
+        homeTabPath = NavigationPath()
+        todayTabPath = NavigationPath()
+        prioritiesTabPath = NavigationPath()
+        plannedTabPath = NavigationPath()
+    }
+    
+    // MARK: - Convenience Methods
+    
+    func showAddTask() {
+        presentSheet(.addTask)
+    }
+    
+    func navigateToSignup() {
+        pushAuth(.signup)
+    }
+}
+// MARK: - Tab Navigation
+//
+extension AppCoordinator {
     
     func pushToHomeTab(_ route: HomeTabRoute) {
         homeTabPath.append(route)
@@ -108,6 +128,10 @@ final class AppCoordinator: ObservableObject {
     
     func pushToTodayTab(_ route: TodayTabRoute) {
         todayTabPath.append(route)
+    }
+    
+    func addTaskTab(_ route: AddTaskRoute) {
+        addTaskPath.append(route)
     }
     
     func pushToPrioritiesTab(_ route: PrioritiesTabRoute) {
@@ -127,7 +151,8 @@ final class AppCoordinator: ObservableObject {
             guard !todayTabPath.isEmpty else { return }
             todayTabPath.removeLast()
         case .addTask:
-            break
+            guard !addTaskPath.isEmpty else { return }
+            addTaskPath.removeLast()
         case .prioritiesTask:
             guard !prioritiesTabPath.isEmpty else { return }
             prioritiesTabPath.removeLast()
@@ -144,24 +169,17 @@ final class AppCoordinator: ObservableObject {
         case .today:
             todayTabPath = NavigationPath()
         case .addTask:
-            break
+            addTaskPath = NavigationPath()
         case .prioritiesTask:
             prioritiesTabPath = NavigationPath()
         case .planned:
             plannedTabPath = NavigationPath()
         }
     }
-    
-    func resetAllPaths() {
-        authPath = NavigationPath()
-        homeTabPath = NavigationPath()
-        todayTabPath = NavigationPath()
-        prioritiesTabPath = NavigationPath()
-        plannedTabPath = NavigationPath()
-    }
-    
-    // MARK: - Modal Presentations
-    
+}
+// MARK: - Modal Presentations
+//
+extension AppCoordinator {
     func presentSheet(_ route: ModalRoute) {
         sheet = route
     }
@@ -177,15 +195,4 @@ final class AppCoordinator: ObservableObject {
     func dismissFullScreen() {
         fullScreen = nil
     }
-    
-    // MARK: - Convenience Methods
-    
-    func showAddTask() {
-        presentSheet(.addTask)
-    }
-   
-    func navigateToSignup() {
-        pushAuth(.signup)
-    }
-   
 }

@@ -11,7 +11,7 @@ struct PrioritiesTasksView: View {
     
     @State var viewModel: PrioritiesTasksViewModel
     @State var selectedIndex: Int?
-    let coordinator: AppCoordinator
+    weak var coordinator: AppCoordinator?
 
     var body: some View {
         ZStack {
@@ -35,31 +35,27 @@ struct PrioritiesTasksView: View {
                 
                 VStack {
                     ForEach(viewModel.prioritiesTasks, id: \.self) { task in
-                        TaskCard(
-                            imageName: task.imageName,
-                            title: task.title,
-                            day: task.day,
-                            start: task.start,
-                            end: task.end,
-                            isChecked: false
-                        )
+                        TaskCard(taskCardModel: task)
+                         
                     }
                 }
                 
                 HeaderView(name: "My projects", seeAll: "See All")
-                ProjectCell(
+                ProjectCell(projectItem: .init(
                     name: "cubes",
                     title: "To Do List",
                     subtitle: "3 tasks",
+                    colorSubTitle: .LightGray,
                     colorCircle: .darkGreen,
                     backgroundColor: .lightGreen
-                )
-                ProjectCell(
+                ))
+                ProjectCell(projectItem: .init(
                     name: "bag",
                     title: "Some Purchases",
                     subtitle: "5 tasks",
+                    colorSubTitle: .LightGray,
                     colorCircle: .white,
-                    backgroundColor: .lightPink
+                    backgroundColor: .lightPink)
                 )
                 
                 Spacer()

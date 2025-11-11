@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CustomNavBar: View {
     var showSearchIcon: Bool = true
+    var onTappedBack: (() -> Void)?
+    var onTappedNotification: (() -> Void)?
     
     var body: some View {
         HStack(spacing: 6) {
@@ -17,6 +19,7 @@ struct CustomNavBar: View {
                 .scaledToFit()
                 .frame(width: 26 * .deviceFontScale,
                        height: 26 * .deviceFontScale)
+                .onTapGesture { onTappedBack?() }
             
             Spacer()
             
@@ -33,6 +36,9 @@ struct CustomNavBar: View {
                     .scaledToFit()
                     .frame(width: 28 * .deviceFontScale,
                            height: 28 * .deviceFontScale)
+                    .onTapGesture {
+                        onTappedNotification?()
+                    }
             }
         }
         .padding(.bottom, 16 * .deviceFontScale)

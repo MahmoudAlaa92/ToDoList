@@ -10,21 +10,15 @@ import SwiftUI
 struct PlannedView: View {
     
     @State var PlannedVM: PlannedViewModel
-    let coordinator: AppCoordinator
+    weak var coordinator: AppCoordinator?
 
     var body: some View {
         ZStack {
             VStack {
                 CustomNavBar()
                 VStack {
-                    ForEach(PlannedVM.plannedCompleted, id: \.self) { task in
-                        TaskCard(imageName: task.imageName,
-                                 title: task.title,
-                                 showStrikeLine: true,
-                                 day: task.day,
-                                 start: task.start,
-                                 end: task.end,
-                                 isChecked: true)
+                    ForEach(PlannedVM.plannedCompleted.enumerated(), id: \.offset) { (index,task) in
+                        TaskCard(taskCardModel: task)
                     }
                 }
                 .padding(.vertical, 14)

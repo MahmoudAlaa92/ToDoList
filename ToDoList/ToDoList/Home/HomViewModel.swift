@@ -24,27 +24,53 @@ class HomeViewModel: ObservableObject {
         .init(day: "Thu", number: 12, progress: 0.8),
         .init(day: "Fri", number: 13, progress: 0.4),
     ]
-
-    var todaysTask: [TaskCard] = [
-        TaskCard(imageName: "Mobile trading", title: "Client Review &Feedback"),
-        TaskCard(imageName: "cubes", title: "Reivew My Work")
+    
+    var todaysTask: [PlannedModel] = [
+        .init(
+            title: "Client Review &Feedback",
+            subTitle: "Redesing my work",
+            day: "Friday",
+            start: "1:00pm",
+            end: "4:00pm",
+            imageName: "Mobile trading",
+            colorSubTitle: Color.LightGray,
+            colorCircle: Color.lightBeige,
+            backgroundColor: Color.lightPink
+        ),
+        .init(
+            title: "Reivew My Work",
+            subTitle: "Swift",
+            day: "Saturday",
+            start: "10:00pm",
+            end: "11:00pm",
+            imageName: "cubes",
+            colorSubTitle: Color.LightGray,
+            colorCircle: Color.lightBeige,
+            backgroundColor: Color.lightPink
+        ),
     ]
-
+    
     var projectCells: [ProjectCell] = [
         ProjectCell(
-            name: "bag",
-            title: "Some Purchases",
-            subtitle: "5 tasks",
-            colorCircle: .white,
-            backgroundColor: .lightPink
+            projectItem: .init(
+                name: "bag",
+                title: "Some Purchases",
+                subtitle: "5 tasks",
+                colorSubTitle: .LightGray,
+                colorCircle: .white,
+                backgroundColor: .lightPink
+            )
         ),
         ProjectCell(
-            name: "cubes",
-            title: "To Do List",
-            subtitle: "3 tasks",
-            colorCircle: .darkGreen,
-            backgroundColor: .lightGreen
+            projectItem: .init(
+                name: "cubes",
+                title: "To Do List",
+                subtitle: "3 tasks",
+                colorSubTitle: .LightGray,
+                colorCircle: .darkGreen,
+                backgroundColor: .lightGreen
+            )
         ),
     ]
-
+    
 }

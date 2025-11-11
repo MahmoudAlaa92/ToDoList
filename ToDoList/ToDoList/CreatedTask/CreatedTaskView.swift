@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CreatedTaskView: View {
+    
+    var viewModel: CreatedTaskViewModel
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -26,8 +29,10 @@ struct CreatedTaskView: View {
                 DescriptionRow()
                 AssignPersons(persons: ["woman" , "teenagerGirl", "youngSmilingMan"])
                 HeaderView(name: "Our Tasks for the project", seeAll: "")
-                TaskCard(imageName: "Mobile trading", title: "Client Review &Feedback")
-                TaskCard(imageName: "cubes", title: "Client Review &Feedback")
+                
+                ForEach(viewModel.plannedCompleted.enumerated(), id: \.offset) { (index,task) in
+                    TaskCard(taskCardModel: task)
+                }
                 
                 Spacer()
             }
@@ -38,5 +43,5 @@ struct CreatedTaskView: View {
 }
 
 #Preview {
-    CreatedTaskView()
+    CreatedTaskView(viewModel: CreatedTaskViewModel())
 }

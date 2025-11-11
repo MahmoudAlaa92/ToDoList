@@ -5,10 +5,13 @@
 //  Created by Mahmoud Alaa on 03/11/2025.
 //
 
-import Foundation
+import SwiftUI
 
 struct ProjectModel: Hashable {
-    let name: String
-    let title: String
-    let subTitle: String 
+    var name: String
+    var title: String
+    var subtitle: String
+    var colorSubTitle: Color
+    var colorCircle: Color
+    var backgroundColor: Color
 }

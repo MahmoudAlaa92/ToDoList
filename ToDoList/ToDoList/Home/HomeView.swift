@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+
     @StateObject var viewModel: HomeViewModel
     weak var coordinator: AppCoordinator?
-    
+
     var body: some View {
         ZStack {
             VStack {
-                HomeNavBar(onTappedNotification: {
-                    coordinator?.pushToHomeTab(.notification)
-                })
+                HomeNavBar(onTappedNotification: { onTappedNotification() })
                 ScrollView {
                     calenderSection()
                     AnnouncementCard()
@@ -33,50 +31,56 @@ struct HomeView: View {
 }
 // MARK: - Views
 //
-private extension HomeView {
-    
+extension HomeView {
+
     @ViewBuilder
-    func calenderSection() -> some View {
+    fileprivate func calenderSection() -> some View {
         HeaderView(name: "Calender", seeAll: "")
-        
+
         ScrollView(.horizontal) {
             HStack(spacing: 24 * .deviceFontScale) {
                 ForEach(viewModel.days, id: \.self) { item in
-                    CalenderCard(title: item.day,
-                                 number: item.number,
-                                 progress: item.progress)
+                    CalenderCard(
+                        title: item.day,
+                        number: item.number,
+                        progress: item.progress
+                    )
                 }
             }
             .padding([.horizontal, .vertical], 8 * .deviceFontScale)
         }
         .padding(.bottom, 24 * .deviceFontScale)
     }
-    
+
     @ViewBuilder
-    func toDaysTasksSection() -> some View {
+    fileprivate func toDaysTasksSection() -> some View {
         HeaderView(name: "To day’s tasks")
-        
-        ForEach(viewModel.todaysTask, id: \.title) { task in
-            TaskCard(imageName: task.imageName, title: task.title)
-                .onTapGesture { onTappedTodaysTask(task: task)}
+
+        ForEach(viewModel.todaysTask.enumerated(), id: \.offset) {
+            (index, item) in
+            TaskCard(taskCardModel: item)
+                .onTapGesture { onTappedTodaysTask(task: item) }
         }
     }
-    
+
     @ViewBuilder
-    func myProjectsSection() -> some View {
+    fileprivate func myProjectsSection() -> some View {
         HeaderView(name: "My Projects")
         
-        ForEach(viewModel.projectCells, id: \.name) { cell in
-            ProjectCell(name: cell.name, title: cell.title, subtitle: cell.subtitle,
-                        colorCircle: cell.colorCircle, backgroundColor: cell.backgroundColor)
+        ForEach(viewModel.projectCells.enumerated(), id: \.offset) { (index, item) in
+            ProjectCell(projectItem: item.projectItem)
         }
     }
 }
 // MARK: - Actions
 //
-private extension HomeView {
-    func onTappedTodaysTask(task: TaskCard) {
-        
+extension HomeView {
+    fileprivate func onTappedTodaysTask(task: PlannedModel) {
+        coordinator?.pushToHomeTab(.projectDetails(taskCard: task))
+    }
+    
+    fileprivate func onTappedNotification() {
+        coordinator?.pushToHomeTab(.notification)
     }
 }
 // MARK: - Preview

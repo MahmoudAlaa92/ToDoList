@@ -11,13 +11,13 @@ import Foundation
 struct NotificationView: View {
     
     @StateObject var viewModel: NotificationViewModel
-    let coordinator: AppCoordinator
+    weak var coordinator: AppCoordinator?
 
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
                 BackAndEllipsesNavBar(
-                    onTappedBack: { coordinator.goBack(from: .home)},
+                    onTappedBack: { coordinator?.goBack(from: .home)},
                     onTappedEllipse: {})
 
                 HeaderView(name: "Notifications", seeAll: "")
@@ -51,6 +51,5 @@ extension NotificationView {
                 }
             }
         }
-    }
-    
+    }   
 }

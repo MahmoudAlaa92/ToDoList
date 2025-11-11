@@ -10,42 +10,40 @@ import SwiftUI
 struct ProjectDetails: View {
     
     @State var changeComment: String = ""
-    @State var title: String = "Client Review &Feedback"
-    @State var subTitle: String = "Redesign app"
-    @State var imageName: String = "cubes"
-    @State var startDate: String = "11am"
-    @State var endDate: String = "9pm"
+    @State var taskCard: PlannedModel?
     weak var coordinator: AppCoordinator?
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                CustomNavBar(showSearchIcon: false)
+                CustomNavBar(showSearchIcon: false,
+                             onTappedBack: { coordinator?.goBack(from: .home)},
+                             onTappedNotification: { coordinator?.pushToHomeTab(.notification)})
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(title)
+                        Text(taskCard?.title ?? "")
                             .font(.customfont(.medium, fontSize: 18 * .deviceFontScale))
                         
-                        Text(subTitle)
+                        Text(taskCard?.subTitle ?? "")
                             .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
                             .foregroundStyle(Color.LightGray)
                     }
                     Spacer()
                 }
                 
-                Image(imageName)
+                Image(taskCard?.imageName ?? "")
                     .resizable()
                     .scaledToFit()
                     .frame(width: .screenWidth / 1.5,
                            height: .screenWidth / 1.5)
                 
                 HStack {
-                    Text("31August,2024")
+                    Text(taskCard?.day ?? "")
                         .font(.customfont(.regular, fontSize: 18 * .deviceFontScale))
                         .foregroundStyle(Color.LightGray)
                     Spacer()
-                    Text("\(startDate) to \(endDate)")
+                    Text("\(taskCard?.start ?? "") to \(taskCard?.end ?? "")")
                         .font(.customfont(.regular, fontSize: 18 * .deviceFontScale))
                         .foregroundStyle(Color.LightGray)
                 }
@@ -62,6 +60,7 @@ struct ProjectDetails: View {
                 Spacer()
             }
         }
+        .navigationBarBackButtonHidden()
         .scrollIndicators(.hidden)
         .padding(.horizontal, 20)
     }

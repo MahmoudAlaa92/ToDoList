@@ -36,13 +36,12 @@ struct CustomTabBar: View {
             }
             
             Tab("AddTask", image: "addIcon", value: .addTask) {
-                Color.clear
-                    .onAppear {
-                        coordinator.showAddTask()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            selectedTab = .home
+                NavigationStack(path: $coordinator.addTaskPath) {
+                    AddTask(coordinator: coordinator)
+                        .navigationDestination(for: AddTaskRoute.self) { route in
+                            route.makeView(coordinator: coordinator)
                         }
-                    }
+                }
             }
             
             Tab("Priorities", image: "flag2", value: .prioritiesTask) {

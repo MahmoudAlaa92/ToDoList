@@ -13,7 +13,7 @@ struct AddTask: View {
     @State var changeTaskTitle: String = ""
     @State var changeTaskSubTitle: String = ""
     @State var changeTaskDescription: String = ""
-    let coordinator: AppCoordinator
+    weak var coordinator: AppCoordinator?
 
     var body: some View {
         ScrollView {
