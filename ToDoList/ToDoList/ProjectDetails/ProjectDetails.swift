@@ -12,13 +12,14 @@ struct ProjectDetails: View {
     @State var changeComment: String = ""
     @State var taskCard: PlannedModel?
     weak var coordinator: AppCoordinator?
-    
+    var sourceTab: Tabs
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 CustomNavBar(showSearchIcon: false,
-                             onTappedBack: { coordinator?.goBack(from: .home)},
-                             onTappedNotification: { coordinator?.pushToHomeTab(.notification)})
+                             onTappedBack: { coordinator?.goBack(from: sourceTab)},
+                             onTappedNotification: { coordinator?.pushNotification(for: sourceTab)})
                 
                 HStack {
                     VStack(alignment: .leading) {
@@ -67,5 +68,5 @@ struct ProjectDetails: View {
 }
 
 #Preview {
-    ProjectDetails()
+    ProjectDetails(sourceTab: .home)
 }

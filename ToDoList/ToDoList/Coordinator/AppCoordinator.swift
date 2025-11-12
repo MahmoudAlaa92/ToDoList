@@ -17,11 +17,40 @@ final class AppCoordinator: ObservableObject {
     @Published var authPath = NavigationPath()
     
     // Tab-specific navigation paths
-    @Published var homeTabPath = NavigationPath()
-    @Published var todayTabPath = NavigationPath()
-    @Published var addTaskPath = NavigationPath()
-    @Published var prioritiesTabPath = NavigationPath()
-    @Published var plannedTabPath = NavigationPath()
+    
+    @Published private(set) var tabPaths: [Tabs: NavigationPath] = [
+        .home: NavigationPath(),
+        .today: NavigationPath(),
+        .addTask: NavigationPath(),
+        .prioritiesTask: NavigationPath(),
+        .planned: NavigationPath()
+    ]
+    
+    // Convenience computed properties for backward compatibility
+    var homeTabPath: NavigationPath {
+        get { tabPaths[.home] ?? NavigationPath() }
+        set { tabPaths[.home] = newValue }
+    }
+    
+    var todayTabPath: NavigationPath {
+        get { tabPaths[.today] ?? NavigationPath() }
+        set { tabPaths[.today] = newValue }
+    }
+    
+    var addTaskPath: NavigationPath {
+        get { tabPaths[.addTask] ?? NavigationPath() }
+        set { tabPaths[.addTask] = newValue }
+    }
+    
+    var prioritiesTabPath: NavigationPath {
+        get { tabPaths[.prioritiesTask] ?? NavigationPath() }
+        set { tabPaths[.prioritiesTask] = newValue }
+    }
+    
+    var plannedTabPath: NavigationPath {
+        get { tabPaths[.planned] ?? NavigationPath() }
+        set { tabPaths[.planned] = newValue }
+    }
     
     // Modal presentations
     @Published var sheet: ModalRoute?
@@ -106,6 +135,14 @@ final class AppCoordinator: ObservableObject {
         todayTabPath = NavigationPath()
         prioritiesTabPath = NavigationPath()
         plannedTabPath = NavigationPath()
+        
+        tabPaths = [
+            .home: NavigationPath(),
+            .today: NavigationPath(),
+            .addTask: NavigationPath(),
+            .prioritiesTask: NavigationPath(),
+            .planned: NavigationPath()
+        ]
     }
     
     // MARK: - Convenience Methods
@@ -121,60 +158,59 @@ final class AppCoordinator: ObservableObject {
 // MARK: - Tab Navigation
 //
 extension AppCoordinator {
-    
-    func pushToHomeTab(_ route: HomeTabRoute) {
-        homeTabPath.append(route)
+    func push<R: TabIdentifiable>(_ route: R) where R: Hashable {
+        let tab = route.tab
+        tabPaths[tab]?.append(route)
     }
     
-    func pushToTodayTab(_ route: TodayTabRoute) {
-        todayTabPath.append(route)
+    /// Universal push method using type erasure
+    func push(_ route: any (Route & ViewBuildable & TabIdentifiable)) {
+        let tab = route.tab
+        tabPaths[tab]?.append(route)
     }
     
-    func addTaskTab(_ route: AddTaskRoute) {
-        addTaskPath.append(route)
-    }
+    //    /// Specific push methods for type safety
+    //    func pushToHomeTab(_ route: HomeTabRoute) {
+    //        tabPaths[.home]?.append(route)
+    //    }
+    //
+    //    func pushToTodayTab(_ route: TodayTabRoute) {
+    //        tabPaths[.today]?.append(route)
+    //    }
+    //
+    //    func addTaskTab(_ route: AddTaskRoute) {
+    //        tabPaths[.addTask]?.append(route)
+    //    }
+    //
+    //    func pushToPrioritiesTab(_ route: PrioritiesTabRoute) {
+    //        tabPaths[.prioritiesTask]?.append(route)
+    //    }
+    //
+    //    func pushToPlannedTab(_ route: PlannedTabRoute) {
+    //        tabPaths[.planned]?.append(route)
+    //    }
     
-    func pushToPrioritiesTab(_ route: PrioritiesTabRoute) {
-        prioritiesTabPath.append(route)
-    }
-    
-    func pushToPlannedTab(_ route: PlannedTabRoute) {
-        plannedTabPath.append(route)
-    }
-    
+    /// Dynamic go back without switch case
     func goBack(from tab: Tabs) {
-        switch tab {
-        case .home:
-            guard !homeTabPath.isEmpty else { return }
-            homeTabPath.removeLast()
-        case .today:
-            guard !todayTabPath.isEmpty else { return }
-            todayTabPath.removeLast()
-        case .addTask:
-            guard !addTaskPath.isEmpty else { return }
-            addTaskPath.removeLast()
-        case .prioritiesTask:
-            guard !prioritiesTabPath.isEmpty else { return }
-            prioritiesTabPath.removeLast()
-        case .planned:
-            guard !plannedTabPath.isEmpty else { return }
-            plannedTabPath.removeLast()
-        }
+        guard let path = tabPaths[tab], !path.isEmpty else { return }
+        tabPaths[tab]?.removeLast()
     }
     
+    /// Dynamic pop to root without switch case
     func popToRoot(tab: Tabs) {
-        switch tab {
-        case .home:
-            homeTabPath = NavigationPath()
-        case .today:
-            todayTabPath = NavigationPath()
-        case .addTask:
-            addTaskPath = NavigationPath()
-        case .prioritiesTask:
-            prioritiesTabPath = NavigationPath()
-        case .planned:
-            plannedTabPath = NavigationPath()
-        }
+        tabPaths[tab] = NavigationPath()
+    }
+    
+    /// Push notification route for any tab
+    func pushNotification(for tab: Tabs) {
+        let route = NotificationRouteFactory.createNotificationRoute(for: tab)
+        push(route)
+    }
+    
+    /// Push project details route for any tab
+    func pushProjectDetails(for tab: Tabs, taskCard: PlannedModel) {
+        let route = NotificationRouteFactory.createProjectDetailsRoute(for: tab, taskCard: taskCard)
+        push(route)
     }
 }
 // MARK: - Modal Presentations

@@ -18,7 +18,10 @@ struct PlannedView: View {
                 CustomNavBar()
                 VStack {
                     ForEach(PlannedVM.plannedCompleted.enumerated(), id: \.offset) { (index,task) in
-                        TaskCard(taskCardModel: task)
+                        TaskCard(taskCardModel: task).onTapGesture {
+//                            coordinator?.pushToPlannedTab(.projectDetails(taskCard: task))
+                            coordinator?.pushProjectDetails(for: .planned, taskCard: task)
+                        }
                     }
                 }
                 .padding(.vertical, 14)

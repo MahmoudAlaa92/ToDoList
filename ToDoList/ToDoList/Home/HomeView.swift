@@ -76,11 +76,13 @@ extension HomeView {
 //
 extension HomeView {
     fileprivate func onTappedTodaysTask(task: PlannedModel) {
-        coordinator?.pushToHomeTab(.projectDetails(taskCard: task))
+//        coordinator?.pushToHomeTab(.projectDetails(taskCard: task))
+        coordinator?.pushProjectDetails(for: .home, taskCard: task)
     }
     
     fileprivate func onTappedNotification() {
-        coordinator?.pushToHomeTab(.notification)
+//        coordinator?.pushToHomeTab(.notification)
+        coordinator?.pushNotification(for: .home)
     }
 }
 // MARK: - Preview

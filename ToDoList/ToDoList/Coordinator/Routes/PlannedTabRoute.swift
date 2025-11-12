@@ -7,29 +7,31 @@
 
 import SwiftUI
 
-enum PlannedTabRoute: Route, ViewBuildable {
-    case taskDetails(String)
-    case calendarView
-    case editTask(String)
-    
+enum PlannedTabRoute: Route, ViewBuildable, TabIdentifiable {
+    case profile
+    case notification
+    case projectDetails(taskCard: PlannedModel)
+        
+    var tab: Tabs { .planned }
+
     var id: String {
         switch self {
-        case .taskDetails(let id): return "planned-task-\(id)"
-        case .calendarView: return "planned-calendar"
-        case .editTask(let id): return "planned-edit-\(id)"
+        case .profile: return "home-profile"
+        case .notification: return "home-notification"
+        case .projectDetails: return "home-projectDetails"
         }
     }
     
     @ViewBuilder
     func makeView(coordinator: AppCoordinator) -> some View {
-        EmptyView()
-//        switch self {
-//        case .taskDetails(let id):
-//            TaskDetailsView(taskId: id, coordinator: coordinator)
-//        case .calendarView:
-//            CalendarFullView(coordinator: coordinator)
-//        case .editTask(let id):
-//            EditTaskView(taskId: id, coordinator: coordinator)
-//        }
+        switch self {
+            
+        case .profile:
+            ProfileView(coordinator: coordinator)
+        case .notification:
+            NotificationView(viewModel: NotificationViewModel(), coordinator: coordinator, sourceTab: .planned)
+        case .projectDetails(let taskCard):
+            ProjectDetails(taskCard: taskCard, coordinator: coordinator, sourceTab: .planned)
+        }
     }
 }

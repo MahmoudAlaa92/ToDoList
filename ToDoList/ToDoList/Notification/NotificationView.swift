@@ -12,12 +12,13 @@ struct NotificationView: View {
     
     @StateObject var viewModel: NotificationViewModel
     weak var coordinator: AppCoordinator?
+    var sourceTab: Tabs
 
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
                 BackAndEllipsesNavBar(
-                    onTappedBack: { coordinator?.goBack(from: .home)},
+                    onTappedBack: { coordinator?.goBack(from: sourceTab)},
                     onTappedEllipse: {})
 
                 HeaderView(name: "Notifications", seeAll: "")

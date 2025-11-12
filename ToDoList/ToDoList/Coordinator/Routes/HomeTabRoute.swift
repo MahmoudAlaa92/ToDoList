@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-enum HomeTabRoute: Route, ViewBuildable {
+enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
     case profile
     case notification
     case projectDetails(taskCard: PlannedModel)
-        
+
+    var tab: Tabs { .home }
+
     var id: String {
         switch self {
         case .profile: return "home-profile"
@@ -27,9 +29,9 @@ enum HomeTabRoute: Route, ViewBuildable {
         case .profile:
             ProfileView(coordinator: coordinator)
         case .notification:
-            NotificationView(viewModel: NotificationViewModel(), coordinator: coordinator)        
+            NotificationView(viewModel: NotificationViewModel(), coordinator: coordinator, sourceTab: .home)        
         case .projectDetails(let taskCard):
-            ProjectDetails(taskCard: taskCard, coordinator: coordinator)
+            ProjectDetails(taskCard: taskCard, coordinator: coordinator, sourceTab: .home)
         }
     }
 }
