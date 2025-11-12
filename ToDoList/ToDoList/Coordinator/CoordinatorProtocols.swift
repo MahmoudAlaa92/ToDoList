@@ -24,10 +24,3 @@ protocol ViewBuildable {
 protocol TabIdentifiable {
     var tab: Tabs { get }
 }
-
-// MARK: - Route Creation Protocol
-
-/// Protocol for creating routes for specific tabs
-protocol TabRouteCreatable {
-    static func createForTab(_ tab: Tabs) -> any (Route & ViewBuildable & TabIdentifiable)
-}

@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 
-
 final class AppCoordinator: ObservableObject {
     
     // MARK: - Published Properties
