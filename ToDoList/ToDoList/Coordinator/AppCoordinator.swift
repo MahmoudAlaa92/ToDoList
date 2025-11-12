@@ -84,13 +84,7 @@ final class AppCoordinator: ObservableObject {
             currentAppState = .main
         }
     }
-    
-    func completeSplash() {
-        withAnimation {
-            currentAppState = .auth
-        }
-    }
-    
+
     func login() {
         isAuthenticated = true
         UserDefaults.standard.set(true, forKey: "isAuthenticated")
@@ -169,27 +163,6 @@ extension AppCoordinator {
         tabPaths[tab]?.append(route)
     }
     
-    //    /// Specific push methods for type safety
-    //    func pushToHomeTab(_ route: HomeTabRoute) {
-    //        tabPaths[.home]?.append(route)
-    //    }
-    //
-    //    func pushToTodayTab(_ route: TodayTabRoute) {
-    //        tabPaths[.today]?.append(route)
-    //    }
-    //
-    //    func addTaskTab(_ route: AddTaskRoute) {
-    //        tabPaths[.addTask]?.append(route)
-    //    }
-    //
-    //    func pushToPrioritiesTab(_ route: PrioritiesTabRoute) {
-    //        tabPaths[.prioritiesTask]?.append(route)
-    //    }
-    //
-    //    func pushToPlannedTab(_ route: PlannedTabRoute) {
-    //        tabPaths[.planned]?.append(route)
-    //    }
-    
     /// Dynamic go back without switch case
     func goBack(from tab: Tabs) {
         guard let path = tabPaths[tab], !path.isEmpty else { return }
@@ -200,16 +173,19 @@ extension AppCoordinator {
     func popToRoot(tab: Tabs) {
         tabPaths[tab] = NavigationPath()
     }
-    
+}
+// MARK: - Push this Views for any tab
+//
+extension AppCoordinator {
     /// Push notification route for any tab
     func pushNotification(for tab: Tabs) {
-        let route = NotificationRouteFactory.createNotificationRoute(for: tab)
+        let route = CoordintorRouteFactory.createNotificationRoute(for: tab)
         push(route)
     }
     
     /// Push project details route for any tab
     func pushProjectDetails(for tab: Tabs, taskCard: PlannedModel) {
-        let route = NotificationRouteFactory.createProjectDetailsRoute(for: tab, taskCard: taskCard)
+        let route = CoordintorRouteFactory.createProjectDetailsRoute(for: tab, taskCard: taskCard)
         push(route)
     }
 }
