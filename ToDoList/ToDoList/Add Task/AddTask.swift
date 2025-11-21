@@ -13,12 +13,14 @@ struct AddTask: View {
     @State var changeTaskTitle: String = ""
     @State var changeTaskSubTitle: String = ""
     @State var changeTaskDescription: String = ""
-    weak var coordinator: AppCoordinator?
+    weak var coordinator: CoordinatorProtocol?
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                CustomNavBar(showSearchIcon: false, showBackIcon: false)
+                CustomNavBar(showSearchIcon: false,
+                             showBackIcon: false,
+                             onTappedNotification: { coordinator?.pushNotification(for: .addTask) })
                 textFields()
                 addSubTask()
                 taskActionBar()

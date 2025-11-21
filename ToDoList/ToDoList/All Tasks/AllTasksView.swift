@@ -18,6 +18,7 @@ struct AllTasksView: View {
             VStack {
                 headerView()
                 Spacer()
+
             }
             VStack {
                 Spacer()
@@ -41,7 +42,8 @@ extension AllTasksView {
     func headerView() -> some View {
         ZStack {
             VStack {
-                CustomNavBar(showBackIcon: false)
+                CustomNavBar(showBackIcon: false,
+                             onTappedNotification: onTappedNotification)
                     .foregroundStyle(.white)
                     .padding(.top, .topInsets)
                     .padding(.bottom, 12 * .deviceFontScale)
@@ -128,5 +130,9 @@ extension AllTasksView {
 extension AllTasksView {
     fileprivate func onTappedScheduleTask(task: PlannedModel) {
         coordinator?.pushProjectDetails(for: .today, taskCard: task)
+    }
+    
+    fileprivate func onTappedNotification() {
+        coordinator?.pushNotification(for: .today)
     }
 }

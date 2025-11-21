@@ -32,7 +32,7 @@ enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
             ProjectDetails(taskCard: taskCard, coordinator: coordinator, sourceTab: .home)
             
         case .createdTaskView(taskCard: let taskCard):
-            CreatedTaskView(viewModel: CreatedTaskViewModel(), taskItem: taskCard,coordinator: coordinator)
+            CreatedTaskView(viewModel: CreatedTaskViewModel(), taskItem: taskCard, coordinator: coordinator, sourceTab: .home)
         }
     }
 }

@@ -15,13 +15,12 @@ struct PlannedView: View {
     var body: some View {
         ZStack {
             VStack {
-                CustomNavBar(showBackIcon: false)
+                CustomNavBar(showBackIcon: false,
+                             onTappedNotification: onTappedNotification)
                 VStack {
                     ForEach(PlannedVM.plannedCompleted.enumerated(), id: \.offset) { (index,task) in
-                        TaskCard(taskCardModel: task).onTapGesture {
-//                            coordinator?.pushToPlannedTab(.projectDetails(taskCard: task))
-                            coordinator?.pushProjectDetails(for: .planned, taskCard: task)
-                        }
+                        TaskCard(taskCardModel: task)
+                            .onTapGesture { onTappedTaskCard(taskCard: task) }
                     }
                 }
                 .padding(.vertical, 14)
@@ -32,4 +31,14 @@ struct PlannedView: View {
         .padding(.horizontal, 20)
     }
 }
-
+// MARK: - Actions
+//
+extension PlannedView {
+    private func onTappedNotification() {
+        coordinator?.pushNotification(for: .planned)
+    }
+    
+    private func onTappedTaskCard(taskCard: PlannedModel) {
+        coordinator?.pushProjectDetails(for: .planned, taskCard: taskCard)
+    }
+}

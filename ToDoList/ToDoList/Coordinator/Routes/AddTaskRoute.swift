@@ -1,23 +1,20 @@
 //
-//  TodayTabRoute.swift
+//  AddTaskRoute.swift
 //  ToDoList
 //
-//  Created by Mahmoud Alaa on 09/11/2025.
+//  Created by Mahmoud Alaa on 21/11/2025.
 //
 
 import SwiftUI
 
-enum TodayTabRoute: Route, ViewBuildable, TabIdentifiable {
-    
+enum AddTaskRoute: Route, ViewBuildable, TabIdentifiable {
     case notification
-    case projectDetails(taskCard: PlannedModel)
 
-    var tab: Tabs { .today }
+    var tab: Tabs { .addTask }
     
     var id: String {
         switch self {
         case .notification: return "home-notification"
-        case .projectDetails: return "home-projectDetails"
         }
     }
     
@@ -27,9 +24,6 @@ enum TodayTabRoute: Route, ViewBuildable, TabIdentifiable {
         switch self {
         case .notification:
             NotificationView(viewModel: NotificationViewModel(), coordinator: coordinator, sourceTab: tab)
-            
-        case .projectDetails(taskCard: let task):
-            ProjectDetails(taskCard: task, coordinator: coordinator, sourceTab: tab)
         }
     }
 }

@@ -12,13 +12,15 @@ struct CreatedTaskView: View {
     @StateObject var viewModel: CreatedTaskViewModel
     var taskItem: PlannedModel
     weak var coordinator: CoordinatorProtocol?
-    
+    var sourceTab: Tabs
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
                 
                 CustomNavBar(showSearchIcon: false,
-                             onTappedBack: onTappedBackButton)
+                             onTappedBack: onTappedBackButton,
+                             onTappedNotification: onTappedNotificationButton)
                 TaskDetails(taskItems: taskItem)
                 HStack {
                     Spacer()
@@ -52,7 +54,10 @@ struct CreatedTaskView: View {
 extension CreatedTaskView {
     private func onTappedBackButton() {
         coordinator?.goBack(from: .home)
-        print("Yes")
+    }
+    
+    private func onTappedNotificationButton() {
+        coordinator?.pushNotification(for: sourceTab)
     }
 }
 
@@ -69,6 +74,6 @@ extension CreatedTaskView {
             colorSubTitle: Color.LightGray,
             colorCircle: nil,
             backgroundColor: Color.darkPrimaryApp
-        )
+        ), sourceTab: .home
     )
 }

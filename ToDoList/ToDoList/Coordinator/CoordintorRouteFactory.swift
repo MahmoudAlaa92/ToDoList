@@ -13,15 +13,14 @@ enum CoordintorRouteFactory {
         case .home:
             return HomeTabRoute.notification
         case .today:
-            break
+            return TodayTabRoute.notification
         case .addTask:
-            break
+            return AddTaskRoute.notification
         case .prioritiesTask:
-            break
+            return PrioritiesTabRoute.notification
         case .planned:
             return PlannedTabRoute.notification
         }
-        return PlannedTabRoute.notification
     }
     
     static func ProjectDetailsRoutFactory(for tab: Tabs, taskCard: PlannedModel) -> any (Route & ViewBuildable & TabIdentifiable) {
@@ -33,7 +32,7 @@ enum CoordintorRouteFactory {
         case .addTask:
             break
         case .prioritiesTask:
-            break
+            return PrioritiesTabRoute.projectDetails(taskCard: taskCard)
         case .planned:
             return PlannedTabRoute.projectDetails(taskCard: taskCard)
         }

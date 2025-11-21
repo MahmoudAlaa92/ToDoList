@@ -16,7 +16,8 @@ struct PrioritiesTasksView: View {
     var body: some View {
         ZStack {
             VStack {
-                CustomNavBar(showBackIcon: false)
+                CustomNavBar(showBackIcon: false,
+                             onTappedNotification: onTappedNotification)
                 HeaderView(name: "Today’s Task", seeAll: "See All")
                 
                 ScrollView(.horizontal) {
@@ -36,7 +37,7 @@ struct PrioritiesTasksView: View {
                 VStack {
                     ForEach(viewModel.prioritiesTasks, id: \.self) { task in
                         TaskCard(taskCardModel: task)
-                         
+                            .onTapGesture { onTappedTaskCard(taskCard: task) }
                     }
                 }
                 
@@ -71,4 +72,14 @@ struct PrioritiesTasksView: View {
     }
     
 }
-
+// MARK: - Actions
+//
+extension PrioritiesTasksView {
+    private func onTappedNotification() {
+        coordinator?.pushNotification(for: .prioritiesTask)
+    }
+    
+    private func onTappedTaskCard(taskCard: PlannedModel) {
+        coordinator?.pushProjectDetails(for: .prioritiesTask, taskCard: taskCard)
+    }
+}
