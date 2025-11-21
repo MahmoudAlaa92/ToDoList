@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProjectCell: View {
-    var projectItem: ProjectModel
+    var projectItem: PlannedModel
 
     var body: some View {
         VStack {
@@ -30,14 +30,4 @@ struct ProjectCell: View {
 // MARK: - Preview
 //
 #Preview {
-    ProjectCell(
-        projectItem: ProjectModel(
-            name: "",
-            title: "",
-            subtitle: "",
-            colorSubTitle: .darkGray,
-            colorCircle: .white,
-            backgroundColor: .lightPink
-        )
-    )
 }

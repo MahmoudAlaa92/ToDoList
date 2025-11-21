@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-final class AppCoordinator: ObservableObject {
+final class AppCoordinator: ObservableObject, CoordinatorProtocol {
     
     // MARK: - Published Properties
     
@@ -25,7 +25,7 @@ final class AppCoordinator: ObservableObject {
         .planned: NavigationPath()
     ]
     
-    // Convenience computed properties for backward compatibility
+    // Convenience computead properties for backward compatibility
     var homeTabPath: NavigationPath {
         get { tabPaths[.home] ?? NavigationPath() }
         set { tabPaths[.home] = newValue }
@@ -173,21 +173,6 @@ extension AppCoordinator {
         tabPaths[tab] = NavigationPath()
     }
 }
-// MARK: - Push this Views for any tab
-//
-extension AppCoordinator {
-    /// Push notification route for any tab
-    func pushNotification(for tab: Tabs) {
-        let route = CoordintorRouteFactory.createNotificationRoute(for: tab)
-        push(route)
-    }
-    
-    /// Push project details route for any tab
-    func pushProjectDetails(for tab: Tabs, taskCard: PlannedModel) {
-        let route = CoordintorRouteFactory.createProjectDetailsRoute(for: tab, taskCard: taskCard)
-        push(route)
-    }
-}
 // MARK: - Modal Presentations
 //
 extension AppCoordinator {
@@ -205,5 +190,26 @@ extension AppCoordinator {
     
     func dismissFullScreen() {
         fullScreen = nil
+    }
+}
+// MARK: - Push this Views for any tab
+//
+extension AppCoordinator {
+    /// Push notification route for any tab
+    func pushNotification(for tab: Tabs) {
+        let route = CoordintorRouteFactory.NotificationRouteFactory(for: tab)
+        push(route)
+    }
+    
+    /// Push project details route for any tab
+    func pushProjectDetails(for tab: Tabs, taskCard: PlannedModel) {
+        let route = CoordintorRouteFactory.ProjectDetailsRoutFactory(for: tab, taskCard: taskCard)
+        push(route)
+    }
+    
+    /// Push project details route for any tab
+    func pushCreatedTaskView(for tab: Tabs, taskCard: PlannedModel) {
+        let route = CoordintorRouteFactory.CreatedTaskViewRoutFactory(for: tab, taskCard: taskCard)
+        push(route)
     }
 }

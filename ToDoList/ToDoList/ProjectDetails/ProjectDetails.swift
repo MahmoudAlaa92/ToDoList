@@ -11,7 +11,7 @@ struct ProjectDetails: View {
     
     @State var changeComment: String = ""
     @State var taskCard: PlannedModel?
-    weak var coordinator: AppCoordinator?
+    weak var coordinator: CoordinatorProtocol?
     var sourceTab: Tabs
 
     var body: some View {

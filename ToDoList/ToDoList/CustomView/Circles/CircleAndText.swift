@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CircleAndText: View {
-    var circleItem: ProjectModel
+    var circleItem: PlannedModel
     var showCheckCircle: Bool = true
     var showStrikeLine: Bool = false
     @State var isChecked = false
@@ -20,12 +20,12 @@ struct CircleAndText: View {
                     width: 60 * .deviceFontScale,
                     height: 60 * .deviceFontScale
                 )
-                .foregroundStyle(circleItem.colorCircle)
+                .foregroundStyle(circleItem.colorCircle ?? .primary)
                 .overlay(
                     Circle().stroke(Color.primary.opacity(0.2), lineWidth: 0.5)
                 )
                 .overlay {
-                    Image(circleItem.name)
+                    Image(circleItem.imageName)
                         .resizable()
                         .scaledToFit()
                         .frame(
@@ -45,8 +45,8 @@ struct CircleAndText: View {
                         )
                         .strikethrough(showStrikeLine, color: .gray)
 
-                    Text(circleItem.subtitle)
-                        .foregroundStyle(circleItem.colorSubTitle)
+                    Text(circleItem.subTitle)
+                        .foregroundStyle(circleItem.colorSubTitle ?? .primary)
                         .font(
                             .customfont(
                                 .regular,
@@ -70,11 +70,14 @@ struct CircleAndText: View {
 //
 #Preview {
     CircleAndText(
-    
-        circleItem: ProjectModel(
-            name: "cubes",
+
+        circleItem: PlannedModel(
             title: "Review your notes",
-            subtitle: "Resdesing",
+            subTitle: "Redesign",
+            day: "Friday",
+            start: "10:00pm",
+            end: "11:00pm",
+            imageName: "cubes",
             colorSubTitle: .LightGray,
             colorCircle: .white,
             backgroundColor: .lightPink

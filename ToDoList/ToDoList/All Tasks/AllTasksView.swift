@@ -11,7 +11,7 @@ struct AllTasksView: View {
 
     @State var viewModel: AllTasksViewModel
     @State var selectedIndex: Int?
-    let coordinator: AppCoordinator
+    weak var coordinator: AppCoordinator?
 
     var body: some View {
         ZStack {
@@ -41,7 +41,7 @@ extension AllTasksView {
     func headerView() -> some View {
         ZStack {
             VStack {
-                CustomNavBar()
+                CustomNavBar(showBackIcon: false)
                     .foregroundStyle(.white)
                     .padding(.top, .topInsets)
                     .padding(.bottom, 12 * .deviceFontScale)
@@ -114,12 +114,19 @@ extension AllTasksView {
                                 colorCircle: Color.lightBeige,
                                 backgroundColor: Color.lightPink
                             )
-                        )
+                        ).onTapGesture { onTappedScheduleTask(task: task) }
                     }
                 }
             }
         }
         .scrollIndicators(.hidden)
         .padding(.horizontal, 20)
+    }
+}
+// MARK: - Actions
+//
+extension AllTasksView {
+    fileprivate func onTappedScheduleTask(task: PlannedModel) {
+        coordinator?.pushProjectDetails(for: .today, taskCard: task)
     }
 }

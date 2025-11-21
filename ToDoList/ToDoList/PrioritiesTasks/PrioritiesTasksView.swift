@@ -16,7 +16,7 @@ struct PrioritiesTasksView: View {
     var body: some View {
         ZStack {
             VStack {
-                CustomNavBar()
+                CustomNavBar(showBackIcon: false)
                 HeaderView(name: "Today’s Task", seeAll: "See All")
                 
                 ScrollView(.horizontal) {
@@ -42,19 +42,25 @@ struct PrioritiesTasksView: View {
                 
                 HeaderView(name: "My projects", seeAll: "See All")
                 ProjectCell(projectItem: .init(
-                    name: "cubes",
                     title: "To Do List",
-                    subtitle: "3 tasks",
-                    colorSubTitle: .LightGray,
-                    colorCircle: .darkGreen,
+                    subTitle: "3 tasks",
+                    day: "Mondat",
+                    start: "10:00pm",
+                    end: "11:00pm",
+                    imageName: "cubes",
+                    colorSubTitle: .darkGray,
+                    colorCircle: .white,
                     backgroundColor: .lightGreen
                 ))
                 ProjectCell(projectItem: .init(
-                    name: "bag",
-                    title: "Some Purchases",
-                    subtitle: "5 tasks",
-                    colorSubTitle: .LightGray,
-                    colorCircle: .white,
+                    title: "bag",
+                    subTitle: "5 tasks",
+                    day: "Friday",
+                    start: "10:00pm",
+                    end: "11:00pm",
+                    imageName: "bag",
+                    colorSubTitle: .darkGray,
+                    colorCircle: .darkPrimaryApp,
                     backgroundColor: .lightPink)
                 )
                 

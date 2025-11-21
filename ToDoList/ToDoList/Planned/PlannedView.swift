@@ -15,7 +15,7 @@ struct PlannedView: View {
     var body: some View {
         ZStack {
             VStack {
-                CustomNavBar()
+                CustomNavBar(showBackIcon: false)
                 VStack {
                     ForEach(PlannedVM.plannedCompleted.enumerated(), id: \.offset) { (index,task) in
                         TaskCard(taskCardModel: task).onTapGesture {

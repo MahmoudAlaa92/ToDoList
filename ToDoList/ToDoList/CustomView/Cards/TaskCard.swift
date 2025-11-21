@@ -15,14 +15,7 @@ struct TaskCard: View {
     var body: some View {
         VStack {
             CircleAndText(
-                circleItem: ProjectModel(
-                    name: taskCardModel.imageName,
-                    title: taskCardModel.title,
-                    subtitle: taskCardModel.subTitle,
-                    colorSubTitle: taskCardModel.colorSubTitle ?? .LightGray,
-                    colorCircle: taskCardModel.colorCircle ?? .primary,
-                    backgroundColor: taskCardModel.backgroundColor ?? .lightPink
-                ),
+                circleItem: taskCardModel,
                 showStrikeLine: showStrikeLine,
                 isChecked: isChecked
             )

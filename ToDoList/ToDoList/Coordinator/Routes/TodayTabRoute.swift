@@ -7,30 +7,25 @@
 
 import SwiftUI
 
-enum TodayTabRoute: Route, ViewBuildable {
-    case taskDetails(String)
-    case editTask(String)
-    case filterTasks
+enum TodayTabRoute: Route, ViewBuildable, TabIdentifiable {
+    
+    case projectDetails(taskCard: PlannedModel)
+
+    var tab: Tabs { .today }
     
     var id: String {
         switch self {
-        case .taskDetails(let id): return "today-task-\(id)"
-        case .editTask(let id): return "today-edit-\(id)"
-        case .filterTasks: return "today-filter"
+        case .projectDetails: return "home-projectDetails"
         }
     }
     
     @ViewBuilder
     func makeView(coordinator: AppCoordinator) -> some View {
-        EmptyView()
-//        switch self {
-//        case .taskDetails(let id):
-//            TaskDetailsView(taskId: id, coordinator: coordinator)
-//        case .editTask(let id):
-//            EditTaskView(taskId: id, coordinator: coordinator)
-//        case .filterTasks:
-//            FilterTasksView(coordinator: coordinator)
-//        }
+
+        switch self {
+        case .projectDetails(taskCard: let task):
+            ProjectDetails(taskCard: task, coordinator: coordinator, sourceTab: .today)
+        }
     }
 }
 
@@ -50,13 +45,5 @@ enum AddTaskRoute: Route, ViewBuildable {
     @ViewBuilder
     func makeView(coordinator: AppCoordinator) -> some View {
         EmptyView()
-//        switch self {
-//        case .taskDetails(let id):
-//            TaskDetailsView(taskId: id, coordinator: coordinator)
-//        case .editTask(let id):
-//            EditTaskView(taskId: id, coordinator: coordinator)
-//        case .filterTasks:
-//            FilterTasksView(coordinator: coordinator)
-//        }
     }
 }

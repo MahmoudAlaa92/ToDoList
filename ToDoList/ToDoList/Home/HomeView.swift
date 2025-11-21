@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
 
     @StateObject var viewModel: HomeViewModel
-    weak var coordinator: AppCoordinator?
+    weak var coordinator: CoordinatorProtocol?
 
     var body: some View {
         ZStack {
@@ -68,7 +68,8 @@ extension HomeView {
         HeaderView(name: "My Projects")
         
         ForEach(viewModel.projectCells.enumerated(), id: \.offset) { (index, item) in
-            ProjectCell(projectItem: item.projectItem)
+            ProjectCell(projectItem: item)
+                .onTapGesture { onTappedProject(task: item) }
         }
     }
 }
@@ -76,13 +77,15 @@ extension HomeView {
 //
 extension HomeView {
     fileprivate func onTappedTodaysTask(task: PlannedModel) {
-//        coordinator?.pushToHomeTab(.projectDetails(taskCard: task))
         coordinator?.pushProjectDetails(for: .home, taskCard: task)
     }
     
     fileprivate func onTappedNotification() {
-//        coordinator?.pushToHomeTab(.notification)
         coordinator?.pushNotification(for: .home)
+    }
+    
+    fileprivate func onTappedProject(task: PlannedModel) {
+        coordinator?.pushCreatedTaskView(for: .home, taskCard: task)
     }
 }
 // MARK: - Preview

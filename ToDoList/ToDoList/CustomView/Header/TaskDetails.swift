@@ -8,16 +8,11 @@
 import SwiftUI
 
 struct TaskDetails: View {
-    var taskName: String
-    var title: String
-    var subTitle: String
-    var day: String
-    var from: String
-    var to: String
+    var taskItems: PlannedModel
     
     var body: some View {
         HStack(spacing: 16) {
-            Image(taskName)
+            Image(taskItems.imageName)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 120 * .deviceFontScale,
@@ -26,17 +21,17 @@ struct TaskDetails: View {
                 .clipShape(RoundedRectangle(cornerRadius: 14))
             
             VStack (alignment: .leading) {
-                Text(title)
+                Text(taskItems.title)
                     .font(.customfont(.semibold, fontSize: 18 * .deviceFontScale))
-                Text(subTitle)
+                Text(taskItems.subTitle)
                     .font(.customfont(.regular, fontSize: 16 * .deviceFontScale))
                     .foregroundStyle(Color.LightGray)
                 HStack {
-                    Text(day)
+                    Text(taskItems.day)
                         .font(.customfont(.regular, fontSize: 12 * .deviceFontScale))
                         .foregroundStyle(Color.LightGray)
                     Spacer()
-                    Text("\(from) to \(to)")
+                    Text("\(taskItems.start) to \(taskItems.end)")
                         .font(.customfont(.regular, fontSize: 12 * .deviceFontScale))
                         .foregroundStyle(Color.LightGray)
                 }

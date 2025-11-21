@@ -50,26 +50,28 @@ class HomeViewModel: ObservableObject {
         ),
     ]
     
-    var projectCells: [ProjectCell] = [
-        ProjectCell(
-            projectItem: .init(
-                name: "bag",
-                title: "Some Purchases",
-                subtitle: "5 tasks",
-                colorSubTitle: .LightGray,
-                colorCircle: .white,
-                backgroundColor: .lightPink
-            )
+    var projectCells: [PlannedModel] = [
+        .init(
+            title: "bag",
+            subTitle: "Swift",
+            day: "Saturday",
+            start: "10:00pm",
+            end: "11:00pm",
+            imageName: "bag",
+            colorSubTitle: .LightGray,
+            colorCircle: .white,
+            backgroundColor: .lightPink
         ),
-        ProjectCell(
-            projectItem: .init(
-                name: "cubes",
-                title: "To Do List",
-                subtitle: "3 tasks",
-                colorSubTitle: .LightGray,
-                colorCircle: .darkGreen,
-                backgroundColor: .lightGreen
-            )
+        .init(
+            title: "To Do List",
+            subTitle: "3 tasks",
+            day: "Saturday",
+            start: "10:00pm",
+            end: "11:00pm",
+            imageName: "cubes",
+            colorSubTitle: .LightGray,
+            colorCircle: .darkGreen,
+            backgroundColor: .lightGreen
         ),
     ]
     

@@ -18,7 +18,7 @@ struct AddTask: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                CustomNavBar(showSearchIcon: false)
+                CustomNavBar(showSearchIcon: false, showBackIcon: false)
                 textFields()
                 addSubTask()
                 taskActionBar()

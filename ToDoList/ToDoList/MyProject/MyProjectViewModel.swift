@@ -8,23 +8,26 @@
 import Combine
 import SwiftUI
 
-//var colorSubTitle: Color = Color.darkGray
-//var colorCircle: Color = Color.lightPink
-//var backgroundColor: Color = Color.lightBeige
 class MyProjectViewModel: ObservableObject {
-    @Published var projectItems: [ProjectModel] = [
+    @Published var projectItems: [PlannedModel] = [
         .init(
-            name: "bag",
-            title: "Some Purchases",
-            subtitle: "5 tasks",
+            title: "bag",
+            subTitle: "5 tasks",
+            day: "Friday",
+            start: "10:00pm",
+            end: "11:00pm",
+            imageName: "bag",
             colorSubTitle: .darkGray,
             colorCircle: .darkPrimaryApp,
             backgroundColor: .lightPink
         ),
         .init(
-            name: "cubes",
             title: "To Do List",
-            subtitle: "3 tasks",
+            subTitle: "3 tasks",
+            day: "Mondat",
+            start: "10:00pm",
+            end: "11:00pm",
+            imageName: "cubes",
             colorSubTitle: .darkGray,
             colorCircle: .white,
             backgroundColor: .lightGreen

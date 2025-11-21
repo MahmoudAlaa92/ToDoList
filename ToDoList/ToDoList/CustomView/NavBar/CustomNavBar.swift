@@ -9,18 +9,20 @@ import SwiftUI
 
 struct CustomNavBar: View {
     var showSearchIcon: Bool = true
+    var showBackIcon: Bool = true
     var onTappedBack: (() -> Void)?
     var onTappedNotification: (() -> Void)?
     
     var body: some View {
         HStack(spacing: 6) {
-            Image("Back")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 26 * .deviceFontScale,
-                       height: 26 * .deviceFontScale)
-                .onTapGesture { onTappedBack?() }
-            
+            if showBackIcon {
+                Image("Back")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 26 * .deviceFontScale,
+                           height: 26 * .deviceFontScale)
+                    .onTapGesture { onTappedBack?() }
+            }
             Spacer()
             
             HStack {
