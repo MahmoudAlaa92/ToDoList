@@ -35,10 +35,16 @@ struct CreatedTaskView: View {
                 ])
                 HeaderView(name: "Our Tasks for the project", seeAll: "")
                 
-                ForEach(viewModel.plannedCompleted.enumerated(), id: \.offset) {
-                    (index, task) in
-                    TaskCard(taskCardModel: task)
+                List {
+                    ForEach(viewModel.plannedCompleted.enumerated(), id: \.offset) {
+                        (index, task) in
+                        TaskCard(taskCardModel: task,
+                                 onDelete: { viewModel.deletePlannedItem(at: index)})
+                    }
                 }
+                .listStyle(.plain)
+                .scrollDisabled(true)
+                .frame(height: CGFloat(viewModel.plannedCompleted.count) * 150 * .deviceFontScale)
                 
                 Spacer()
             }

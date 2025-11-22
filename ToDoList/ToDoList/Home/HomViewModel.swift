@@ -5,8 +5,8 @@
 //  Created by Mahmoud Alaa on 09/11/2025.
 //
 
-import Combine
 import SwiftUI
+import Combine
 
 class HomeViewModel: ObservableObject {
     var days: [CalenderModel] = [
@@ -25,7 +25,7 @@ class HomeViewModel: ObservableObject {
         .init(day: "Fri", number: 13, progress: 0.4),
     ]
     
-    var todaysTask: [PlannedModel] = [
+    @Published var todaysTask: [PlannedModel] = [
         .init(
             title: "Client Review &Feedback",
             subTitle: "Redesing my work",
@@ -74,5 +74,9 @@ class HomeViewModel: ObservableObject {
             backgroundColor: .lightGreen
         ),
     ]
+    
+    func deleteItems(at index: Int) {
+        todaysTask.remove(at: index)
+    }
     
 }

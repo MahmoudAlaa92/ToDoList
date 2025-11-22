@@ -102,4 +102,8 @@ class AllTasksViewModel: ObservableObject {
             backgroundColor: Color.lightPink
         ),
     ]
+    
+    func deleteItems(at index: Int) {
+        prioritiesTasks.remove(at: index)
+    }
 }

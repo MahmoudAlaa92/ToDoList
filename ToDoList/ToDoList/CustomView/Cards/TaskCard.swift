@@ -11,6 +11,7 @@ struct TaskCard: View {
     var taskCardModel: PlannedModel
     var showStrikeLine: Bool = false
     @State var isChecked = false
+    var onDelete: (() -> Void)?
 
     var body: some View {
         VStack {
@@ -29,6 +30,16 @@ struct TaskCard: View {
                 start: taskCardModel.start,
                 end: taskCardModel.end
             )
+        }
+        .listRowInsets(EdgeInsets())
+        .listRowSeparator(.hidden)
+        .listRowBackground(Color.clear)
+        .swipeActions(edge: .trailing) {
+            Button(role: .destructive) {
+                onDelete?()
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
         }
         .padding(.horizontal, 12 * .deviceFontScale)
         .padding(.vertical, 12 * .deviceFontScale)
@@ -53,7 +64,7 @@ struct TaskCard: View {
             colorSubTitle: .red,
             colorCircle: .red,
             backgroundColor: .red
-        )
+        ), onDelete: nil
     )
 
 }

@@ -5,8 +5,8 @@
 //  Created by Mahmoud Alaa on 01/11/2025.
 //
 
-import Combine
 import SwiftUI
+import Combine
 
 class PlannedViewModel: ObservableObject {
     @Published var plannedCompleted: [PlannedModel] = [
@@ -31,6 +31,10 @@ class PlannedViewModel: ObservableObject {
             colorSubTitle: Color.LightGray,
             colorCircle: Color.lightBeige,
             backgroundColor: Color.lightPink
-        ),
+        )
     ]
+    
+    func deleteItems(at index: Int) {
+        plannedCompleted.remove(at: index)
+    }
 }

@@ -33,4 +33,8 @@ class CreatedTaskViewModel: ObservableObject {
             backgroundColor: Color.lightPink
         ),
     ]
+    
+    func deletePlannedItem(at index: Int) {
+        plannedCompleted.remove(at: index)
+    }
 }

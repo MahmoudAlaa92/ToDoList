@@ -54,13 +54,19 @@ extension HomeView {
 
     @ViewBuilder
     fileprivate func toDaysTasksSection() -> some View {
-        HeaderView(name: "To day’s tasks")
-
-        ForEach(viewModel.todaysTask.enumerated(), id: \.offset) {
-            (index, item) in
-            TaskCard(taskCardModel: item)
-                .onTapGesture { onTappedTodaysTask(task: item) }
+        HeaderView(name: "To day's tasks")
+        
+        List {
+            ForEach(Array(viewModel.todaysTask.enumerated()), id: \.offset) { index, item in
+                TaskCard(taskCardModel: item,
+                         onDelete: { viewModel.deleteItems(at: index) })
+                
+                    .onTapGesture { onTappedTodaysTask(task: item) }
+            }
         }
+        .listStyle(.plain)
+        .scrollDisabled(true)
+        .frame(height: CGFloat(viewModel.todaysTask.count) * 150 * .deviceFontScale)
     }
 
     @ViewBuilder

@@ -9,20 +9,22 @@ import SwiftUI
 
 struct PlannedView: View {
     
-    @State var PlannedVM: PlannedViewModel
-    weak var coordinator: AppCoordinator?
-
+    @StateObject var PlannedVM: PlannedViewModel
+    weak var coordinator: CoordinatorProtocol?
+    
     var body: some View {
         ZStack {
             VStack {
                 CustomNavBar(showBackIcon: false,
                              onTappedNotification: onTappedNotification)
-                VStack {
-                    ForEach(PlannedVM.plannedCompleted.enumerated(), id: \.offset) { (index,task) in
-                        TaskCard(taskCardModel: task)
-                            .onTapGesture { onTappedTaskCard(taskCard: task) }
+                List {
+                    ForEach(PlannedVM.plannedCompleted.enumerated(), id: \.offset) { (index, task) in
+                        TaskCard(taskCardModel: task,
+                                 onDelete: { PlannedVM.deleteItems(at: index)})
+                        .onTapGesture { onTappedTaskCard(taskCard: task) }
                     }
                 }
+                .listStyle(.plain)
                 .padding(.vertical, 14)
                 
                 Spacer()

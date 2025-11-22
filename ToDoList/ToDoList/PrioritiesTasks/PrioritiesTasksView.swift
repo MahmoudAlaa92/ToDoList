@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PrioritiesTasksView: View {
     
-    @State var viewModel: PrioritiesTasksViewModel
+    @StateObject var viewModel: PrioritiesTasksViewModel
     @State var selectedIndex: Int?
     weak var coordinator: AppCoordinator?
 
@@ -34,12 +34,16 @@ struct PrioritiesTasksView: View {
                 .padding(.bottom, 8 * .deviceFontScale)
                 .scrollIndicators(.hidden)
                 
-                VStack {
-                    ForEach(viewModel.prioritiesTasks, id: \.self) { task in
-                        TaskCard(taskCardModel: task)
+                List {
+                    ForEach(viewModel.prioritiesTasks.enumerated(), id: \.offset) { (index, task) in
+                        TaskCard(taskCardModel: task,
+                                 onDelete: { viewModel.deletePriority(at: index)})
                             .onTapGesture { onTappedTaskCard(taskCard: task) }
                     }
                 }
+                .listStyle(.plain)
+                .scrollDisabled(true)
+                .frame(height: CGFloat(viewModel.prioritiesTasks.count) * 150 * .deviceFontScale)
                 
                 HeaderView(name: "My projects", seeAll: "See All")
                 ProjectCell(projectItem: .init(

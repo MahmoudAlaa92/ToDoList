@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AllTasksView: View {
 
-    @State var viewModel: AllTasksViewModel
+    @StateObject var viewModel: AllTasksViewModel
     @State var selectedIndex: Int?
     weak var coordinator: AppCoordinator?
 
@@ -99,31 +99,38 @@ extension AllTasksView {
     }
 
     func scheduleTasks() -> some View {
-        ScrollView(.vertical) {
-            VStack {
+        List {
+            Section {
                 HeaderView(name: "Schedule", seeAll: "")
-                VStack {
-                    ForEach(viewModel.prioritiesTasks, id: \.self) { task in
-                        TaskCard(
-                            taskCardModel: .init(
-                                title: task.title,
-                                subTitle: task.subTitle,
-                                day: task.day,
-                                start: task.start,
-                                end: task.end,
-                                imageName: task.imageName,
-                                colorSubTitle: Color.LightGray,
-                                colorCircle: Color.lightBeige,
-                                backgroundColor: Color.lightPink
-                            )
-                        ).onTapGesture { onTappedScheduleTask(task: task) }
-                    }
+                    .listRowInsets(EdgeInsets())    // remove padding
+                    .listRowSeparator(.hidden)
+
+                ForEach(viewModel.prioritiesTasks.indices, id: \.self) { index in
+                    let task = viewModel.prioritiesTasks[index]
+
+                    TaskCard(
+                        taskCardModel: .init(
+                            title: task.title,
+                            subTitle: task.subTitle,
+                            day: task.day,
+                            start: task.start,
+                            end: task.end,
+                            imageName: task.imageName,
+                            colorSubTitle: Color.LightGray,
+                            colorCircle: Color.lightBeige,
+                            backgroundColor: Color.lightPink
+                        ),
+                        onDelete: { viewModel.deleteItems(at: index) }
+                    )
+                    .onTapGesture { onTappedScheduleTask(task: task) }
                 }
             }
         }
+        .listStyle(.plain)
         .scrollIndicators(.hidden)
         .padding(.horizontal, 20)
     }
+
 }
 // MARK: - Actions
 //
