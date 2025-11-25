@@ -55,4 +55,20 @@ enum CoordintorRouteFactory {
         return HomeTabRoute.createdTaskView(taskCard: taskCard)
     }
     
+    static func CreatedProfileRoutFactory(for tab: Tabs) -> any (Route & ViewBuildable & TabIdentifiable) {
+        switch tab {
+        case .home:
+            return HomeTabRoute.profilePicture
+        case .today:
+            break
+        case .addTask:
+            break
+        case .prioritiesTask:
+            break
+        case .planned:
+            break
+        }
+        return HomeTabRoute.profilePicture
+    }
+    
 }

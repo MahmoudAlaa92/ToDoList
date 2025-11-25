@@ -11,10 +11,11 @@ struct SelectTime: View {
     
     @State private var hour = 3
     @State private var minute = 24
+    weak var coordinator: CoordinatorProtocol?
     
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
-            SelectTimeNavBar {}
+            SelectTimeNavBar(onCloseTapped: { coordinator?.dismissSheet() })
             HeaderSelectedTime(time: "03:24 pm")
             HStack(spacing: 12) {
                 MinutePickerView(selectedMinute: $hour, fromTo: Array(0...23))

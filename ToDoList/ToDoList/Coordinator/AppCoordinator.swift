@@ -212,4 +212,10 @@ extension AppCoordinator {
         let route = CoordintorRouteFactory.CreatedTaskViewRoutFactory(for: tab, taskCard: taskCard)
         push(route)
     }
+    
+    /// Push profile route for any tab
+    func pushProfileView(for tab: Tabs) {
+        let route = CoordintorRouteFactory.CreatedProfileRoutFactory(for: tab)
+        push(route)
+    }
 }

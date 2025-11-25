@@ -49,4 +49,5 @@ protocol CoordinatorProtocol: AnyObject {
     func pushNotification(for tab: Tabs)
     func pushProjectDetails(for tab: Tabs, taskCard: PlannedModel)
     func pushCreatedTaskView(for tab: Tabs, taskCard: PlannedModel)
+    func pushProfileView(for tab: Tabs) 
 }

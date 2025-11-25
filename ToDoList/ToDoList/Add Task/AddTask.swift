@@ -76,7 +76,7 @@ extension AddTask {
     func taskActionBar() -> some View {
         TaskActionBar (
             onCalendarTap: {},
-            onAlertTap: {},
+            onAlertTap: { coordinator?.presentSheet(.selectTime) },
             onFlagTap: {},
             onPhotoTap: {},
             onMicTap: {},

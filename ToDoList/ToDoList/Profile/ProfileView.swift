@@ -10,13 +10,14 @@ import SwiftUI
 struct ProfileView: View {
     
     @State var changeFullName: String = ""
-    let coordinator: AppCoordinator
+    var sourceTab: Tabs
+    weak var coordinator: CoordinatorProtocol?
 
     var body: some View {
         
         ZStack {
             VStack {
-                BackAndEllipsesNavBar()
+                BackAndEllipsesNavBar(onTappedBack: {coordinator?.goBack(from: sourceTab)})
                     .padding(.top, 20 * .deviceFontScale)
                 
                 VStack {
@@ -47,9 +48,21 @@ struct ProfileView: View {
                 
                 
                 VStack(spacing: 16 * .deviceFontScale) {
-                    CustomTextField(title:"Full Name", placeholder: "Enter your full name", text: $changeFullName)
-                    CustomTextField(title:"Email", placeholder: "Enter your email", text: $changeFullName)
-                    CustomTextField(title:"Full Phone Number", placeholder: "+20 1142128919", text: $changeFullName)
+                    CustomTextField(
+                        title:"Full Name",
+                        placeholder: "Enter your full name",
+                        text: $changeFullName
+                    )
+                    CustomTextField(
+                        title:"Email",
+                        placeholder: "Enter your email",
+                        text: $changeFullName
+                    )
+                    CustomTextField(
+                        title:"Full Phone Number",
+                        placeholder: "+20 1142128919",
+                        text: $changeFullName
+                    )
                     HStack {
                         Text("Your QR Code")
                             .font(.customfont(.regular, fontSize: 12 * .deviceFontScale))
@@ -67,6 +80,7 @@ struct ProfileView: View {
             }
             
         }
+        .navigationBarBackButtonHidden()
         .padding(.horizontal, 20)
         
     }

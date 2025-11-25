@@ -9,12 +9,14 @@ import SwiftUI
 
 enum AddTaskRoute: Route, ViewBuildable, TabIdentifiable {
     case notification
-
+    case selectTime
+  
     var tab: Tabs { .addTask }
     
     var id: String {
         switch self {
         case .notification: return "home-notification"
+        case .selectTime: return "select-time"
         }
     }
     
@@ -24,6 +26,8 @@ enum AddTaskRoute: Route, ViewBuildable, TabIdentifiable {
         switch self {
         case .notification:
             NotificationView(viewModel: NotificationViewModel(), coordinator: coordinator, sourceTab: tab)
+        case .selectTime:
+            SelectTime()
         }
     }
 }
