@@ -147,6 +147,7 @@ extension HomeView {
             MenuButton(image: "Lock", title: "Logout") {
                 showMenu = false
             }
+            
             Spacer()
         }
         .padding(.horizontal, 15)

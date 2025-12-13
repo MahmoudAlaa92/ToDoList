@@ -37,7 +37,7 @@ struct CustomTabBar: View {
             
             Tab("AddTask", image: "addIcon", value: .addTask) {
                 NavigationStack(path: $coordinator.addTaskPath) {
-                    AddTask(coordinator: coordinator)
+                    AddTask(viewModel: AddTaskViewModel(), coordinator: coordinator)
                         .navigationDestination(for: AddTaskRoute.self) { route in
                             route.makeView(coordinator: coordinator)
                         }

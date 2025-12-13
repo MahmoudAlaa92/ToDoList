@@ -21,7 +21,7 @@ enum ModalRoute: Route, ViewBuildable {
     func makeView(coordinator: AppCoordinator) -> some View {
         switch self {
         case .addTask:
-            AddTask(coordinator: coordinator)
+            AddTask(viewModel: AddTaskViewModel(), coordinator: coordinator)
         case .selectTime:
             SelectTime(coordinator: coordinator)
         }

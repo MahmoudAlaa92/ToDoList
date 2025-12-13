@@ -15,6 +15,7 @@ struct SelectTime: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
+            
             SelectTimeNavBar(onCloseTapped: { coordinator?.dismissSheet() })
             HeaderSelectedTime(time: "03:24 pm")
             HStack(spacing: 12) {
