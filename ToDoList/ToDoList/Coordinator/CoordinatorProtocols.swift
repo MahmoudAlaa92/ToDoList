@@ -28,7 +28,8 @@ protocol TabIdentifiable {
 protocol CoordinatorProtocol: AnyObject {
     // State management
     var currentAppState: AppCoordinator.AppState { get set }
-
+    func login()
+    func logout()
     // Tab navigation
     func push<R: TabIdentifiable & Hashable>(_ route: R)
     func goBack(from tab: Tabs)

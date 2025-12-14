@@ -152,6 +152,7 @@ extension HomeView {
             Spacer()
             
             MenuButton(image: "Lock", title: "Logout") {
+                coordinator?.logout()
                 showMenu = false
             }
             

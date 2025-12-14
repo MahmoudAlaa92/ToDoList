@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct LogInView: View {
-    let coordinator: AppCoordinator
+    
+    weak var coordinator: CoordinatorProtocol?
 
     var body: some View {
         ScrollView {
@@ -47,6 +48,7 @@ struct LogInView: View {
                             Text("Sign UP")
                                 .font(.customfont(.regular, fontSize: 14))
                                 .foregroundStyle(Color.primaryApp)
+                                .onTapGesture { coordinator?.pushAuth(.signup) }
                         }
                         
                     }
@@ -90,9 +92,9 @@ extension LogInView {
     
     func joinWith() -> some View {
         HStack(spacing: 20) {
-            IconCardView(imageName: "ProfilePicture", title: "Your Account") { print("Account") }
-            IconCardView(imageName: "Google", title: "Your Gmail") { print("Gmail") }
-            IconCardView(imageName: "QrCode", title: "Your Qr Code") { print("Code") }
+            IconCardView(imageName: "ProfilePicture", title: "Your Account") { coordinator?.login() }
+            IconCardView(imageName: "Google", title: "Your Gmail") { coordinator?.login() }
+            IconCardView(imageName: "QrCode", title: "Your Qr Code") { coordinator?.login() }
         }
     }
 }

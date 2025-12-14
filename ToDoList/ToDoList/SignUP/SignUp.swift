@@ -10,7 +10,7 @@ import SwiftUI
 struct SignUp: View {
     
     @State var nameText: String = ""
-    let coordinator: AppCoordinator
+    weak var coordinator: CoordinatorProtocol?
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -38,6 +38,7 @@ struct SignUp: View {
                     Text("Log In")
                         .font(.customfont(.regular, fontSize: 14))
                         .foregroundStyle(Color.primaryApp)
+                        .onTapGesture { coordinator?.goBackAuth() }
                 }
                 
                 Spacer()

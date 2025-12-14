@@ -77,11 +77,7 @@ final class AppCoordinator: ObservableObject, CoordinatorProtocol {
     private func checkAuthState() {
         isAuthenticated = UserDefaults.standard.bool(forKey: "isAuthenticated")
         
-        if isAuthenticated {
-            currentAppState = .main
-        } else {
-            currentAppState = .main
-        }
+        currentAppState = isAuthenticated ? .main : .auth
     }
 
     func login() {
