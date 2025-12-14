@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct ToDoListApp: App {
+    @StateObject private var taskStore = TaskStore()
+    
     var body: some Scene {
         WindowGroup {
             AppCoordinatorView()
+                .environmentObject(taskStore)
         }
     }
 }

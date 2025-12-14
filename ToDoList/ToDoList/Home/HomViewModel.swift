@@ -8,7 +8,9 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class HomeViewModel: ObservableObject {
+    // MARK: - Properties
     var days: [CalenderModel] = [
         .init(day: "Sun", number: 1, progress: 0.9),
         .init(day: "Mon", number: 2, progress: 0.6),
@@ -23,31 +25,6 @@ class HomeViewModel: ObservableObject {
         .init(day: "Wed", number: 11, progress: 1),
         .init(day: "Thu", number: 12, progress: 0.8),
         .init(day: "Fri", number: 13, progress: 0.4),
-    ]
-    
-    @Published var todaysTask: [PlannedModel] = [
-        .init(
-            title: "Client Review &Feedback",
-            subTitle: "Redesing my work",
-            day: "Friday",
-            start: "1:00pm",
-            end: "4:00pm",
-            imageName: "Mobile trading",
-            colorSubTitle: Color.LightGray,
-            colorCircle: Color.lightBeige,
-            backgroundColor: Color.lightPink
-        ),
-        .init(
-            title: "Reivew My Work",
-            subTitle: "Swift",
-            day: "Saturday",
-            start: "10:00pm",
-            end: "11:00pm",
-            imageName: "cubes",
-            colorSubTitle: Color.LightGray,
-            colorCircle: Color.lightBeige,
-            backgroundColor: Color.lightPink
-        ),
     ]
     
     var projectCells: [PlannedModel] = [
@@ -75,8 +52,29 @@ class HomeViewModel: ObservableObject {
         ),
     ]
     
-    func deleteItems(at index: Int) {
-        todaysTask.remove(at: index)
+    @Published var todaysTask: [PlannedModel] = []
+    private let taskStore: TaskStore
+    private var Cancellabel = Set<AnyCancellable>()
+ 
+    // MARK: - Init
+    init(taskStore: TaskStore) {
+        self.taskStore = taskStore
+        binding()
     }
     
+    func deleteItems(at index: Int) {
+        taskStore.deleteTask(at: index)
+    }
+}
+// MARK: - Private Handler
+//
+extension HomeViewModel {
+    private func binding() {
+        taskStore
+            .$todaysTasks
+            .sink { [weak self] value in
+                self?.todaysTask = value
+            }
+            .store(in: &Cancellabel)
+    }
 }

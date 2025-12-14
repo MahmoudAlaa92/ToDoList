@@ -10,16 +10,20 @@ import Combine
 
 struct AddTask: View {
 
-    @State var changeTaskName: String = ""
-    @State var changeTaskTitle: String = ""
-    @State var changeTaskSubTitle: String = ""
-    @State var changeTaskDescription: String = ""
+    // MARK: - Properties
+    @EnvironmentObject var taskStore: TaskStore
     @StateObject var viewModel: AddTaskViewModel
     weak var coordinator: CoordinatorProtocol?
     
     @State private var showAlert = false
     @State private var alertTitle = ""
 
+   // MARK: - Init
+    init(coordinator: CoordinatorProtocol? ,taskStore: TaskStore) {
+        self.coordinator = coordinator
+        _viewModel = StateObject(wrappedValue: AddTaskViewModel(taskStore: taskStore))
+    }
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
@@ -38,21 +42,22 @@ struct AddTask: View {
         }
         .padding(.horizontal, 20)
         .scrollIndicators(.hidden)
-        .onChange(of: changeTaskName) { _, newValue in
+        .onChange(of: viewModel.taskName) { _, newValue in
             viewModel.updateTaskName(newValue)
         }
-        .onChange(of: changeTaskTitle) { _, newValue in
+        .onChange(of: viewModel.taskTitle) { _, newValue in
             viewModel.updateTaskTitle(newValue)
         }
-        .onChange(of: changeTaskSubTitle) { _, newValue in
+        .onChange(of: viewModel.taskSubTitle) { _, newValue in
             viewModel.updateTaskSubTitle(newValue)
         }
-        .onChange(of: changeTaskDescription) { _, newValue in
+        .onChange(of: viewModel.taskDescription) { _, newValue in
             viewModel.updateTaskDescription(newValue)
         }
-        .onReceive(viewModel.createdSuccess) { message in
-            alertTitle = message
+        .onReceive(viewModel.createdSuccess) { task in
+            alertTitle = "Task Created Successfuly"
             showAlert = true
+            taskStore.addTask(task)
         }
         .onReceive(viewModel.createdError) { error in
             alertTitle = error
@@ -74,23 +79,23 @@ extension AddTask {
         CustomTextField(
             title: "Add Your Project Name",
             placeholder: "Enter your Project Name",
-            text: $changeTaskName
+            text: $viewModel.taskName
         )
         CustomTextField(
             title: "Title",
             placeholder: "Enter your title",
-            text: $changeTaskTitle
+            text: $viewModel.taskTitle
         )
         CustomTextField(
             title: "SubTitle",
             placeholder: "Enter your subTitle",
-            text: $changeTaskSubTitle
+            text: $viewModel.taskSubTitle
         )
         CustomTextField(
             title: "Description",
             placeholder: "Add Description..",
             height: 100 * .deviceFontScale,
-            text: $changeTaskDescription
+            text: $viewModel.taskDescription
         )
     }
 }

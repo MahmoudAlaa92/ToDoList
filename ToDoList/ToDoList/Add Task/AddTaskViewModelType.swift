@@ -24,5 +24,5 @@ protocol AddTaskViewModelTypeInput {
 //
 protocol AddTaskViewModelTypeOutput {
     var createdError: PassthroughSubject<String, Never> { get }
-    var createdSuccess: PassthroughSubject<String, Never> { get }
+    var createdSuccess: PassthroughSubject<PlannedModel, Never> { get }
 }

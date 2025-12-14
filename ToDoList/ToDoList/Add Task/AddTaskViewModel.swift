@@ -5,52 +5,78 @@
 //  Created by Mahmoud Alaa on 13/12/2025.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
-class AddTaskViewModel: ObservableObject, AddTaskViewModelType {
+@MainActor
+final class AddTaskViewModel: ObservableObject, AddTaskViewModelType {
+    
+    /// Dependencies
+    ///
+    private let taskStore: TaskStore
     
     /// Input handling
     ///
-    private let taskName = CurrentValueSubject<String, Never>("")
-    private let taskTitle = CurrentValueSubject<String, Never>("")
-    private let taskSubTitle = CurrentValueSubject<String, Never>("")
-    private let taskDescription = CurrentValueSubject<String, Never>("")
+    @Published var taskName = ""
+    @Published var taskTitle = ""
+    @Published var taskSubTitle = ""
+    @Published var taskDescription = ""
     
     /// Outputs
     ///
-    var createdError =  PassthroughSubject<String, Never>()
-    var createdSuccess = PassthroughSubject<String, Never>()
-  
+    var createdError = PassthroughSubject<String, Never>()
+    var createdSuccess = PassthroughSubject<PlannedModel, Never>()
+    
+    init(taskStore: TaskStore) {
+        self.taskStore = taskStore
+    }
 }
 // MARK: - AddTaskViewModelInput
 //
 extension AddTaskViewModel {
     func updateTaskName(_ name: String) {
-        taskName.send(name)
+        taskName = name
     }
     
     func updateTaskTitle(_ title: String) {
-        taskTitle.send(title)
+        taskTitle = title
     }
     
     func updateTaskSubTitle(_ subTitle: String) {
-        taskSubTitle.send(subTitle)
+        taskSubTitle = subTitle
     }
     
     func updateTaskDescription(_ description: String) {
-        taskDescription.send(description)
+        taskDescription = description
     }
     
     func createdTaskTapped() {
-        guard !taskName.value.isEmpty,
-              !taskTitle.value.isEmpty,
-              !taskSubTitle.value.isEmpty,
-              !taskDescription.value.isEmpty else {
+        guard !taskName.isEmpty,
+              !taskTitle.isEmpty,
+              !taskSubTitle.isEmpty,
+              !taskDescription.isEmpty
+        else {
             createdError.send("There is an empty field")
             return
         }
         
-        createdSuccess.send("Task Created Successfuly")
+        createdSuccess.send(
+            PlannedModel(
+                title: taskTitle,
+                subTitle: taskSubTitle,
+                day: "Friday",
+                start: "8:00pm",
+                end: "10:00pm",
+                imageName: "cubes",
+                colorSubTitle: Color.gray,
+                colorCircle: Color.white,
+                backgroundColor: Color.black
+            )
+        )
+        
+        taskName = ""
+        taskTitle = ""
+        taskSubTitle = ""
+        taskDescription = ""
     }
 }

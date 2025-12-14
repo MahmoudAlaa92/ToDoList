@@ -13,13 +13,14 @@ enum Tabs {
 
 struct CustomTabBar: View {
     @ObservedObject var coordinator: AppCoordinator
+    @EnvironmentObject var taskStore: TaskStore
     @State private var selectedTab: Tabs = .home
-    
+
     var body: some View {
         TabView(selection: $selectedTab) {
             Tab("Home", image: "home", value: .home) {
                 NavigationStack(path: $coordinator.homeTabPath) {
-                    HomeView(viewModel: HomeViewModel(), coordinator: coordinator)
+                    HomeView(coordinator: coordinator, taskStore: taskStore)  
                         .navigationDestination(for: HomeTabRoute.self) { route in
                             route.makeView(coordinator: coordinator)
                         }
@@ -37,7 +38,7 @@ struct CustomTabBar: View {
             
             Tab("AddTask", image: "addIcon", value: .addTask) {
                 NavigationStack(path: $coordinator.addTaskPath) {
-                    AddTask(viewModel: AddTaskViewModel(), coordinator: coordinator)
+                    AddTask(coordinator: coordinator, taskStore: taskStore)
                         .navigationDestination(for: AddTaskRoute.self) { route in
                             route.makeView(coordinator: coordinator)
                         }

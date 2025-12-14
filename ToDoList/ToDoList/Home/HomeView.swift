@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+    // MARK: - Propeties
+    @EnvironmentObject private var taskStore: TaskStore
     @State private var showMenu: Bool = false
     @StateObject var viewModel: HomeViewModel
     weak var coordinator: CoordinatorProtocol?
+    
+    // MARK: - Init
+    init(coordinator: CoordinatorProtocol?, taskStore: TaskStore) {
+        self.coordinator = coordinator
+        _viewModel = StateObject(wrappedValue: HomeViewModel(taskStore: taskStore))
+    }
     
     var body: some View {
         VStack {
@@ -30,7 +37,7 @@ struct HomeView: View {
                         onTappedMenu: { showMenu.toggle() }
                     )
                     .padding(.top, safeArea.top + 8)
-
+                    
                     ScrollView {
                         calenderSection()
                         AnnouncementCard()
@@ -45,7 +52,7 @@ struct HomeView: View {
             } menuView: { safeArea in
                 sideBarMenuView(safeArea)
             } background: {
-               
+                
             }
         }
     }
@@ -178,5 +185,5 @@ extension HomeView {
 
 // MARK: - Preview
 #Preview {
-    HomeView(viewModel: HomeViewModel())
+    //    HomeView(viewModel: HomeViewModel())
 }
