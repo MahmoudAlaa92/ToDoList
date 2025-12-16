@@ -10,7 +10,7 @@ import SwiftUI
 struct PrioritiesTasksView: View {
     
     @StateObject var viewModel: PrioritiesTasksViewModel
-    @State var selectedIndex: Int?
+    @State var selectedIndex: Int? = 0
     weak var coordinator: AppCoordinator?
 
     var body: some View {

@@ -58,8 +58,8 @@ struct HomeView: View {
     }
     
 }
-
 // MARK: - Views
+//
 extension HomeView {
     
     @ViewBuilder
@@ -140,15 +140,6 @@ extension HomeView {
                 showMenu = false
             }
             
-            MenuButton(image: "flag2", title: "Priorities") {
-                coordinator?.pushNotification(for: .home)
-                showMenu = false
-            }
-            
-            MenuButton(image: "planned", title: "Planned") {
-                showMenu = false
-            }
-            
             Spacer()
             
             MenuButton(image: "Lock", title: "Logout") {
@@ -183,8 +174,8 @@ extension HomeView {
         coordinator?.pushCreatedTaskView(for: .home, taskCard: task)
     }
 }
-
 // MARK: - Preview
+//
 #Preview {
     //    HomeView(viewModel: HomeViewModel())
 }

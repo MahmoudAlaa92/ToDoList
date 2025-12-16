@@ -11,11 +11,11 @@ import Combine
 class PrioritiesTasksViewModel: ObservableObject {
 
     @Published var prioritieItems: [PriorityModel] = [
-        .init(title: "All", number: 10),
-        .init(title: "High Priority", number: 4),
-        .init(title: "Medium Priority", number: 6),
-        .init(title: "Low Priority", number: 8),
-        .init(title: "Not Priority", number: 8),
+        .init(title: "All", number: 2),
+        .init(title: "High Priority", number: 1),
+        .init(title: "Medium Priority", number: 2),
+        .init(title: "Low Priority", number: 2),
+        .init(title: "Not Priority", number: 1),
     ]
 
     @Published var prioritiesTasks: [PlannedModel] = [

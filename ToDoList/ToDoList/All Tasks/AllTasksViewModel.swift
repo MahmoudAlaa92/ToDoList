@@ -26,11 +26,11 @@ class AllTasksViewModel: ObservableObject {
     ]
 
     @Published var prioritieItems: [PriorityModel] = [
-        .init(title: "All", number: 10),
+        .init(title: "All", number: 6),
         .init(title: "High Priority", number: 4),
         .init(title: "Medium Priority", number: 6),
-        .init(title: "Low Priority", number: 8),
-        .init(title: "Not Priority", number: 8),
+        .init(title: "Low Priority", number: 3),
+        .init(title: "Not Priority", number: 4),
     ]
 
     @Published var prioritiesTasks: [PlannedModel] = [

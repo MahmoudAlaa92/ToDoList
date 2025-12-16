@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct AllTasksView: View {
-
+   // MARK: - Properties
     @StateObject var viewModel: AllTasksViewModel
-    @State var selectedIndex: Int?
+    @State var selectedIndex: Int? = 0
     weak var coordinator: AppCoordinator?
 
+    // MARK: - Body
     var body: some View {
         ZStack {
             VStack {
