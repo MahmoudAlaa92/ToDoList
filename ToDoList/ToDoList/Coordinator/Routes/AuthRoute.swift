@@ -27,7 +27,7 @@ enum AuthRoute: Route, ViewBuildable {
         case .login:
             LogInView(coordinator: coordinator)
         case .signup:
-            SignUp(coordinator: coordinator)
+            SignUp(coordinator: coordinator, viewModel: SignUpViewModel())
         }
     }
 }
