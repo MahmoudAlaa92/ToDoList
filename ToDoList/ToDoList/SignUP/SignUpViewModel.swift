@@ -15,9 +15,8 @@ class SignUpViewModel: SignUpViewModelType {
     @Published var nameText: String = ""
     @Published var emailText: String = ""
     @Published var passwordText: String = ""
-    
+    ///
     @Published private(set) var isFormValid: Bool = false
-    var cancellabels = Set<AnyCancellable>()
     
     // MARK: - Init
     init() {

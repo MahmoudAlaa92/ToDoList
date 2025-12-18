@@ -8,105 +8,95 @@
 import SwiftUI
 import Combine
 
-struct AddTask: View {
+struct AddTask<VM: AddTaskViewModelType>: View {
 
     // MARK: - Properties
-    @EnvironmentObject var taskStore: TaskStore
-    @StateObject var viewModel: AddTaskViewModel
     weak var coordinator: CoordinatorProtocol?
-    
+    @StateObject private var viewModel: VM
+
     @State private var showAlert = false
     @State private var alertTitle = ""
 
-   // MARK: - Init
-    init(coordinator: CoordinatorProtocol? ,taskStore: TaskStore) {
+    // MARK: - Init
+    init(
+        coordinator: CoordinatorProtocol?,
+        viewModel: VM
+    ) {
         self.coordinator = coordinator
-        _viewModel = StateObject(wrappedValue: AddTaskViewModel(taskStore: taskStore))
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                CustomNavBar(
-                    showSearchIcon: false,
-                    showBackIcon: false,
-                    onTappedNotification: {
-                        coordinator?.pushNotification(for: .addTask)
-                    }
-                )
+                navBar()
                 textFields()
                 addSubTask()
                 taskActionBar()
-                creatTaskButton()
+                createTaskButton()
             }
         }
         .padding(.horizontal, 20)
         .scrollIndicators(.hidden)
-        .onChange(of: viewModel.taskName) { _, newValue in
-            viewModel.updateTaskName(newValue)
-        }
-        .onChange(of: viewModel.taskTitle) { _, newValue in
-            viewModel.updateTaskTitle(newValue)
-        }
-        .onChange(of: viewModel.taskSubTitle) { _, newValue in
-            viewModel.updateTaskSubTitle(newValue)
-        }
-        .onChange(of: viewModel.taskDescription) { _, newValue in
-            viewModel.updateTaskDescription(newValue)
-        }
-        .onReceive(viewModel.createdSuccess) { task in
-            alertTitle = "Task Created Successfuly"
+        .onReceive(viewModel.success) { _ in
+            alertTitle = "Task Created Successfully"
             showAlert = true
-            taskStore.addTask(task)
         }
-        .onReceive(viewModel.createdError) { error in
+        .onReceive(viewModel.error) { error in
             alertTitle = error
             showAlert = true
         }
         .alert(alertTitle, isPresented: $showAlert) {
             Button("OK", role: .cancel) {}
         }
-        
-        Spacer()
     }
 }
-// MARK: - Views
-//
 extension AddTask {
-    @ViewBuilder
-    func textFields() -> some View {
 
-        CustomTextField(
-            title: "Add Your Project Name",
-            placeholder: "Enter your Project Name",
-            text: $viewModel.taskName
-        )
-        CustomTextField(
-            title: "Title",
-            placeholder: "Enter your title",
-            text: $viewModel.taskTitle
-        )
-        CustomTextField(
-            title: "SubTitle",
-            placeholder: "Enter your subTitle",
-            text: $viewModel.taskSubTitle
-        )
-        CustomTextField(
-            title: "Description",
-            placeholder: "Add Description..",
-            height: 100 * .deviceFontScale,
-            text: $viewModel.taskDescription
+    func navBar() -> some View {
+        CustomNavBar(
+            showSearchIcon: false,
+            showBackIcon: false,
+            onTappedNotification: {
+                coordinator?.pushNotification(for: .addTask)
+            }
         )
     }
-}
-// MARK: - Actions
-//
-extension AddTask {
+
+    func textFields() -> some View {
+        VStack(spacing: 12) {
+            CustomTextField(
+                title: "Add Your Project Name",
+                placeholder: "Enter your Project Name",
+                text: $viewModel.taskName
+            )
+
+            CustomTextField(
+                title: "Title",
+                placeholder: "Enter your title",
+                text: $viewModel.taskTitle
+            )
+
+            CustomTextField(
+                title: "SubTitle",
+                placeholder: "Enter your subTitle",
+                text: $viewModel.taskSubTitle
+            )
+
+            CustomTextField(
+                title: "Description",
+                placeholder: "Add Description..",
+                height: 100 * .deviceFontScale,
+                text: $viewModel.taskDescription
+            )
+        }
+    }
+
     func addSubTask() -> some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 AddProject(
-                    title: "Add SubTak",
+                    title: "Add SubTask",
                     titleColor: .primaryApp,
                     backGround: .white,
                     plusCircleColor: .darkGray
@@ -128,13 +118,12 @@ extension AddTask {
         )
     }
 
-    func creatTaskButton() -> some View {
-        PrimaryButton(
-            title: "Creat Task",
-            action: {
-                viewModel.createdTaskTapped()
-            }
-        )
+    func createTaskButton() -> some View {
+        PrimaryButton(title: "Create Task") {
+            viewModel.createTaskTapped()
+        }
+        .disabled(!viewModel.isFormValid)
+        .opacity(viewModel.isFormValid ? 1 : 0.6)
         .padding(.vertical, 16)
     }
 }

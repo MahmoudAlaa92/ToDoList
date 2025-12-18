@@ -9,14 +9,15 @@ import SwiftUI
 import Combine
 
 protocol TaskStoreProtocol {
-    var todaysTasks: AnyPublisher<[PlannedModel], Never> { get }
     func addTask(_ task: PlannedModel)
     func deleteTask(at index: Int)
+    
+    var tasksPublisher: AnyPublisher<[PlannedModel], Never> { get }
 }
 
 @MainActor
-final class TaskStore: ObservableObject {
-
+final class TaskStore: ObservableObject, TaskStoreProtocol {
+    
     @Published var todaysTasks: [PlannedModel] = [
         .init(
             title: "Client Review &Feedback",
@@ -42,6 +43,10 @@ final class TaskStore: ObservableObject {
         ),
     ]
 
+    var tasksPublisher: AnyPublisher<[PlannedModel], Never> {
+         $todaysTasks.eraseToAnyPublisher()
+     }
+     
     func addTask(_ task: PlannedModel) {
         todaysTasks.insert(task, at: 0)
     }

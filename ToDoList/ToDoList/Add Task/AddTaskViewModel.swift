@@ -5,75 +5,76 @@
 //  Created by Mahmoud Alaa on 13/12/2025.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 @MainActor
-final class AddTaskViewModel: ObservableObject, AddTaskViewModelType {
+final class AddTaskViewModel: AddTaskViewModelType {
     
-    /// Dependencies
-    ///
-    private let taskStore: TaskStore
+    // MARK: - Dependencies
+    private let taskStore: TaskStoreProtocol
     
-    /// Input handling
-    ///
-    @Published var taskName = ""
-    @Published var taskTitle = ""
-    @Published var taskSubTitle = ""
-    @Published var taskDescription = ""
+    // MARK: - Internal State
+    @Published var taskName: String = ""
+    @Published var taskTitle: String = ""
+    @Published var taskSubTitle: String = ""
+    @Published var taskDescription: String = ""
     
-    /// Outputs
-    ///
-    var createdError = PassthroughSubject<String, Never>()
-    var createdSuccess = PassthroughSubject<PlannedModel, Never>()
+    // MARK: - Publishers
+    private let successSubject = PassthroughSubject<PlannedModel, Never>()
+    private let errorSubject = PassthroughSubject<String, Never>()
     
-    init(taskStore: TaskStore) {
+    // MARK: - Outputs
+    var success: AnyPublisher<PlannedModel, Never> {
+        successSubject.eraseToAnyPublisher()
+    }
+    
+    var error: AnyPublisher<String, Never> {
+        errorSubject.eraseToAnyPublisher()
+    }
+    
+    var isFormValid: Bool {
+        !taskName.isEmpty &&
+        !taskTitle.isEmpty &&
+        !taskSubTitle.isEmpty &&
+        !taskDescription.isEmpty
+    }
+    
+    // MARK: - Init
+    init(taskStore: TaskStoreProtocol) {
         self.taskStore = taskStore
     }
 }
-// MARK: - AddTaskViewModelInput
+// MARK: - Input
 //
 extension AddTaskViewModel {
-    func updateTaskName(_ name: String) {
-        taskName = name
-    }
-    
-    func updateTaskTitle(_ title: String) {
-        taskTitle = title
-    }
-    
-    func updateTaskSubTitle(_ subTitle: String) {
-        taskSubTitle = subTitle
-    }
-    
-    func updateTaskDescription(_ description: String) {
-        taskDescription = description
-    }
-    
-    func createdTaskTapped() {
-        guard !taskName.isEmpty,
-              !taskTitle.isEmpty,
-              !taskSubTitle.isEmpty,
-              !taskDescription.isEmpty
-        else {
-            createdError.send("There is an empty field")
+    func createTaskTapped() {
+        guard isFormValid else {
+            errorSubject.send("There is an empty field")
             return
         }
-        
-        createdSuccess.send(
-            PlannedModel(
-                title: taskTitle,
-                subTitle: taskSubTitle,
-                day: "Friday",
-                start: "8:00pm",
-                end: "10:00pm",
-                imageName: "cubes",
-                colorSubTitle: Color.gray,
-                colorCircle: Color.white,
-                backgroundColor: Color.black
-            )
+
+        let task = PlannedModel(
+            title: taskTitle,
+            subTitle: taskSubTitle,
+            day: "Friday",
+            start: "8:00pm",
+            end: "10:00pm",
+            imageName: "cubes",
+            colorSubTitle: .gray,
+            colorCircle: .white,
+            backgroundColor: .black
         )
-        
+
+        taskStore.addTask(task)
+        successSubject.send(task)
+        clearForm()
+    }
+}
+// MARK: - Private Handler
+//
+private extension AddTaskViewModel {
+    func clearForm() {
         taskName = ""
         taskTitle = ""
         taskSubTitle = ""

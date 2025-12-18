@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppCoordinatorView: View {
-    @StateObject private var coordinator = AppCoordinator()
+    @StateObject private var coordinator = AppCoordinator(taskStore: TaskStore())
     
     var body: some View {
         Group {

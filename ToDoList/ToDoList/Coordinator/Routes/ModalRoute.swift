@@ -10,6 +10,7 @@ import SwiftUI
 enum ModalRoute: Route, ViewBuildable {
     case addTask
     case selectTime
+    
     var id: String {
         switch self {
         case .addTask: return "modal-add-task"
@@ -21,7 +22,8 @@ enum ModalRoute: Route, ViewBuildable {
     func makeView(coordinator: AppCoordinator) -> some View {
         switch self {
         case .addTask:
-            AddTask(coordinator: coordinator, taskStore: TaskStore())
+            AddTask(coordinator: coordinator,
+                    viewModel: AddTaskViewModel(taskStore: coordinator.taskStore))
         case .selectTime:
             SelectTime(coordinator: coordinator)
         }

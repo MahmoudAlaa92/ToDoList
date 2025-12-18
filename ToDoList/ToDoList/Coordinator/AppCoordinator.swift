@@ -60,15 +60,18 @@ final class AppCoordinator: ObservableObject, CoordinatorProtocol {
     @Published var currentAppState: AppState = .main
     
     // MARK: - App State
-    
     enum AppState {
         case auth
         case main
     }
     
+    // MARK: - Dependencies
+     let taskStore: TaskStoreProtocol
+     
     // MARK: - Init
     
-    init() {
+    init(taskStore: TaskStoreProtocol) {
+        self.taskStore = taskStore
         checkAuthState()
     }
     

@@ -5,24 +5,24 @@
 //  Created by Mahmoud Alaa on 13/12/2025.
 //
 
-import Foundation
 import Combine
+import SwiftUI
 
+typealias AddTaskViewModelType = AddTaskViewModelInput & AddTaskViewModelOutput
 
-typealias AddTaskViewModelType = AddTaskViewModelTypeInput & AddTaskViewModelTypeOutput
+// MARK: - Input
+protocol AddTaskViewModelInput: ObservableObject {
+    var taskName: String { get set }
+    var taskTitle: String { get set }
+    var taskSubTitle: String { get set }
+    var taskDescription: String { get set }
 
-// MARK: - ViewModel Input
-//
-protocol AddTaskViewModelTypeInput {
-    func updateTaskName(_ name: String)
-    func updateTaskTitle(_ title: String)
-    func updateTaskSubTitle(_ subTitle: String)
-    func updateTaskDescription(_ description: String)
-    func createdTaskTapped()
+    func createTaskTapped()
 }
-// MARK: - ViewModel Output
-//
-protocol AddTaskViewModelTypeOutput {
-    var createdError: PassthroughSubject<String, Never> { get }
-    var createdSuccess: PassthroughSubject<PlannedModel, Never> { get }
+
+// MARK: - Output
+protocol AddTaskViewModelOutput: ObservableObject {
+    var isFormValid: Bool { get }
+    var success: AnyPublisher<PlannedModel, Never> { get }
+    var error: AnyPublisher<String, Never> { get }
 }
