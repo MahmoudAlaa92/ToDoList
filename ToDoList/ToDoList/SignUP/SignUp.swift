@@ -35,7 +35,7 @@ struct SignUp<VM: SignUpViewModelType>: View {
         .ignoresSafeArea()
     }
 }
-// MARK: -  Views
+// MARK: - Subviews
 //
 extension SignUp {
     
@@ -63,7 +63,6 @@ extension SignUp {
         }
         .disabled(!viewModel.isFormValid)
         .opacity(viewModel.isFormValid ? 1.0 : 0.8)
-
 
         HStack {
             Text("Already  have an account ?")

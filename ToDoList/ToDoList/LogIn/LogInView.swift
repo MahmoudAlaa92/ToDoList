@@ -1,100 +1,140 @@
 //
-//  ContentView.swift
+//  LogInView.swift
 //  ToDoList
 //
 //  Created by Mahmoud Alaa on 30/10/2025.
 //
-
 import SwiftUI
 
-struct LogInView: View {
+struct LogInView<ViewModel: LogInViewModelType>: View {
+    // MARK: - Properties
+    @ObservedObject private var viewModel: ViewModel
     
-    weak var coordinator: CoordinatorProtocol?
-
+    // MARK: - Init
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    // MARK: - LifeCycle
     var body: some View {
         ScrollView {
             ZStack(alignment: .top) {
+                backgroundImage()
                 
-                backGround()
-                
-                VStack {
-                    
-                    Image("manandwomen")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: .screenWidth * 0.8, height: .screenHeight * 0.4)
-                        .padding(.bottom, 40)
-                        .padding(.top, 100)
-                    
-                    intro()
-                    
-                    VStack(spacing: 20) {
-                        
-                        HStack {
-                            LineDivider()
-                            Text("Join with us")
-                                .font(.customfont(.regular, fontSize: 12))
-                                .foregroundStyle(Color.primaryApp)
-                            LineDivider()
-                        }
-                        
-                        joinWith()
-                        
-                        HStack {
-                            Text("Don`t have an account ?")
-                                .font(.customfont(.regular, fontSize: 14))
-                                .foregroundStyle(Color.secondaryText)
-                            
-                            Text("Sign UP")
-                                .font(.customfont(.regular, fontSize: 14))
-                                .foregroundStyle(Color.primaryApp)
-                                .onTapGesture { coordinator?.pushAuth(.signup) }
-                        }
-                        
-                    }
-                    .padding(.top, 14)
-                    
+                VStack(spacing: 20) {
+                    topIllustration()
+                    introText()
+                    socialJoinSection()
+                    signUpPrompt()
+                    checkLoadingPage()
                     Spacer()
                 }
                 .padding(.horizontal, 20)
-                
+                .padding(.top, 100)
             }
         }
         .ignoresSafeArea()
+        .disabled(viewModel.isLoading)
     }
 }
 
-// MARK: - Views
-//
+// MARK: - Subviews
 extension LogInView {
     
-    func backGround() -> some View {
+    private func backgroundImage() -> some View {
         Image("backGround")
             .resizable()
             .scaledToFill()
             .frame(width: .screenWidth, height: .screenHeight * 0.5)
     }
     
-    func intro() -> some View {
+    private func topIllustration() -> some View {
+        Image("manandwomen")
+            .resizable()
+            .scaledToFit()
+            .frame(width: .screenWidth * 0.8, height: .screenHeight * 0.4)
+            .padding(.bottom, 40)
+    }
+    
+    private func introText() -> some View {
         VStack(spacing: 8) {
-            Text("Glad you're here.!!")
+            Text("Glad you're here!!")
                 .font(.customfont(.semibold, fontSize: 20))
                 .foregroundStyle(Color.primaryApp)
             
-            Text("“Welcome to Daily Grind, your go-to for Daily Grind app is a digital tool that helps you organize, prioritize, and manage your tasks.”")
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+            Text("""
+            Welcome to Daily Grind, your go-to app to organize, prioritize, and manage your tasks effectively.
+            """)
                 .multilineTextAlignment(.center)
                 .font(.customfont(.regular, fontSize: 14))
                 .foregroundStyle(Color.secondaryText)
-            
         }
     }
     
-    func joinWith() -> some View {
-        HStack(spacing: 20) {
-            IconCardView(imageName: "ProfilePicture", title: "Your Account") { coordinator?.login() }
-            IconCardView(imageName: "Google", title: "Your Gmail") { coordinator?.login() }
-            IconCardView(imageName: "QrCode", title: "Your Qr Code") { coordinator?.login() }
+    private func socialJoinSection() -> some View {
+        VStack(spacing: 14) {
+            HStack {
+                LineDivider()
+                Text("Join with us")
+                    .font(.customfont(.regular, fontSize: 12))
+                    .foregroundStyle(Color.primaryApp)
+                LineDivider()
+            }
+            
+            HStack(spacing: 20) {
+                IconCardView(
+                    imageName: "ProfilePicture",
+                    title: "Your Account"
+                ) {
+                    viewModel.handleLogin()
+                }
+                
+                IconCardView(
+                    imageName: "Google",
+                    title: "Your Gmail"
+                ) {
+                    viewModel.handleGoogleLogin()
+                }
+                
+                IconCardView(
+                    imageName: "QrCode",
+                    title: "Your Qr Code"
+                ) {
+                    viewModel.handleQRCodeLogin()
+                }
+            }
         }
     }
+    
+    private func signUpPrompt() -> some View {
+        HStack {
+            Text("Don't have an account?")
+                .font(.customfont(.regular, fontSize: 14))
+                .foregroundStyle(Color.secondaryText)
+            
+            Text("Sign UP")
+                .font(.customfont(.regular, fontSize: 14))
+                .foregroundStyle(Color.primaryApp)
+                .onTapGesture {
+                    viewModel.navigateToSignUp()
+                }
+        }
+        .padding(.top, 14)
+    }
+    
+    @ViewBuilder
+    private func checkLoadingPage() -> some View {
+        if viewModel.isLoading {
+            ProgressView()
+                .padding(.top, 20)
+        }
+        
+        if let errorMessage = viewModel.errorMessage {
+            Text(errorMessage)
+                .font(.customfont(.regular, fontSize: 12))
+                .foregroundStyle(.red)
+                .padding(.top, 10)
+        }
+    }
+    
 }

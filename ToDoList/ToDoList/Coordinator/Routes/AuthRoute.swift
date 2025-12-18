@@ -25,7 +25,7 @@ enum AuthRoute: Route, ViewBuildable {
     func makeView(coordinator: AppCoordinator) -> some View {
         switch self {
         case .login:
-            LogInView(coordinator: coordinator)
+            LogInView(viewModel: LoginViewModel(coordinator: coordinator))
         case .signup:
             SignUp(coordinator: coordinator, viewModel: SignUpViewModel())
         }
