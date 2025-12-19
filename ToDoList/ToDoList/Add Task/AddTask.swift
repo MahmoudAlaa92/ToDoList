@@ -51,6 +51,8 @@ struct AddTask<VM: AddTaskViewModelType>: View {
         }
     }
 }
+// MARK: - Subviews
+//
 extension AddTask {
 
     func navBar() -> some View {

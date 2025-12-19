@@ -7,14 +7,9 @@
 
 import SwiftUI
 
-struct AllTasksView<VM:AllTasksViewModelType>: View {
+struct AllTasksView<VM: AllTasksViewModelType>: View {
    // MARK: - Properties
     @StateObject var viewModel: VM
-    
-    // MARK: - Init
-    init(viewModel: VM) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
 
     // MARK: - Body
     var body: some View {
@@ -22,8 +17,8 @@ struct AllTasksView<VM:AllTasksViewModelType>: View {
             VStack {
                 headerView()
                 Spacer()
-
             }
+            
             VStack {
                 Spacer()
                 VStack {
@@ -97,7 +92,8 @@ extension AllTasksView {
                 }
             }
         }
-        .padding([.bottom, .top], 28 * .deviceFontScale)
+        .padding([.top], 28 * .deviceFontScale)
+        .padding([.bottom], 12 * .deviceFontScale)
         .scrollIndicators(.hidden)
         .padding(.horizontal, 20)
     }
@@ -106,7 +102,7 @@ extension AllTasksView {
         List {
             Section {
                 HeaderView(name: "Schedule", seeAll: "")
-                    .listRowInsets(EdgeInsets())    // remove padding
+                    .listRowInsets(EdgeInsets())    /// remove padding
                     .listRowSeparator(.hidden)
 
                 ForEach(viewModel.prioritiesTasks.indices, id: \.self) { index in
@@ -133,6 +129,6 @@ extension AllTasksView {
         .listStyle(.plain)
         .scrollIndicators(.hidden)
         .padding(.horizontal, 20)
+        .padding(.bottom, .bottomInsets + 40)
     }
-
 }

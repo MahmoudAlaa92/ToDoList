@@ -34,7 +34,11 @@ enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
             ProjectDetails(taskCard: taskCard, coordinator: coordinator, sourceTab: tab)
             
         case .createdTaskView(taskCard: let taskCard):
-            CreatedTaskView(viewModel: CreatedTaskViewModel(), taskItem: taskCard, coordinator: coordinator, sourceTab: tab)
+//            CreatedTaskView(viewModel: CreatedTaskViewModel(), taskItem: taskCard, coordinator: coordinator, sourceTab: tab)
+            CreatedTaskView(viewModel: CreatedTaskViewModel(taskItem: taskCard,
+                                                            sourceTab: tab,
+                                                            coordinator: coordinator,
+                                                            dataProvider: CreatedTaskDataProvider.shared))
         case .profilePicture:
             ProfileView(sourceTab: tab, coordinator: coordinator)
         }

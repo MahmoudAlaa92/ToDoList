@@ -7,45 +7,26 @@
 
 import SwiftUI
 
-struct CreatedTaskView: View {
+struct CreatedTaskView<VM: CreatedTaskViewModelType>: View {
     
-    @StateObject var viewModel: CreatedTaskViewModel
-    var taskItem: PlannedModel
-    weak var coordinator: CoordinatorProtocol?
-    var sourceTab: Tabs
-
+    // MARK: - Properties
+    @StateObject var viewModel: VM
+    
+    // MARK: - Init
+    init(viewModel: VM) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+    
+    // MARK: - Body
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                
-                CustomNavBar(showSearchIcon: false,
-                             onTappedBack: onTappedBackButton,
-                             onTappedNotification: onTappedNotificationButton)
-                TaskDetails(taskItems: taskItem)
-                HStack {
-                    Spacer()
-                    AddProject(
-                        title: "Add project",
-                        backGround: Color.primaryApp
-                    )
-                }
-                DescriptionRow()
-                AssignPersons(persons: [
-                    "woman", "teenagerGirl", "youngSmilingMan",
-                ])
-                HeaderView(name: "Our Tasks for the project", seeAll: "")
-                
-                List {
-                    ForEach(viewModel.plannedCompleted.enumerated(), id: \.offset) {
-                        (index, task) in
-                        TaskCard(taskCardModel: task,
-                                 onDelete: { viewModel.deletePlannedItem(at: index)})
-                    }
-                }
-                .listStyle(.plain)
-                .scrollDisabled(true)
-                .frame(height: CGFloat(viewModel.plannedCompleted.count) * 150 * .deviceFontScale)
-                
+                navigationBar()
+                taskDetailsSection()
+                addProjectSection()
+                descriptionSection()
+                assignPersonsSection()
+                tasksListSection()
                 Spacer()
             }
         }
@@ -54,32 +35,82 @@ struct CreatedTaskView: View {
         .padding(.horizontal, 20)
     }
 }
-
-// MARK: - Actions
+// MARK: - SubViews
 //
 extension CreatedTaskView {
-    private func onTappedBackButton() {
-        coordinator?.goBack(from: .home)
+    func navigationBar() -> some View {
+        CustomNavBar(
+            showSearchIcon: false,
+            onTappedBack: { viewModel.didTapBack() },
+            onTappedNotification: { viewModel.didTapNotification() }
+        )
     }
     
-    private func onTappedNotificationButton() {
-        coordinator?.pushNotification(for: sourceTab)
+    func taskDetailsSection() -> some View {
+        TaskDetails(taskItems: viewModel.taskItem)
+    }
+    
+    func addProjectSection() -> some View {
+        HStack {
+            Spacer()
+            AddProject(
+                title: "Add project",
+                backGround: Color.primaryApp
+            )
+            .onTapGesture {
+                viewModel.didTapAddProject()
+            }
+        }
+    }
+    
+    func descriptionSection() -> some View {
+        DescriptionRow()
+    }
+    
+    func assignPersonsSection() -> some View {
+        AssignPersons(persons: viewModel.assignedPersons)
+    }
+    
+    func tasksListSection() -> some View {
+        VStack(alignment: .leading) {
+            HeaderView(name: "Our Tasks for the project", seeAll: "")
+            
+            List {
+                ForEach(viewModel.plannedTasks.indices, id: \.self) { index in
+                    let task = viewModel.plannedTasks[index]
+                    
+                    TaskCard(
+                        taskCardModel: task,
+                        onDelete: { viewModel.deleteTask(at: index) }
+                    )
+                }
+            }
+            .listStyle(.plain)
+            .scrollDisabled(true)
+            .frame(height: CGFloat(viewModel.plannedTasks.count) * 150 * .deviceFontScale)
+        }
     }
 }
-
+// MARK: - Preview
+//
 #Preview {
-    CreatedTaskView(
-        viewModel: CreatedTaskViewModel(),
-        taskItem: PlannedModel(
-            title: "To Do List",
-            subTitle: "Redesign",
-            day: "Friday",
-            start: "11:00pm",
-            end: "01:00am",
-            imageName: "cubes",
-            colorSubTitle: Color.LightGray,
-            colorCircle: nil,
-            backgroundColor: Color.darkPrimaryApp
-        ), sourceTab: .home
+    let taskItem = PlannedModel(
+        title: "To Do List",
+        subTitle: "Redesign",
+        day: "Friday",
+        start: "11:00pm",
+        end: "01:00am",
+        imageName: "cubes",
+        colorSubTitle: Color.LightGray,
+        colorCircle: nil,
+        backgroundColor: Color.darkPrimaryApp
     )
+    
+    let viewModel = CreatedTaskViewModel(
+        taskItem: taskItem,
+        sourceTab: .home,
+        dataProvider: CreatedTaskDataProvider.shared
+    )
+    
+    CreatedTaskView(viewModel: viewModel)
 }

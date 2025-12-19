@@ -46,7 +46,7 @@ struct HomeView: View {
                         Spacer()
                     }
                     .scrollIndicators(.hidden)
-                    .padding(.bottom, safeArea.bottom + 40)
+                    .padding(.bottom, safeArea.bottom + 44)
                 }
                 .padding(.horizontal, 20)
             } menuView: { safeArea in
