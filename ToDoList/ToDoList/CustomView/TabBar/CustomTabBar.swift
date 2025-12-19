@@ -29,7 +29,8 @@ struct CustomTabBar: View {
             
             Tab("Today", image: "calender2", value: .today) {
                 NavigationStack(path: $coordinator.todayTabPath) {
-                    AllTasksView(viewModel: AllTasksViewModel(), coordinator: coordinator)
+                    AllTasksView(viewModel: AllTasksViewModel(coordinator: coordinator,
+                                                              dataProvider: AllTasksDataProvider.shared))
                         .navigationDestination(for: TodayTabRoute.self) { route in
                             route.makeView(coordinator: coordinator)
                         }

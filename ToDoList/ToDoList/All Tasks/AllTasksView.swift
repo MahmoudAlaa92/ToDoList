@@ -7,11 +7,14 @@
 
 import SwiftUI
 
-struct AllTasksView: View {
+struct AllTasksView<VM:AllTasksViewModelType>: View {
    // MARK: - Properties
-    @StateObject var viewModel: AllTasksViewModel
-    @State var selectedIndex: Int? = 0
-    weak var coordinator: AppCoordinator?
+    @StateObject var viewModel: VM
+    
+    // MARK: - Init
+    init(viewModel: VM) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     // MARK: - Body
     var body: some View {
@@ -24,8 +27,8 @@ struct AllTasksView: View {
             VStack {
                 Spacer()
                 VStack {
-                    ProiritieTask()
-                    scheduleTasks()
+                    priorityTasksView()
+                    scheduleTasksView()
                     Spacer()
                 }
                 .frame(width: .screenWidth, height: .screenHeight * 0.68)
@@ -37,14 +40,14 @@ struct AllTasksView: View {
         .ignoresSafeArea()
     }
 }
-// MARK: - Views
+// MARK: - SubViews
 //
 extension AllTasksView {
     func headerView() -> some View {
         ZStack {
             VStack {
                 CustomNavBar(showBackIcon: false,
-                             onTappedNotification: onTappedNotification)
+                             onTappedNotification: viewModel.didTapNotification)
                     .foregroundStyle(.white)
                     .padding(.top, .topInsets)
                     .padding(.bottom, 12 * .deviceFontScale)
@@ -77,7 +80,7 @@ extension AllTasksView {
         .background(Color.darkPrimaryApp)
     }
 
-    func ProiritieTask() -> some View {
+    func priorityTasksView() -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 16) {
                 ForEach(
@@ -87,9 +90,9 @@ extension AllTasksView {
                     PriorityCircle(
                         title: priority.title,
                         number: priority.number,
-                        isSelected: selectedIndex == index
+                        isSelected: viewModel.selectedPriorityIndex == index
                     ) {
-                        selectedIndex = (selectedIndex == index ? nil : index)
+                        viewModel.selectPriority(at: index)
                     }
                 }
             }
@@ -99,7 +102,7 @@ extension AllTasksView {
         .padding(.horizontal, 20)
     }
 
-    func scheduleTasks() -> some View {
+    func scheduleTasksView() -> some View {
         List {
             Section {
                 HeaderView(name: "Schedule", seeAll: "")
@@ -121,9 +124,9 @@ extension AllTasksView {
                             colorCircle: Color.lightBeige,
                             backgroundColor: Color.lightPink
                         ),
-                        onDelete: { viewModel.deleteItems(at: index) }
+                        onDelete: { viewModel.deleteTask(at: index) }
                     )
-                    .onTapGesture { onTappedScheduleTask(task: task) }
+                    .onTapGesture { viewModel.didTapScheduleTask(task) }
                 }
             }
         }
@@ -132,15 +135,4 @@ extension AllTasksView {
         .padding(.horizontal, 20)
     }
 
-}
-// MARK: - Actions
-//
-extension AllTasksView {
-    fileprivate func onTappedScheduleTask(task: PlannedModel) {
-        coordinator?.pushProjectDetails(for: .today, taskCard: task)
-    }
-    
-    fileprivate func onTappedNotification() {
-        coordinator?.pushNotification(for: .today)
-    }
 }
