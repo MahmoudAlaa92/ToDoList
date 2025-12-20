@@ -6,7 +6,6 @@
 //
 
 import Combine
-import SwiftUI
 
 // MARK: - Input Protocol
 protocol PrioritiesTasksViewModelInput: ObservableObject {

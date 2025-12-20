@@ -6,7 +6,6 @@
 //
 
 import Combine
-import SwiftUI
 
 typealias AddTaskViewModelType = AddTaskViewModelInput & AddTaskViewModelOutput
 

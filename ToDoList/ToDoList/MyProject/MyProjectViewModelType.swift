@@ -6,7 +6,6 @@
 //
 
 import Combine
-import SwiftUI
 
 // MARK: - Input Protocol
 protocol MyProjectViewModelInput: ObservableObject {
@@ -23,4 +22,4 @@ protocol MyProjectViewModelOutput: ObservableObject {
 }
 
 // MARK: - Type Alias
-typealias MyProjectViewModelType = MyProjectViewModelInput & MyProjectViewModelOutput & ObservableObject
+typealias MyProjectViewModelType = MyProjectViewModelInput & MyProjectViewModelOutput 
