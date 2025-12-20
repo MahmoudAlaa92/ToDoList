@@ -69,23 +69,7 @@ extension NotificationView {
             imageName: notification.profileImageName,
             comment: notification.message
         )
-        .onTapGesture {
-            viewModel.didTapNotification(notification)
-        }
-        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button(role: .destructive) {
-                viewModel.deleteNotification(notification)
-            } label: {
-                Label("Delete", systemImage: "trash")
-            }
-            
-            Button {
-                viewModel.markAsRead(notification)
-            } label: {
-                Label("Read", systemImage: "envelope.open")
-            }
-            .tint(.blue)
-        }
+        .onTapGesture { viewModel.didTapNotification(notification) }
     }
 }
 // MARK: - Preview
