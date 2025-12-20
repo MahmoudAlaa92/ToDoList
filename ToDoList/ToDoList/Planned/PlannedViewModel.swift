@@ -8,33 +8,68 @@
 import SwiftUI
 import Combine
 
-class PlannedViewModel: ObservableObject {
-    @Published var plannedCompleted: [PlannedModel] = [
-        .init(
-            title: "Client Review &Feedback",
-            subTitle: "Redesign App",
-            day: "Today",
-            start: "10:00 am",
-            end: "4:00 pm",
-            imageName: "Mobile trading",
-            colorSubTitle: Color.LightGray,
-            colorCircle: Color.lightBeige,
-            backgroundColor: Color.lightPink
-        ),
-        .init(
-            title: "Client Review",
-            subTitle: "Redesign App",
-            day: "Today",
-            start: "10:00 am",
-            end: "4:00 pm",
-            imageName: "cubes",
-            colorSubTitle: Color.LightGray,
-            colorCircle: Color.lightBeige,
-            backgroundColor: Color.lightPink
-        )
-    ]
+final class PlannedViewModel: PlannedViewModelType {
     
-    func deleteItems(at index: Int) {
-        plannedCompleted.remove(at: index)
+    // MARK: - Dependencies
+    private let dataProvider: PlannedDataProviderProtocol
+    weak var coordinator: CoordinatorProtocol?
+    
+    // MARK: - Output Properties
+    @Published var plannedTasks: [PlannedModel]
+    
+    // MARK: - Initialization
+    init(
+        coordinator: CoordinatorProtocol?,
+        dataProvider: PlannedDataProviderProtocol
+    ) {
+        self.coordinator = coordinator
+        self.dataProvider = dataProvider
+        
+        // Fetch data from data provider
+        self.plannedTasks = dataProvider.fetchPlannedTasks()
+    }
+}
+// MARK: - Input Methods
+//
+extension PlannedViewModel {
+    func deleteTask(at index: Int) {
+        guard index >= 0 && index < plannedTasks.count else { return }
+        plannedTasks.remove(at: index)
+    }
+    
+    func didTapNotification() {
+        coordinator?.pushNotification(for: .planned)
+    }
+    
+    func didTapTaskCard(_ task: PlannedModel) {
+        coordinator?.pushProjectDetails(for: .planned, taskCard: task)
+    }
+    
+    func didTapSearch() {
+        print("Search tapped")
+    }
+    
+    func refreshTasks() {
+        plannedTasks = dataProvider.fetchPlannedTasks()
+    }
+}
+
+// MARK: - Private Methods
+private extension PlannedViewModel {
+    func filterTasks(by searchText: String) -> [PlannedModel] {
+        guard !searchText.isEmpty else { return plannedTasks }
+        
+        return plannedTasks.filter {
+            $0.title.localizedCaseInsensitiveContains(searchText) ||
+            $0.subTitle.localizedCaseInsensitiveContains(searchText)
+        }
+    }
+    
+    func sortTasksByDate() {
+        // plannedTasks.sort { ... }
+    }
+    
+    func addNewTask(_ task: PlannedModel) {
+        plannedTasks.append(task)
     }
 }

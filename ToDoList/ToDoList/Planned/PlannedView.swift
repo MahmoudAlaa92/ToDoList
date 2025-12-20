@@ -7,40 +7,67 @@
 
 import SwiftUI
 
-struct PlannedView: View {
-    
-    @StateObject var PlannedVM: PlannedViewModel
-    weak var coordinator: CoordinatorProtocol?
-    
+struct PlannedView<ViewModel: PlannedViewModelType>: View {
+
+    // MARK: - Properties
+    @StateObject var viewModel: ViewModel
+
+    // MARK: - Body
     var body: some View {
         ZStack {
             VStack {
-                CustomNavBar(showBackIcon: false,
-                             onTappedNotification: onTappedNotification)
-                List {
-                    ForEach(PlannedVM.plannedCompleted.enumerated(), id: \.offset) { (index, task) in
-                        TaskCard(taskCardModel: task,
-                                 onDelete: { PlannedVM.deleteItems(at: index)})
-                        .onTapGesture { onTappedTaskCard(taskCard: task) }
-                    }
-                }
-                .listStyle(.plain)
-                .padding(.vertical, 14)
-                
+                navigationBar()
+                tasksList()
                 Spacer()
             }
         }
         .padding(.horizontal, 20)
     }
 }
-// MARK: - Actions
-//
+
+// MARK: - SubViews
 extension PlannedView {
-    private func onTappedNotification() {
-        coordinator?.pushNotification(for: .planned)
+    func navigationBar() -> some View {
+        CustomNavBar(
+            showBackIcon: false,
+            onTappedSearch: { viewModel.didTapSearch() },
+            onTappedNotification: { viewModel.didTapNotification() }
+        )
     }
+
+    func tasksList() -> some View {
+        List {
+            ForEach(viewModel.plannedTasks.indices, id: \.self) { index in
+                let task = viewModel.plannedTasks[index]
+
+                TaskCard(
+                    taskCardModel: task,
+                    onDelete: { viewModel.deleteTask(at: index) }
+                )
+                .listRowInsets(EdgeInsets())
+                .listRowSeparator(.hidden)
+                .onTapGesture {
+                    viewModel.didTapTaskCard(task)
+                }
+            }
+        }
+        .listStyle(.plain)
+        .padding(.vertical, 14)
+        .refreshable {
+            viewModel.refreshTasks()
+        }
+    }
+}
+
+// MARK: - Preview
+#Preview {
+    let coordinator = AppCoordinator(taskStore: TaskStore())
+    let dataProvider = PlannedDataProvider.shared
     
-    private func onTappedTaskCard(taskCard: PlannedModel) {
-        coordinator?.pushProjectDetails(for: .planned, taskCard: taskCard)
-    }
+    return PlannedView(
+        viewModel: PlannedViewModel(
+            coordinator: coordinator,
+            dataProvider: dataProvider
+        )
+    )
 }
