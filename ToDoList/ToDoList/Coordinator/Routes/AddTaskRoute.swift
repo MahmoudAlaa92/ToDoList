@@ -33,7 +33,12 @@ enum AddTaskRoute: Route, ViewBuildable, TabIdentifiable {
                 )
             )
         case .selectTime:
-            SelectTime()
+            SelectTimeView(
+                viewModel: SelectTimeViewModel(
+                    dataProvider: TimeDataProvider(),
+                    coordinator: coordinator
+                )
+            )
         }
     }
 }

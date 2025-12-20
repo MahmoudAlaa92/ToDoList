@@ -7,44 +7,105 @@
 
 import SwiftUI
 
-struct SelectTime: View {
+struct SelectTimeView: View {
+    // MARK: - Properties
+    @StateObject private var viewModel: SelectTimeViewModel
     
-    @State private var hour = 3
-    @State private var minute = 24
-    weak var coordinator: CoordinatorProtocol?
+    // MARK: - Init
+    init(viewModel: SelectTimeViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
+    // MARK: - Body
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
+            SelectTimeNavBar(onCloseTapped: {
+                viewModel.closeTapped()
+            })
             
-            SelectTimeNavBar(onCloseTapped: { coordinator?.dismissSheet() })
-            HeaderSelectedTime(time: "03:24 pm")
-            HStack(spacing: 12) {
-                MinutePickerView(selectedMinute: $hour, fromTo: Array(0...23))
-                Text(":")
-                    .foregroundStyle(Color.LightGray)
-                MinutePickerView(selectedMinute: $minute, fromTo: Array(1...59))
-                Text("pm")
-                    .font(.customfont(.medium, fontSize: 16))
-                    .foregroundStyle(Color.LightGray)
-            }
+            HeaderSelectedTime(time: viewModel.formattedTime)
             
-            AlertRow(imageName: "Alarm", title: "Sound", subTitle: "iphone sound")
-            AlertRow(imageName: "Sound", title: "Snooz", subTitle: "10 min to 20 min")
+            timePickerSection
             
-            HStack{
-                SecondaryButton(title: "back", width: (.screenWidth * 0.5 - 30.0), action: {})
-                Spacer()
-                PrimaryButton(title: "done", width: (.screenWidth * 0.5 - 30.0), action: {})
-            }
-            .padding(.top, 24)
+            alertSection
+            
+            actionButtons
             
             Spacer()
         }
         .padding(20)
-
+        .onAppear {
+            viewModel.viewDidLoad()
+        }
     }
 }
-
+// MARK: - SubViews
+//
+extension SelectTimeView {
+    private var timePickerSection: some View {
+        HStack(spacing: 12) {
+            MinutePickerView(
+                selectedMinute: Binding(
+                    get: { viewModel.hour },
+                    set: { viewModel.updateHour($0) }
+                ),
+                fromTo: Array(0...23)
+            )
+            
+            Text(":")
+                .foregroundStyle(Color.LightGray)
+            
+            MinutePickerView(
+                selectedMinute: Binding(
+                    get: { viewModel.minute },
+                    set: { viewModel.updateMinute($0) }
+                ),
+                fromTo: Array(0...59)
+            )
+            
+            Text(viewModel.hour >= 12 ? "pm" : "am")
+                .font(.customfont(.medium, fontSize: 16))
+                .foregroundStyle(Color.LightGray)
+        }
+    }
+    
+    private var alertSection: some View {
+        Group {
+            AlertRow(
+                imageName: "Alarm",
+                title: "Sound",
+                subTitle: viewModel.soundTitle
+            )
+            
+            AlertRow(
+                imageName: "Sound",
+                title: "Snooze",
+                subTitle: viewModel.snoozeTitle
+            )
+        }
+    }
+    
+    private var actionButtons: some View {
+        HStack {
+            SecondaryButton(
+                title: "back",
+                width: (.screenWidth * 0.5 - 30.0),
+                action: { viewModel.backTapped() }
+            )
+            
+            Spacer()
+            
+            PrimaryButton(
+                title: "done",
+                width: (.screenWidth * 0.5 - 30.0),
+                action: { viewModel.doneTapped() }
+            )
+        }
+        .padding(.top, 24)
+    }
+}
+// MARK: - Preview
+//
 #Preview {
-    SelectTime()
+    SelectTimeFactory.create(coordinator: nil)
 }

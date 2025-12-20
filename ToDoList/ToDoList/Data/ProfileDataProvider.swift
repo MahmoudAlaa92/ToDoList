@@ -28,7 +28,7 @@ final class ProfileDataProvider: ProfileDataProviderProtocol {
         // In production, fetch from UserDefaults, Keychain, or API
         return ProfileModel(
             fullName: "Mahmoud Alaa",
-            email: "mahmoud.alaa@example.com",
+            email: "mahmoudalaa.wr@gmail.com",
             phoneNumber: "+20 1142128919",
             profileImageName: "ProfilePicture2",
             qrCodeUrl: "https://example.com/qr/user123"
