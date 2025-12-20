@@ -30,8 +30,14 @@ enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
     func makeView(coordinator: AppCoordinator) -> some View {
         switch self {
         case .notification:
-            NotificationView(viewModel: NotificationViewModel(), coordinator: coordinator, sourceTab: tab)
-            
+            NotificationView(
+                viewModel: NotificationViewModel(
+                    sourceTab: tab,
+                    coordinator: coordinator,
+                    dataProvider: NotificationDataProvider.shared
+                )
+            )
+
         case .projectDetails(let taskCard):
             ProjectDetails(taskCard: taskCard, coordinator: coordinator, sourceTab: tab)
             

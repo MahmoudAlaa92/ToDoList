@@ -29,7 +29,13 @@ enum PlannedTabRoute: Route, ViewBuildable, TabIdentifiable {
         case .profile:
             ProfileView(sourceTab: tab, coordinator: coordinator)
         case .notification:
-            NotificationView(viewModel: NotificationViewModel(), coordinator: coordinator, sourceTab: .planned)
+            NotificationView(
+                viewModel: NotificationViewModel(
+                    sourceTab: tab,
+                    coordinator: coordinator,
+                    dataProvider: NotificationDataProvider.shared
+                )
+            )
         case .projectDetails(let taskCard):
             ProjectDetails(taskCard: taskCard, coordinator: coordinator, sourceTab: .planned)
         }

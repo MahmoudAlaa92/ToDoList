@@ -26,7 +26,13 @@ enum TodayTabRoute: Route, ViewBuildable, TabIdentifiable {
 
         switch self {
         case .notification:
-            NotificationView(viewModel: NotificationViewModel(), coordinator: coordinator, sourceTab: tab)
+            NotificationView(
+                viewModel: NotificationViewModel(
+                    sourceTab: tab,
+                    coordinator: coordinator,
+                    dataProvider: NotificationDataProvider.shared
+                )
+            )
             
         case .projectDetails(taskCard: let task):
             ProjectDetails(taskCard: task, coordinator: coordinator, sourceTab: tab)

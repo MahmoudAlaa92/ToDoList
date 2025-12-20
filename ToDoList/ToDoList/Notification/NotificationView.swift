@@ -1,5 +1,5 @@
 //
-//  Notification.swift
+//  NotificationView.swift
 //  ToDoList
 //
 //  Created by Mahmoud Alaa on 02/11/2025.
@@ -8,22 +8,18 @@
 import SwiftUI
 import Foundation
 
-struct NotificationView: View {
+struct NotificationView<ViewModel: NotificationViewModelType>: View {
     
-    @StateObject var viewModel: NotificationViewModel
-    weak var coordinator: AppCoordinator?
-    var sourceTab: Tabs
-
+    // MARK: - Properties
+    @StateObject var viewModel: ViewModel
+    
+    // MARK: - Body
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
-                BackAndEllipsesNavBar(
-                    onTappedBack: { coordinator?.goBack(from: sourceTab)},
-                    onTappedEllipse: {})
-
-                HeaderView(name: "Notifications", seeAll: "")
-                notificationRows(days: Array(viewModel.notificationItem.keys))
-                
+                navigationBar()
+                headerSection()
+                notificationList()
                 Spacer()
             }
         }
@@ -31,26 +27,79 @@ struct NotificationView: View {
         .padding(.horizontal, 18)
     }
 }
-// MARK: - Views
+// MARK: - SubViews
 //
 extension NotificationView {
+    func navigationBar() -> some View {
+        BackAndEllipsesNavBar(
+            onTappedBack: { viewModel.didTapBack() },
+            onTappedEllipse: { viewModel.didTapMoreOptions() }
+        )
+    }
     
-    func notificationRows(days: [String]) -> some View {
-        ForEach(days, id: \.self) { day in
-            if let itemsForDay = viewModel.notificationItem[day] {
-                VStack(alignment: .leading) {
-                    Text(day)
-                        .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
-                        .foregroundStyle(Color.darkGray)
-                        .padding(.bottom, 2 * .deviceFontScale)
-                    
-                    ForEach(Array(itemsForDay.keys), id: \.self) { profileKey in
-                        if let message = itemsForDay[profileKey] {
-                            NotificationRowView(imageName: profileKey, comment: message)
-                        }
-                    }
-                }
+    func headerSection() -> some View {
+        HeaderView(name: "Notifications", seeAll: "")
+    }
+    
+    func notificationList() -> some View {
+        ForEach(viewModel.notificationSections) { section in
+            notificationSection(section)
+        }
+    }
+    
+    func notificationSection(_ section: NotificationSection) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader(section.title)
+            
+            ForEach(section.notifications) { notification in
+                notificationRow(notification)
             }
         }
-    }   
+    }
+    
+    func sectionHeader(_ title: String) -> some View {
+        Text(title)
+            .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
+            .foregroundStyle(Color.darkGray)
+            .padding(.bottom, 2 * .deviceFontScale)
+    }
+    
+    func notificationRow(_ notification: NotificationItem) -> some View {
+        NotificationRowView(
+            imageName: notification.profileImageName,
+            comment: notification.message
+        )
+        .onTapGesture {
+            viewModel.didTapNotification(notification)
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+            Button(role: .destructive) {
+                viewModel.deleteNotification(notification)
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+            
+            Button {
+                viewModel.markAsRead(notification)
+            } label: {
+                Label("Read", systemImage: "envelope.open")
+            }
+            .tint(.blue)
+        }
+    }
+}
+// MARK: - Preview
+//
+#Preview {
+    
+    let coordinator = AppCoordinator(taskStore: TaskStore())
+    let dataProvider = NotificationDataProvider.shared
+    
+    NotificationView(
+        viewModel: NotificationViewModel(
+            sourceTab: .home,
+            coordinator: coordinator,
+            dataProvider: dataProvider
+        )
+    )
 }
