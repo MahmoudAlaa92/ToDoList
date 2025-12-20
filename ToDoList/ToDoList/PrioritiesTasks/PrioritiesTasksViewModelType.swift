@@ -25,7 +25,7 @@ protocol PrioritiesTasksViewModelOutput: ObservableObject {
     var selectedPriorityIndex: Int? { get }
 }
 
-// MARK: - Type Alias
+// MARK: - Protocol with Coordinator
 protocol PrioritiesTasksViewModelType: PrioritiesTasksViewModelInput, PrioritiesTasksViewModelOutput {
     var coordinator: CoordinatorProtocol? { get set }
     var sourceTab: Tabs { get }

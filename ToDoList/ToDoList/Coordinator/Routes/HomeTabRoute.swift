@@ -58,7 +58,13 @@ enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
                 )
             )
         case .profilePicture:
-            ProfileView(sourceTab: tab, coordinator: coordinator)
+            ProfileView(
+                viewModel: ProfileViewModel(
+                    sourceTab: tab,
+                    coordinator: coordinator,
+                    dataProvider: ProfileDataProvider.shared
+                )
+            )
 
         case .myProjectsView:
             MyProjectView(

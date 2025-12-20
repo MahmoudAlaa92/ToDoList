@@ -27,7 +27,13 @@ enum PlannedTabRoute: Route, ViewBuildable, TabIdentifiable {
         switch self {
             
         case .profile:
-            ProfileView(sourceTab: tab, coordinator: coordinator)
+            ProfileView(
+                viewModel: ProfileViewModel(
+                    sourceTab: tab,
+                    coordinator: coordinator,
+                    dataProvider: ProfileDataProvider.shared
+                )
+            )
         case .notification:
             NotificationView(
                 viewModel: NotificationViewModel(
