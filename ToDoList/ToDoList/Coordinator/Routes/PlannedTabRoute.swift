@@ -37,7 +37,14 @@ enum PlannedTabRoute: Route, ViewBuildable, TabIdentifiable {
                 )
             )
         case .projectDetails(let taskCard):
-            ProjectDetails(taskCard: taskCard, coordinator: coordinator, sourceTab: .planned)
+            ProjectDetailsView(
+                viewModel: ProjectDetailsViewModel(
+                    taskCard: taskCard,
+                    sourceTab: tab,
+                    coordinator: coordinator,
+                    dataProvider: ProjectDetailsDataProvider.shared
+                )
+            )
         }
     }
 }

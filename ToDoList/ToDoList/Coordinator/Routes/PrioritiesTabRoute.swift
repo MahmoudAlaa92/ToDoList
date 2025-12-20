@@ -38,9 +38,14 @@ enum PrioritiesTabRoute: Route, ViewBuildable, TabIdentifiable {
             )
             
         case .projectDetails(taskCard: let task):
-            ProjectDetails(taskCard: task,
-                           coordinator: coordinator,
-                           sourceTab: tab)
+            ProjectDetailsView(
+                viewModel: ProjectDetailsViewModel(
+                    taskCard: task,
+                    sourceTab: tab,
+                    coordinator: coordinator,
+                    dataProvider: ProjectDetailsDataProvider.shared
+                )
+            )
             
         case .myProjectsView:
             MyProjectView(viewModel: MyProjectViewModel(sourceTab: tab,

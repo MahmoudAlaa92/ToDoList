@@ -13,9 +13,9 @@ enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
     case createdTaskView(taskCard: PlannedModel)
     case profilePicture
     case myProjectsView
-    
+
     var tab: Tabs { .home }
-    
+
     var id: String {
         switch self {
         case .notification: return "home-notification"
@@ -25,7 +25,7 @@ enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
         case .myProjectsView: return "MyProjects-View"
         }
     }
-    
+
     @ViewBuilder
     func makeView(coordinator: AppCoordinator) -> some View {
         switch self {
@@ -39,20 +39,35 @@ enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
             )
 
         case .projectDetails(let taskCard):
-            ProjectDetails(taskCard: taskCard, coordinator: coordinator, sourceTab: tab)
-            
-        case .createdTaskView(taskCard: let taskCard):
-            CreatedTaskView(viewModel: CreatedTaskViewModel(taskItem: taskCard,
-                                                            sourceTab: tab,
-                                                            coordinator: coordinator,
-                                                            dataProvider: CreatedTaskDataProvider.shared))
+            ProjectDetailsView(
+                viewModel: ProjectDetailsViewModel(
+                    taskCard: taskCard,
+                    sourceTab: tab,
+                    coordinator: coordinator,
+                    dataProvider: ProjectDetailsDataProvider.shared
+                )
+            )
+
+        case .createdTaskView(let taskCard):
+            CreatedTaskView(
+                viewModel: CreatedTaskViewModel(
+                    taskItem: taskCard,
+                    sourceTab: tab,
+                    coordinator: coordinator,
+                    dataProvider: CreatedTaskDataProvider.shared
+                )
+            )
         case .profilePicture:
             ProfileView(sourceTab: tab, coordinator: coordinator)
-            
+
         case .myProjectsView:
-            MyProjectView(viewModel: MyProjectViewModel(sourceTab: tab,
-                                                        coordinator: coordinator,
-                                                        dataProvider: MyProjectDataProvider.shared))
+            MyProjectView(
+                viewModel: MyProjectViewModel(
+                    sourceTab: tab,
+                    coordinator: coordinator,
+                    dataProvider: MyProjectDataProvider.shared
+                )
+            )
         }
     }
 }
