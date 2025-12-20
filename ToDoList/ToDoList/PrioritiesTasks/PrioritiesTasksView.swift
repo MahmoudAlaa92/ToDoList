@@ -7,83 +7,98 @@
 
 import SwiftUI
 
-struct PrioritiesTasksView: View {
+struct PrioritiesTasksView<ViewModel: PrioritiesTasksViewModelType>: View {
     
-    @StateObject var viewModel: PrioritiesTasksViewModel
-    @State var selectedIndex: Int? = 0
-    weak var coordinator: AppCoordinator?
-
+    // MARK: - Properties
+    @StateObject var viewModel: ViewModel
+    
+    // MARK: - Body
     var body: some View {
         ZStack {
             VStack {
-                CustomNavBar(showBackIcon: false,
-                             onTappedNotification: onTappedNotification)
-                HeaderView(name: "Today’s Task", seeAll: "See All")
-                
-                ScrollView(.horizontal) {
-                    HStack(spacing: 16) {
-                        ForEach(Array(viewModel.prioritieItems.enumerated()), id:\.offset) { index, priority in
-                            PriorityCircle(title: priority.title,
-                                           number: priority.number,
-                                           isSelected: selectedIndex == index) {
-                                selectedIndex = (selectedIndex == index ? nil : index)
-                            }
-                        }
-                    }
-                }
-                .padding(.bottom, 8 * .deviceFontScale)
-                .scrollIndicators(.hidden)
-                
-                List {
-                    ForEach(viewModel.prioritiesTasks.enumerated(), id: \.offset) { (index, task) in
-                        TaskCard(taskCardModel: task,
-                                 onDelete: { viewModel.deletePriority(at: index)})
-                            .onTapGesture { onTappedTaskCard(taskCard: task) }
-                    }
-                }
-                .listStyle(.plain)
-                .scrollDisabled(true)
-                .frame(height: CGFloat(viewModel.prioritiesTasks.count) * 150 * .deviceFontScale)
-                
-                HeaderView(name: "My projects", seeAll: "See All")
-                ProjectCell(projectItem: .init(
-                    title: "To Do List",
-                    subTitle: "3 tasks",
-                    day: "Mondat",
-                    start: "10:00pm",
-                    end: "11:00pm",
-                    imageName: "cubes",
-                    colorSubTitle: .darkGray,
-                    colorCircle: .white,
-                    backgroundColor: .lightGreen
-                ))
-                ProjectCell(projectItem: .init(
-                    title: "bag",
-                    subTitle: "5 tasks",
-                    day: "Friday",
-                    start: "10:00pm",
-                    end: "11:00pm",
-                    imageName: "bag",
-                    colorSubTitle: .darkGray,
-                    colorCircle: .darkPrimaryApp,
-                    backgroundColor: .lightPink)
-                )
-                
+                navigationBar()
+                todaysTaskHeader()
+                priorityFilterSection()
+                priorityTasksList()
+                myProjectsSection()
                 Spacer()
             }
         }
         .padding(.horizontal, 20)
     }
-    
 }
-// MARK: - Actions
-//
+
+// MARK: - SubViews
 extension PrioritiesTasksView {
-    private func onTappedNotification() {
-        coordinator?.pushNotification(for: .prioritiesTask)
+    func navigationBar() -> some View {
+        CustomNavBar(
+            showBackIcon: false,
+            onTappedNotification: { viewModel.didTapNotification() }
+        )
     }
     
-    private func onTappedTaskCard(taskCard: PlannedModel) {
-        coordinator?.pushProjectDetails(for: .prioritiesTask, taskCard: taskCard)
+    func todaysTaskHeader() -> some View {
+        HeaderView(
+            name: "Today's Task",
+            seeAll: "See All"
+        )
     }
+    
+    func priorityFilterSection() -> some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 16) {
+                ForEach(Array(viewModel.priorityItems.enumerated()), id: \.offset) { index, priority in
+                    PriorityCircle(
+                        title: priority.title,
+                        number: priority.number,
+                        isSelected: viewModel.selectedPriorityIndex == index
+                    ) {
+                        viewModel.selectPriority(at: index)
+                    }
+                }
+            }
+        }
+        .padding(.bottom, 8 * .deviceFontScale)
+        .scrollIndicators(.hidden)
+    }
+    
+    func priorityTasksList() -> some View {
+        List {
+            ForEach(viewModel.priorityTasks.indices, id: \.self) { index in
+                let task = viewModel.priorityTasks[index]
+                
+                TaskCard(
+                    taskCardModel: task,
+                    onDelete: { viewModel.deleteTask(at: index) }
+                )
+                .onTapGesture {
+                    viewModel.didTapTaskCard(task)
+                }
+            }
+        }
+        .listStyle(.plain)
+        .scrollDisabled(true)
+        .frame(height: CGFloat(viewModel.priorityTasks.count) * 150 * .deviceFontScale)
+    }
+    
+    func myProjectsSection() -> some View {
+        VStack {
+            HeaderView(name: "My projects",
+                       seeAll: "See All") { viewModel.didTapSeeAllProjects() }
+            
+            ForEach(viewModel.projectItems.enumerated(), id: \.offset) { (index, item) in
+                ProjectCell(projectItem: viewModel.projectItems[index])
+                    .onTapGesture { viewModel.didTapProjetCell(item: item) }
+            }
+        }
+    }
+}
+
+// MARK: - Preview
+#Preview {
+    let dataProvider = PrioritiesTasksDataProvider.shared
+    let coordinator = AppCoordinator(taskStore: TaskStore())
+    let viewModel = PrioritiesTasksViewModel(sourceTab: .prioritiesTask, coordinator: coordinator,
+                                             dataProvider: dataProvider)
+    PrioritiesTasksView(viewModel: viewModel)
 }

@@ -66,6 +66,6 @@ extension MyProjectView {
 #Preview {
     let dataProvider = MyProjectDataProvider.shared
     let coordinator = AppCoordinator(taskStore: TaskStore())
-    let viewModel = MyProjectViewModel( coordinator: coordinator, dataProvider: dataProvider)
+    let viewModel = MyProjectViewModel( sourceTab: .home, coordinator: coordinator, dataProvider: dataProvider)
     MyProjectView(viewModel: viewModel)
 }

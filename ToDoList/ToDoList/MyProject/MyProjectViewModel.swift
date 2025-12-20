@@ -15,13 +15,16 @@ final class MyProjectViewModel: MyProjectViewModelType {
     weak var coordinator: CoordinatorProtocol?
     
     // MARK: - Output Properties
+    let sourceTab: Tabs
     @Published var projectItems: [PlannedModel]
     
     // MARK: - Init
     init(
+        sourceTab: Tabs,
         coordinator: CoordinatorProtocol?,
         dataProvider: MyProjectDataProviderProtocol
     ) {
+        self.sourceTab = sourceTab
         self.coordinator = coordinator
         self.dataProvider = dataProvider
         
@@ -40,11 +43,11 @@ extension MyProjectViewModel {
     }
     
     func didTapBack() {
-        coordinator?.goBack(from: .home)
+        coordinator?.goBack(from: sourceTab)
     }
     
     func didTapNotification() {
-        coordinator?.pushNotification(for: .home)
+        coordinator?.pushNotification(for: sourceTab)
     }
     
     func didTapSearch() {

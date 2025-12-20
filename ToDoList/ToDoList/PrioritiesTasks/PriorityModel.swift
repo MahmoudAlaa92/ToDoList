@@ -9,5 +9,5 @@ import Foundation
 
 struct PriorityModel: Hashable {
     let title: String
-    let number: Int
+    var number: Int
 }

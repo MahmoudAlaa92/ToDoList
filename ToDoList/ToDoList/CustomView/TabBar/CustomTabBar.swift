@@ -48,7 +48,9 @@ struct CustomTabBar: View {
             
             Tab("Priorities", image: "flag2", value: .prioritiesTask) {
                 NavigationStack(path: $coordinator.prioritiesTabPath) {
-                    PrioritiesTasksView(viewModel: PrioritiesTasksViewModel(), coordinator: coordinator)
+                    PrioritiesTasksView(viewModel: PrioritiesTasksViewModel(sourceTab: .prioritiesTask,
+                                                                            coordinator: coordinator,
+                                                                            dataProvider: PrioritiesTasksDataProvider.shared))
                         .navigationDestination(for: PrioritiesTabRoute.self) { route in
                             route.makeView(coordinator: coordinator)
                         }

@@ -48,7 +48,7 @@ enum CoordintorRouteFactory {
         case .addTask:
             break
         case .prioritiesTask:
-            break
+            return PrioritiesTabRoute.createdTaskView(taskCard: taskCard)
         case .planned:
             break
         }
@@ -80,7 +80,7 @@ enum CoordintorRouteFactory {
         case .addTask:
             break
         case .prioritiesTask:
-            break
+            return PrioritiesTabRoute.myProjectsView
         case .planned:
             break
         }

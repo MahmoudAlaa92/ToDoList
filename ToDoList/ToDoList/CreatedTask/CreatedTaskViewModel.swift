@@ -38,8 +38,8 @@ final class CreatedTaskViewModel: CreatedTaskViewModelType {
         self.assignedPersons = dataProvider.fetchAssignedPersons()
     }
 }
-
 // MARK: - Input Methods
+//
 extension CreatedTaskViewModel {
     func deleteTask(at index: Int) {
         guard index >= 0 && index < plannedTasks.count else { return }
@@ -47,7 +47,7 @@ extension CreatedTaskViewModel {
     }
     
     func didTapBack() {
-        coordinator?.goBack(from: .home)
+        coordinator?.goBack(from: sourceTab)
     }
     
     func didTapNotification() {

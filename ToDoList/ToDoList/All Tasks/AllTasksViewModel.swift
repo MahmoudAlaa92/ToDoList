@@ -23,7 +23,7 @@ final class AllTasksViewModel: AllTasksViewModelType {
 
     // MARK: - Init
     init(
-        coordinator: CoordinatorProtocol? = nil,
+        coordinator: CoordinatorProtocol?,
         dataProvider: AllTasksDataProviderProtocol
     ) {
         self.coordinator = coordinator
@@ -39,6 +39,7 @@ extension AllTasksViewModel {
     func deleteTask(at index: Int) {
         guard index >= 0 && index < prioritiesTasks.count else { return }
         prioritiesTasks.remove(at: index)
+        updatePriorityItemsCount()
     }
     
     func selectPriority(at index: Int?) {
@@ -51,5 +52,16 @@ extension AllTasksViewModel {
     
     func didTapNotification() {
         coordinator?.pushNotification(for: .today)
+    }
+}
+// MARK: - Private Methods
+//
+private extension AllTasksViewModel {
+    
+    func updatePriorityItemsCount() {
+        // Update the count in priority items based on current tasks
+        if let allIndex = prioritieItems.firstIndex(where: { $0.title == "All" }) {
+            prioritieItems[allIndex].number = prioritiesTasks.count
+        }
     }
 }
