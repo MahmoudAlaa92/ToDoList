@@ -217,4 +217,10 @@ extension AppCoordinator {
         let route = CoordintorRouteFactory.CreatedProfileRoutFactory(for: tab)
         push(route)
     }
+    
+    /// Push ProjectsView route for any tab
+    func myProjectsView(for tab: Tabs) {
+        let route = CoordintorRouteFactory.MyProjectsRoutFactory(for: tab)
+        push(route)
+    }
 }

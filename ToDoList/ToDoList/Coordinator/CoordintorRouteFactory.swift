@@ -71,4 +71,20 @@ enum CoordintorRouteFactory {
         return HomeTabRoute.profilePicture
     }
     
+    static func MyProjectsRoutFactory(for tab: Tabs) -> any (Route & ViewBuildable & TabIdentifiable) {
+        switch tab {
+        case .home:
+            return HomeTabRoute.myProjectsView
+        case .today:
+            break
+        case .addTask:
+            break
+        case .prioritiesTask:
+            break
+        case .planned:
+            break
+        }
+        return HomeTabRoute.myProjectsView
+    }
+
 }

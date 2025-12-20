@@ -11,6 +11,7 @@ struct CustomNavBar: View {
     var showSearchIcon: Bool = true
     var showBackIcon: Bool = true
     var onTappedBack: (() -> Void)?
+    var onTappedSearch: (() -> Void)?
     var onTappedNotification: (() -> Void)?
     
     var body: some View {
@@ -32,6 +33,7 @@ struct CustomNavBar: View {
                         .scaledToFit()
                         .frame(width: 28 * .deviceFontScale,
                                height: 28 * .deviceFontScale)
+                        .onTapGesture { onTappedSearch?() }
                 }
                 Image("Notification")
                     .resizable()

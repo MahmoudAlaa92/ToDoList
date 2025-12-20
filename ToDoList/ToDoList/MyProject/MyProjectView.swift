@@ -7,36 +7,65 @@
 
 import SwiftUI
 
-struct MyProjectView: View {
+struct MyProjectView<ViewModel: MyProjectViewModelType>: View {
     
-    @State var viewModel: MyProjectViewModel
+    // MARK: - Properties
+    @StateObject var viewModel: ViewModel
     
+    // MARK: - Body
     var body: some View {
-        
         ZStack {
             VStack(spacing: 16) {
-               CustomNavBar()
-                
-                ForEach(Array(viewModel.projectItems.enumerated()), id: \.offset) { (index, cellItem) in
-                    ProjectCell(projectItem: cellItem)
-                }
-             
+                navigationBar()
+                projectsList()
                 Spacer()
             }
-            
-            VStack(alignment: .leading) {
-                Spacer()
-                HStack {
-                    Spacer()
-                    AddProject(title: "Add Project", backGround: Color.primaryApp) {}
-                }
-            }
-            
+            addProjectButton()
         }
+        .navigationBarBackButtonHidden()
         .padding(.horizontal, 20)
     }
 }
 
+// MARK: - SubViews
+extension MyProjectView {
+    func navigationBar() -> some View {
+        CustomNavBar(
+            onTappedBack: { viewModel.didTapBack() },
+            onTappedSearch: { viewModel.didTapSearch() },
+            onTappedNotification: { viewModel.didTapNotification() }
+        )
+    }
+    
+    func projectsList() -> some View {
+        ForEach(Array(viewModel.projectItems.enumerated()), id: \.offset) { (index, cellItem) in
+            ProjectCell(projectItem: cellItem)
+                .onTapGesture {
+                    viewModel.didTapProject(cellItem)
+                }
+        }
+    }
+    
+    func addProjectButton() -> some View {
+        VStack(alignment: .leading) {
+            Spacer()
+            HStack {
+                Spacer()
+                AddProject(
+                    title: "Add Project",
+                    backGround: Color.primaryApp
+                ) {
+                    viewModel.didTapAddProject()
+                }
+            }
+        }
+    }
+}
+// MARK: - Preview
+//
 #Preview {
-    MyProjectView(viewModel: MyProjectViewModel())
+    let dataProvider = MyProjectDataProvider.shared
+    let coordinator = AppCoordinator(taskStore: TaskStore())
+    let viewModel = MyProjectViewModel( coordinator: coordinator, dataProvider: dataProvider)
+    MyProjectView(viewModel: viewModel)
 }

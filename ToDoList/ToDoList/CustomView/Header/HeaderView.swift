@@ -10,6 +10,7 @@ import SwiftUI
 struct HeaderView: View {
     var name: String = ""
     var seeAll: String = "See All"
+    var onTappedSeeAll: (() -> Void)?
     
     var body: some View {
         HStack {
@@ -18,9 +19,11 @@ struct HeaderView: View {
             Spacer()
             Text(seeAll)
                 .font(.customfont(.regular, fontSize: 11 * .deviceFontScale))
-        }    }
+                .onTapGesture { onTappedSeeAll?() }
+        }
+    }
 }
 
 #Preview {
-    HeaderView()
+    HeaderView(onTappedSeeAll: {})
 }

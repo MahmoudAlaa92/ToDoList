@@ -8,30 +8,62 @@
 import Combine
 import SwiftUI
 
-class MyProjectViewModel: ObservableObject {
-    @Published var projectItems: [PlannedModel] = [
-        .init(
-            title: "bag",
-            subTitle: "5 tasks",
-            day: "Friday",
-            start: "10:00pm",
-            end: "11:00pm",
-            imageName: "bag",
-            colorSubTitle: .darkGray,
-            colorCircle: .darkPrimaryApp,
-            backgroundColor: .lightPink
-        ),
-        .init(
-            title: "To Do List",
-            subTitle: "3 tasks",
-            day: "Mondat",
-            start: "10:00pm",
-            end: "11:00pm",
-            imageName: "cubes",
-            colorSubTitle: .darkGray,
-            colorCircle: .white,
-            backgroundColor: .lightGreen
-        ),
+final class MyProjectViewModel: MyProjectViewModelType {
+    
+    // MARK: - Dependencies
+    private let dataProvider: MyProjectDataProviderProtocol
+    weak var coordinator: CoordinatorProtocol?
+    
+    // MARK: - Output Properties
+    @Published var projectItems: [PlannedModel]
+    
+    // MARK: - Init
+    init(
+        coordinator: CoordinatorProtocol?,
+        dataProvider: MyProjectDataProviderProtocol
+    ) {
+        self.coordinator = coordinator
+        self.dataProvider = dataProvider
+        
+        self.projectItems = dataProvider.fetchProjects()
+    }
+}
 
-    ]
+// MARK: - Input Methods
+extension MyProjectViewModel {
+    func didTapAddProject() {
+        print("Add project tapped")
+    }
+    
+    func didTapProject(_ project: PlannedModel) {
+        coordinator?.pushProjectDetails(for: .home, taskCard: project)
+    }
+    
+    func didTapBack() {
+        coordinator?.goBack(from: .home)
+    }
+    
+    func didTapNotification() {
+        coordinator?.pushNotification(for: .home)
+    }
+    
+    func didTapSearch() {
+        print("Search tapped")
+    }
+}
+
+// MARK: - Private Methods
+private extension MyProjectViewModel {
+    func refreshProjects() {
+        projectItems = dataProvider.fetchProjects()
+    }
+    
+    func addNewProject(_ project: PlannedModel) {
+        projectItems.append(project)
+    }
+    
+    func deleteProject(at index: Int) {
+        guard index >= 0 && index < projectItems.count else { return }
+        projectItems.remove(at: index)
+    }
 }

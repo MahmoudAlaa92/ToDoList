@@ -100,7 +100,8 @@ extension HomeView {
     
     @ViewBuilder
     fileprivate func myProjectsSection() -> some View {
-        HeaderView(name: "My Projects")
+        // MARK: - change this
+        HeaderView(name: "My Projects") { coordinator?.myProjectsView(for: .home)}
         
         ForEach(viewModel.projectCells.enumerated(), id: \.offset) { (index, item) in
             ProjectCell(projectItem: item)

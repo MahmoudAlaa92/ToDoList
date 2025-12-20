@@ -12,6 +12,7 @@ enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
     case projectDetails(taskCard: PlannedModel)
     case createdTaskView(taskCard: PlannedModel)
     case profilePicture
+    case myProjectsView
     
     var tab: Tabs { .home }
     
@@ -21,6 +22,7 @@ enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
         case .projectDetails: return "home-projectDetails"
         case .createdTaskView: return "home-CreatedTaskView"
         case .profilePicture: return "profile-Picture"
+        case .myProjectsView: return "MyProjects-View"
         }
     }
     
@@ -34,13 +36,16 @@ enum HomeTabRoute: Route, ViewBuildable, TabIdentifiable {
             ProjectDetails(taskCard: taskCard, coordinator: coordinator, sourceTab: tab)
             
         case .createdTaskView(taskCard: let taskCard):
-//            CreatedTaskView(viewModel: CreatedTaskViewModel(), taskItem: taskCard, coordinator: coordinator, sourceTab: tab)
             CreatedTaskView(viewModel: CreatedTaskViewModel(taskItem: taskCard,
                                                             sourceTab: tab,
                                                             coordinator: coordinator,
                                                             dataProvider: CreatedTaskDataProvider.shared))
         case .profilePicture:
             ProfileView(sourceTab: tab, coordinator: coordinator)
+            
+        case .myProjectsView:
+            MyProjectView(viewModel: MyProjectViewModel(coordinator: coordinator,
+                                                        dataProvider: MyProjectDataProvider.shared))
         }
     }
 }
