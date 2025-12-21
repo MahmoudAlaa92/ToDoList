@@ -8,73 +8,56 @@
 import SwiftUI
 import Combine
 
+// MARK: - ViewModel Implementation
+
 @MainActor
-class HomeViewModel: ObservableObject {
-    // MARK: - Properties
-    var days: [CalenderModel] = [
-        .init(day: "Sun", number: 1, progress: 0.9),
-        .init(day: "Mon", number: 2, progress: 0.6),
-        .init(day: "Tue", number: 3, progress: 0.4),
-        .init(day: "Wed", number: 4, progress: 1),
-        .init(day: "Thu", number: 5, progress: 0.8),
-        .init(day: "Fri", number: 6, progress: 0.4),
-        .init(day: "Sat", number: 7, progress: 0.7),
-        .init(day: "Sun", number: 8, progress: 0.9),
-        .init(day: "Mon", number: 9, progress: 0.6),
-        .init(day: "Tue", number: 10, progress: 0.4),
-        .init(day: "Wed", number: 11, progress: 1),
-        .init(day: "Thu", number: 12, progress: 0.8),
-        .init(day: "Fri", number: 13, progress: 0.4),
-    ]
+final class HomeViewModel: HomeViewModelType {
+    // MARK: - Output Properties
+    @Published private(set) var days: [CalenderModel] = []
+    @Published private(set) var todaysTasks: [PlannedModel] = []
+    @Published private(set) var projects: [PlannedModel] = []
+    @Published private(set) var isLoading: Bool = false
     
-    var projectCells: [PlannedModel] = [
-        .init(
-            title: "bag",
-            subTitle: "Swift",
-            day: "Saturday",
-            start: "10:00pm",
-            end: "11:00pm",
-            imageName: "bag",
-            colorSubTitle: .LightGray,
-            colorCircle: .white,
-            backgroundColor: .lightPink
-        ),
-        .init(
-            title: "To Do List",
-            subTitle: "3 tasks",
-            day: "Saturday",
-            start: "10:00pm",
-            end: "11:00pm",
-            imageName: "cubes",
-            colorSubTitle: .LightGray,
-            colorCircle: .darkGreen,
-            backgroundColor: .lightGreen
-        ),
-    ]
+    // MARK: - Dependencies
+    private let dataProvider: HomeDataProviderProtocol
+    private var cancellables = Set<AnyCancellable>()
     
-    @Published var todaysTask: [PlannedModel] = []
-    private let taskStore: TaskStore
-    private var Cancellabel = Set<AnyCancellable>()
- 
-    // MARK: - Init
-    init(taskStore: TaskStore) {
-        self.taskStore = taskStore
-        binding()
+    // MARK: - Initialization
+    init(dataProvider: HomeDataProviderProtocol) {
+        self.dataProvider = dataProvider
     }
     
-    func deleteItems(at index: Int) {
-        taskStore.deleteTask(at: index)
+    // MARK: - Input Methods
+    func viewDidLoad() {
+        loadInitialData()
+        observeTodaysTasks()
     }
-}
-// MARK: - Private Handler
-//
-extension HomeViewModel {
-    private func binding() {
-        taskStore
-            .$todaysTasks
-            .sink { [weak self] value in
-                self?.todaysTask = value
+    
+    func deleteTask(at index: Int) {
+        guard index < todaysTasks.count else { return }
+        dataProvider.deleteTask(at: index)
+    }
+    
+    func refreshData() {
+        loadInitialData()
+    }
+    
+    // MARK: - Private Methods
+    private func loadInitialData() {
+        isLoading = true
+        
+        days = dataProvider.getCalendarDays()
+        projects = dataProvider.getProjects()
+        
+        isLoading = false
+    }
+    
+    private func observeTodaysTasks() {
+        dataProvider.observeTodaysTasks()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] tasks in
+                self?.todaysTasks = tasks
             }
-            .store(in: &Cancellabel)
+            .store(in: &cancellables)
     }
 }

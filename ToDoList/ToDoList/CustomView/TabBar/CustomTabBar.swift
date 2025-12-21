@@ -20,11 +20,16 @@ struct CustomTabBar: View {
         TabView(selection: $selectedTab) {
             Tab("Home", image: "home", value: .home) {
                 NavigationStack(path: $coordinator.homeTabPath) {
-                    HomeView(coordinator: coordinator, taskStore: taskStore)
-                        .navigationDestination(for: HomeTabRoute.self) {
-                            route in
-                            route.makeView(coordinator: coordinator)
-                        }
+                    HomeView(
+                        viewModel: HomeViewModel(
+                            dataProvider: HomeDataProvider(taskStore: taskStore)
+                        ),
+                        coordinator: coordinator
+                    )
+                    .navigationDestination(for: HomeTabRoute.self) {
+                        route in
+                        route.makeView(coordinator: coordinator)
+                    }
                 }
             }
 

@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct HomeView: View {
-    // MARK: - Propeties
-    @EnvironmentObject private var taskStore: TaskStore
+    // MARK: - Properties
+    @StateObject private var viewModel: HomeViewModel
     @State private var showMenu: Bool = false
-    @StateObject var viewModel: HomeViewModel
-    weak var coordinator: CoordinatorProtocol?
+    private weak var coordinator: CoordinatorProtocol?
     
     // MARK: - Init
-    init(coordinator: CoordinatorProtocol?, taskStore: TaskStore) {
+    init(viewModel: HomeViewModel, coordinator: CoordinatorProtocol?) {
+        _viewModel = StateObject(wrappedValue: viewModel)
         self.coordinator = coordinator
-        _viewModel = StateObject(wrappedValue: HomeViewModel(taskStore: taskStore))
     }
     
+    // MARK: - Body
     var body: some View {
         VStack {
             AnimatedSideBar(
@@ -29,42 +29,48 @@ struct HomeView: View {
                 cornerRadius: 25,
                 showMenu: $showMenu
             ) { safeArea in
-                // Main Content
-                VStack {
-                    HomeNavBar(
-                        onTappedNotification: { onTappedNotification() },
-                        onTappedProfilePicture: { coordinator?.pushProfileView(for: .home) },
-                        onTappedMenu: { showMenu.toggle() }
-                    )
-                    .padding(.top, safeArea.top + 8)
-                    
-                    ScrollView {
-                        calenderSection()
-                        AnnouncementCard()
-                        toDaysTasksSection()
-                        myProjectsSection()
-                        Spacer()
-                    }
-                    .scrollIndicators(.hidden)
-                    .padding(.bottom, safeArea.bottom + 44)
-                }
-                .padding(.horizontal, 20)
+                mainContent(safeArea: safeArea)
             } menuView: { safeArea in
                 sideBarMenuView(safeArea)
-            } background: {
-                
-            }
+            } background: {}
+        }
+        .onAppear {
+            viewModel.viewDidLoad()
         }
     }
-    
 }
-// MARK: - Views
+// MARK: - Main Content
 //
 extension HomeView {
-    
     @ViewBuilder
-    fileprivate func calenderSection() -> some View {
-        HeaderView(name: "Calender", seeAll: "")
+    private func mainContent(safeArea: UIEdgeInsets) -> some View {
+        VStack {
+            HomeNavBar(
+                onTappedNotification: { handleNotificationTapped() },
+                onTappedProfilePicture: { coordinator?.pushProfileView(for: .home) },
+                onTappedMenu: { showMenu.toggle() }
+            )
+            .padding(.top, safeArea.top + 8)
+            
+            ScrollView {
+                calendarSection
+                AnnouncementCard()
+                todaysTasksSection
+                myProjectsSection
+                Spacer()
+            }
+            .scrollIndicators(.hidden)
+            .padding(.bottom, safeArea.bottom + 44)
+        }
+        .padding(.horizontal, 20)
+    }
+}
+// MARK: - View Components
+//
+extension HomeView {
+    @ViewBuilder
+    private var calendarSection: some View {
+        HeaderView(name: "Calendar", seeAll: "")
         
         ScrollView(.horizontal) {
             HStack(spacing: 24 * .deviceFontScale) {
@@ -78,74 +84,74 @@ extension HomeView {
             }
             .padding([.horizontal, .vertical], 8 * .deviceFontScale)
         }
+        .scrollIndicators(.hidden)
         .padding(.bottom, 24 * .deviceFontScale)
     }
     
     @ViewBuilder
-    fileprivate func toDaysTasksSection() -> some View {
-        HeaderView(name: "To day's tasks")
+    private var todaysTasksSection: some View {
+        HeaderView(name: "Today's tasks")
         
+        if viewModel.todaysTasks.isEmpty {
+            emptyTasksView
+        } else {
+            tasksList
+        }
+    }
+    
+    @ViewBuilder
+    private var tasksList: some View {
         List {
-            ForEach(Array(viewModel.todaysTask.enumerated()), id: \.offset) { index, item in
-                TaskCard(taskCardModel: item,
-                         onDelete: { viewModel.deleteItems(at: index) })
-                
-                .onTapGesture { onTappedTodaysTask(task: item) }
+            ForEach(Array(viewModel.todaysTasks.enumerated()), id: \.offset) { index, task in
+                TaskCard(
+                    taskCardModel: task,
+                    onDelete: { viewModel.deleteTask(at: index) }
+                )
+                .onTapGesture { handleTaskTapped(task) }
             }
         }
         .listStyle(.plain)
         .scrollDisabled(true)
-        .frame(height: CGFloat(viewModel.todaysTask.count) * 150 * .deviceFontScale)
+        .frame(height: CGFloat(viewModel.todaysTasks.count) * 150 * .deviceFontScale)
     }
     
     @ViewBuilder
-    fileprivate func myProjectsSection() -> some View {
-        // MARK: - change this
-        HeaderView(name: "My Projects") { coordinator?.myProjectsView(for: .home)}
+    private var emptyTasksView: some View {
+        VStack(spacing: 12) {
+            Text("No tasks for today")
+                .font(.customfont(.medium, fontSize: 16))
+                .foregroundColor(.LightGray)
+        }
+        .frame(height: 100)
+    }
+    
+    @ViewBuilder
+    private var myProjectsSection: some View {
+        HeaderView(name: "My Projects") {
+            coordinator?.myProjectsView(for: .home)
+        }
         
-        ForEach(viewModel.projectCells.enumerated(), id: \.offset) { (index, item) in
-            ProjectCell(projectItem: item)
-                .onTapGesture { onTappedProject(task: item) }
+        ForEach(viewModel.projects.indices, id: \.self) { index in
+            ProjectCell(projectItem: viewModel.projects[index])
+                .onTapGesture { handleProjectTapped(viewModel.projects[index]) }
         }
     }
     
     @ViewBuilder
-    func sideBarMenuView(_ safeArea: UIEdgeInsets) -> some View {
+    private func sideBarMenuView(_ safeArea: UIEdgeInsets) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Image("ProfilePicture2")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                
-                Text("Mahmoud Alaa")
-                    .font(.customfont(.semibold, fontSize: 16))
-                    .foregroundColor(.primary)
-            }
+            profileHeader
+            
             Divider()
                 .background(.primary.opacity(0.3))
                 .padding(.vertical, 8)
             
-            // Add your menu items here
-            MenuButton(image: "home", title: "Home") {
-                showMenu = false
-            }
-            
-            MenuButton(image: "Account", title: "Profile") {
-                coordinator?.pushProfileView(for: .home)
-                showMenu = false
-            }
-            
-            MenuButton(image: "allTasks", title: "Notifications") {
-                coordinator?.pushNotification(for: .home)
-                showMenu = false
-            }
+            menuItems
             
             Spacer()
             
             MenuButton(image: "Lock", title: "Logout") {
-                coordinator?.logout()
-                showMenu = false
+                handleLogout()
             }
             
             Spacer()
@@ -159,24 +165,60 @@ extension HomeView {
         .background(Color.darkPrimaryApp)
         .clipShape(RoundedRectangle(cornerRadius: 30))
     }
+    
+    @ViewBuilder
+    private var profileHeader: some View {
+        HStack {
+            Image("ProfilePicture2")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 30, height: 30)
+            
+            Text("Mahmoud Alaa")
+                .font(.customfont(.semibold, fontSize: 16))
+                .foregroundColor(.primary)
+        }
+    }
+    
+    @ViewBuilder
+    private var menuItems: some View {
+        MenuButton(image: "home", title: "Home") {
+            showMenu = false
+        }
+        
+        MenuButton(image: "Account", title: "Profile") {
+            coordinator?.pushProfileView(for: .home)
+            showMenu = false
+        }
+        
+        MenuButton(image: "allTasks", title: "Notifications") {
+            coordinator?.pushNotification(for: .home)
+            showMenu = false
+        }
+    }
 }
-
 // MARK: - Actions
+//
 extension HomeView {
-    fileprivate func onTappedTodaysTask(task: PlannedModel) {
+    private func handleTaskTapped(_ task: PlannedModel) {
         coordinator?.pushProjectDetails(for: .home, taskCard: task)
     }
     
-    fileprivate func onTappedNotification() {
+    private func handleProjectTapped(_ project: PlannedModel) {
+        coordinator?.pushCreatedTaskView(for: .home, taskCard: project)
+    }
+    
+    private func handleNotificationTapped() {
         coordinator?.pushNotification(for: .home)
     }
     
-    fileprivate func onTappedProject(task: PlannedModel) {
-        coordinator?.pushCreatedTaskView(for: .home, taskCard: task)
+    private func handleLogout() {
+        coordinator?.logout()
+        showMenu = false
     }
 }
 // MARK: - Preview
 //
 #Preview {
-    //    HomeView(viewModel: HomeViewModel())
+    HomeFactory.create(coordinator: nil, taskStore: TaskStore())
 }
