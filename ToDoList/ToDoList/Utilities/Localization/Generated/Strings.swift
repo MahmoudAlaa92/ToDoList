@@ -115,6 +115,8 @@ internal enum L10n {
       internal static let joinWithUs = L10n.tr("Localizable", "auth.login.joinWithUs", fallback: "Join with us")
       /// please login or sign up to continue our app
       internal static let subtitle = L10n.tr("Localizable", "auth.login.subtitle", fallback: "please login or sign up to continue our app")
+      /// Log In
+      internal static let title = L10n.tr("Localizable", "auth.login.title", fallback: "Log In")
       /// Welcome to Daily Grind, your go-to app to organize, prioritize, and manage your tasks effectively.
       internal static let welcomeMessage = L10n.tr("Localizable", "auth.login.welcomeMessage", fallback: "Welcome to Daily Grind, your go-to app to organize, prioritize, and manage your tasks effectively.")
       /// Your Account

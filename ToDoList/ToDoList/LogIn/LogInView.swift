@@ -42,14 +42,14 @@ struct LogInView<ViewModel: LogInViewModelType>: View {
 extension LogInView {
     
     private func backgroundImage() -> some View {
-        Image("backGround")
+        Images.backGround
             .resizable()
             .scaledToFill()
             .frame(width: .screenWidth, height: .screenHeight * 0.5)
     }
     
     private func topIllustration() -> some View {
-        Image("manandwomen")
+        Images.manandwomen
             .resizable()
             .scaledToFit()
             .frame(width: .screenWidth * 0.8, height: .screenHeight * 0.4)
@@ -58,13 +58,11 @@ extension LogInView {
     
     private func introText() -> some View {
         VStack(spacing: 8) {
-            Text("Glad you're here!!")
+            Text(L10n.Auth.Login.gladYouHere)
                 .font(.customfont(.semibold, fontSize: 20))
                 .foregroundStyle(Color.primaryApp)
             
-            Text("""
-            Welcome to Daily Grind, your go-to app to organize, prioritize, and manage your tasks effectively.
-            """)
+            Text(L10n.Auth.Login.welcomeMessage)
                 .multilineTextAlignment(.center)
                 .font(.customfont(.regular, fontSize: 14))
                 .foregroundStyle(Color.secondaryText)
@@ -75,7 +73,7 @@ extension LogInView {
         VStack(spacing: 14) {
             HStack {
                 LineDivider()
-                Text("Join with us")
+                Text(L10n.Auth.Login.joinWithUs)
                     .font(.customfont(.regular, fontSize: 12))
                     .foregroundStyle(Color.primaryApp)
                 LineDivider()
@@ -83,22 +81,22 @@ extension LogInView {
             
             HStack(spacing: 20) {
                 IconCardView(
-                    imageName: "ProfilePicture",
-                    title: "Your Account"
+                    image: Images.profilePicture,
+                    title: L10n.Auth.Login.yourAccount
                 ) {
                     viewModel.handleLogin()
                 }
                 
                 IconCardView(
-                    imageName: "Google",
-                    title: "Your Gmail"
+                    image: Images.google,
+                    title: L10n.Auth.Login.yourGmail
                 ) {
                     viewModel.handleGoogleLogin()
                 }
                 
                 IconCardView(
-                    imageName: "QrCode",
-                    title: "Your Qr Code"
+                    image: Images.qrCode,
+                    title: L10n.Auth.Login.yourQrCode
                 ) {
                     viewModel.handleQRCodeLogin()
                 }
@@ -108,11 +106,11 @@ extension LogInView {
     
     private func signUpPrompt() -> some View {
         HStack {
-            Text("Don't have an account?")
+            Text(L10n.Auth.Login.dontHaveAccount)
                 .font(.customfont(.regular, fontSize: 14))
                 .foregroundStyle(Color.secondaryText)
             
-            Text("Sign UP")
+            Text(L10n.Auth.Signup.title)
                 .font(.customfont(.regular, fontSize: 14))
                 .foregroundStyle(Color.primaryApp)
                 .onTapGesture {

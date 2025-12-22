@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IconCardView: View {
-    let imageName: String
+    let image: Image
     let title: String
     var backgroundColor: Color = .white
     var cornerRadius: CGFloat = 15
@@ -20,7 +20,7 @@ struct IconCardView: View {
             action?()
         } label: {
             VStack {
-                Image(imageName)
+                image
                     .resizable()
                     .scaledToFit()
                     .frame(width: 50, height: 40)
@@ -40,6 +40,6 @@ struct IconCardView: View {
 }
 
 #Preview {
-    IconCardView(imageName: "ProfilePicture", title: "Your Account")
+    IconCardView(image: Image("cubes"), title: "Your Account")
     
 }

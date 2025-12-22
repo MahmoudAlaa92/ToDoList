@@ -17,6 +17,7 @@
 "auth.apply" = "تطبيق";
 
 // Login
+"auth.login.title" = "تسجيل الدخول";
 "auth.login.subtitle" = "يرجى تسجيل الدخول أو إنشاء حساب للمتابعة";
 "auth.login.gladYouHere" = "سعداء بوجودك!!";
 "auth.login.welcomeMessage" = "مرحباً بك في Daily Grind، تطبيقك المفضل لتنظيم وترتيب وإدارة مهامك بفعالية.";

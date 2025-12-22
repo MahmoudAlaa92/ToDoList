@@ -17,6 +17,7 @@
 "auth.apply" = "Apply";
 
 // Login
+"auth.login.title" = "Log In";
 "auth.login.subtitle" = "please login or sign up to continue our app";
 "auth.login.gladYouHere" = "Glad you're here!!";
 "auth.login.welcomeMessage" = "Welcome to Daily Grind, your go-to app to organize, prioritize, and manage your tasks effectively.";
