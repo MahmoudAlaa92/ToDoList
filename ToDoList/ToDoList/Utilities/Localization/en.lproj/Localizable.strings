@@ -1,0 +1,243 @@
+/* 
+  Localizable.strings
+  ToDoList
+
+  Created by Mahmoud Alaa on 22/12/2025.
+  
+*/
+
+// MARK: - Authentication
+"auth.login" = "Login";
+"auth.signup" = "Sign Up";
+"auth.welcome" = "Welcome!";
+"auth.welcomeBack" = "Welcome Back!";
+"auth.continue" = "Continue";
+"auth.reset" = "Reset";
+"auth.confirm" = "Confirm";
+"auth.apply" = "Apply";
+
+// Login
+"auth.login.subtitle" = "please login or sign up to continue our app";
+"auth.login.gladYouHere" = "Glad you're here!!";
+"auth.login.welcomeMessage" = "Welcome to Daily Grind, your go-to app to organize, prioritize, and manage your tasks effectively.";
+"auth.login.joinWithUs" = "Join with us";
+"auth.login.yourAccount" = "Your Account";
+"auth.login.yourGmail" = "Your Gmail";
+"auth.login.yourQrCode" = "Your Qr Code";
+"auth.login.dontHaveAccount" = "Don't have an account?";
+"auth.login.username.title" = "User Name";
+"auth.login.username.placeholder" = "Enter your user name";
+"auth.login.password.title" = "Password";
+"auth.login.password.placeholder" = "***********";
+"auth.login.forgot.password" = "Forget the password";
+"auth.login.facebook" = "Continue with Facebook";
+"auth.login.google" = "Continue with Google";
+"auth.login.apple" = "Continue with Apple";
+"auth.login.failed" = "Login Failed";
+
+// Sign Up
+"auth.signup.title" = "Sign Up";
+"auth.signup.subtitle" = "Create an new account";
+"auth.signup.createAccount" = "Create An Account";
+"auth.signup.alreadyHaveAccount" = "Already have an account?";
+"auth.signup.firstName.title" = "First name";
+"auth.signup.firstName.placeholder" = "Enter your First name";
+"auth.signup.lastName.title" = "Last name";
+"auth.signup.lastName.placeholder" = "Enter your last name";
+"auth.signup.username.title" = "User Name";
+"auth.signup.username.placeholder" = "Enter your name here";
+"auth.signup.email.title" = "Email";
+"auth.signup.email.placeholder" = "Enter your email here";
+"auth.signup.password.title" = "Password";
+"auth.signup.password.placeholder" = "*******";
+"auth.signup.confirmPassword.title" = "Confirm Password";
+"auth.signup.confirmPassword.placeholder" = "*******";
+"auth.signup.phone.title" = "Phone Number";
+"auth.signup.phone.placeholder" = "+(20) 112 201 201";
+
+// Forgot Password
+"auth.forgotPassword.title" = "Forget the password";
+"auth.forgotPassword.subtitle" = "Change Password";
+"auth.forgotPassword.username.title" = "User Name";
+"auth.forgotPassword.username.placeholder" = "Enter your name here";
+"auth.forgotPassword.currentPassword.title" = "Current Password";
+"auth.forgotPassword.currentPassword.placeholder" = "*******";
+"auth.forgotPassword.newPassword.title" = "New Password";
+"auth.forgotPassword.newPassword.placeholder" = "*******";
+"auth.forgotPassword.confirmPassword.title" = "Confirm Password";
+"auth.forgotPassword.confirmPassword.placeholder" = "*******";
+"auth.forgotPassword.resetButton" = "Reset Password";
+"auth.forgotPassword.error.invalidInput" = "There exists invalid input";
+"auth.forgotPassword.error.emptyFields" = "Please fill in all fields";
+
+// Success
+"auth.success.title" = "Successful!";
+"auth.success.message" = "You have successfully registered in\nour app and start working in it.";
+"auth.success.startShopping" = "Start Shopping";
+
+// MARK: - General
+"general.ok" = "OK";
+"general.cancel" = "Cancel";
+"general.add" = "Add";
+"general.edit" = "Edit";
+"general.delete" = "Delete";
+"general.save" = "Save";
+"general.confirm" = "Confirm";
+"general.male" = "Male";
+"general.female" = "Female";
+"general.gender" = "Gender";
+"general.setting" = "Setting";
+"general.update" = "Update";
+"general.back" = "back";
+"general.done" = "done";
+"general.close" = "Close";
+
+// MARK: - Navigation
+"nav.info" = "Info";
+"nav.addReview" = "Add Review";
+"nav.addAddress" = "Add Address";
+"nav.addInformation" = "Add Information";
+"nav.payment" = "Payment";
+
+// MARK: - Home
+"home.title" = "Home";
+"home.calendar" = "Calendar";
+"home.todaysTasks" = "Today's tasks";
+"home.myProjects" = "My Projects";
+"home.noTasksToday" = "No tasks for today";
+"home.logout" = "Logout";
+"home.menu.profile" = "Profile";
+"home.menu.notifications" = "Notifications";
+
+// MARK: - Calendar
+"calendar.sunday" = "Sun";
+"calendar.monday" = "Mon";
+"calendar.tuesday" = "Tue";
+"calendar.wednesday" = "Wed";
+"calendar.thursday" = "Thu";
+"calendar.friday" = "Fri";
+"calendar.saturday" = "Sat";
+
+// MARK: - Tasks
+"tasks.all" = "All";
+"tasks.highPriority" = "High Priority";
+"tasks.mediumPriority" = "Medium Priority";
+"tasks.lowPriority" = "Low Priority";
+"tasks.notPriority" = "Not Priority";
+"tasks.todaysTask" = "Today's Task";
+"tasks.seeAll" = "See All";
+"tasks.clientReview" = "Client Review & Feedback";
+"tasks.clientReviewShort" = "Client Review";
+"tasks.redesignApp" = "Redesign App";
+"tasks.today" = "Today";
+"tasks.tomorrow" = "Tomorrow";
+"tasks.saturday" = "Saturday";
+"tasks.friday" = "Friday";
+"tasks.monday" = "Monday";
+"tasks.designSystemUpdates" = "Design System Updates";
+"tasks.uiComponents" = "UI Components";
+"tasks.codeReviewSession" = "Code Review Session";
+"tasks.backendAPI" = "Backend API";
+"tasks.emptyField" = "There is an empty field";
+
+// MARK: - Projects
+"projects.title" = "My projects";
+"projects.addProject" = "Add Project";
+"projects.toDoList" = "To Do List";
+"projects.bag" = "bag";
+"projects.swift" = "Swift";
+"projects.tasksCount" = "%d tasks";
+
+// MARK: - Project Details
+"projectDetails.description" = "Description";
+"projectDetails.comment" = "Comment";
+"projectDetails.enterComment" = "Enter your comment";
+"projectDetails.addYourComment" = "Add Your Comment";
+"projectDetails.submitting" = "Submitting...";
+
+// MARK: - Profile
+"profile.title" = "Profile";
+"profile.myOrder" = "My Order";
+"profile.myFavourites" = "My Favourites";
+"profile.shippingAddress" = "Shipping Address";
+"profile.myCard" = "My Card";
+"profile.setting" = "Setting";
+"profile.logout" = "Logout";
+"profile.faqs" = "FAQs";
+"profile.privacyPolicy" = "Privacy Policy";
+"profile.fullName" = "Full Name";
+"profile.email" = "Email";
+"profile.phoneNumber" = "Full Phone Number";
+"profile.editPhoto" = "Edit your photo";
+"profile.yourQRCode" = "Your QR Code";
+"profile.download" = "download";
+"profile.saveInfo" = "Save info";
+"profile.saving" = "Saving...";
+"profile.enterFullName" = "Enter your full name";
+"profile.enterEmail" = "Enter your email";
+
+// MARK: - Notifications
+"notifications.title" = "Notifications";
+"notifications.today" = "Today";
+"notifications.yesterday" = "Yesterday";
+"notifications.assignedMessage" = "%@ assign to you in a new project";
+"notifications.mahmoudAlaa" = "Mahmoud Alaa";
+"notifications.mohamedSamy" = "Mohamed Samy";
+"notifications.sarahSamy" = "Sarah Samy";
+"notifications.hossamAlaa" = "Hossam Alaa";
+
+// MARK: - Comments
+"comments.iThinkGood" = "I think this is good";
+"comments.timeAgo.min" = "%d min";
+
+// MARK: - Time Selection
+"time.selectTime" = "Select Time";
+"time.sound" = "Sound";
+"time.snooze" = "Snooze";
+"time.iphoneSound" = "iphone sound";
+"time.snoozeRange" = "10 min to 20 min";
+"time.am" = "am";
+"time.pm" = "pm";
+
+// MARK: - Add Task
+"addTask.title" = "Add Task";
+"addTask.taskName" = "Task Name";
+"addTask.taskTitle" = "Task Title";
+"addTask.taskSubtitle" = "Task Subtitle";
+"addTask.taskDescription" = "Task Description";
+"addTask.createTask" = "Create Task";
+"addTask.enterTaskName" = "Enter task name";
+"addTask.enterTaskTitle" = "Enter task title";
+"addTask.enterTaskSubtitle" = "Enter task subtitle";
+"addTask.enterDescription" = "Enter description";
+
+// MARK: - Forms
+"form.name.placeholder" = "Enter your name";
+"form.address.placeholder" = "Enter your address";
+"form.phone.placeholder" = "Enter your phone";
+"form.comment.placeholder" = "Enter your Comment";
+"form.rating.placeholder" = "Rating (1-5)";
+
+// MARK: - Errors
+"error.invalidCredentials" = "Invalid email or password";
+"error.missingEmailPassword" = "Please enter both email and password";
+"error.noAccessToken" = "No access token";
+"error.clientIdNotFound" = "Client ID not found";
+"error.googleTokenFailed" = "Failed to retrieve Google ID token.";
+"error.passwordsMismatch" = "Passwords do not match";
+"error.registrationFailed" = "Registration failed: Please check your input";
+"error.emptyField" = "There is an empty field";
+
+// MARK: - Assigned Persons
+"assignedPersons.woman" = "woman";
+"assignedPersons.teenagerGirl" = "teenagerGirl";
+"assignedPersons.youngSmilingMan" = "youngSmilingMan";
+
+// MARK: - Settings
+"settings.uploadImage" = "Upload Image";
+"settings.name" = "Name";
+"settings.age" = "Age";
+"settings.email" = "Email";
+"settings.language" = "Language";
+"settings.notification" = "Notification";
+"settings.helpCenter" = "Help Center";

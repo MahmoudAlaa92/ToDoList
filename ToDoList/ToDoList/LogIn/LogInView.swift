@@ -37,8 +37,8 @@ struct LogInView<ViewModel: LogInViewModelType>: View {
         .disabled(viewModel.isLoading)
     }
 }
-
 // MARK: - Subviews
+//
 extension LogInView {
     
     private func backgroundImage() -> some View {

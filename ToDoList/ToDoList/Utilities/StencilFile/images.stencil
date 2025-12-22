@@ -1,0 +1,11 @@
+import SwiftUI
+
+// MARK: - Images
+
+public enum Images {
+{% for image in catalogs.first.assets %}
+    public static var {{ image.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords }}: Image {
+        Image("{{ image.name }}")
+    }
+{% endfor %}
+}

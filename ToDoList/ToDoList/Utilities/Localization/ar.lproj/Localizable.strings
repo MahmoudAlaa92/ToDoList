@@ -1,0 +1,243 @@
+/* 
+  Localizable.strings
+  ToDoList
+
+  Created by Mahmoud Alaa on 22/12/2025.
+  
+*/
+
+// MARK: - Authentication
+"auth.login" = "تسجيل الدخول";
+"auth.signup" = "إنشاء حساب";
+"auth.welcome" = "أهلاً وسهلاً!";
+"auth.welcomeBack" = "أهلاً بعودتك!";
+"auth.continue" = "متابعة";
+"auth.reset" = "إعادة تعيين";
+"auth.confirm" = "تأكيد";
+"auth.apply" = "تطبيق";
+
+// Login
+"auth.login.subtitle" = "يرجى تسجيل الدخول أو إنشاء حساب للمتابعة";
+"auth.login.gladYouHere" = "سعداء بوجودك!!";
+"auth.login.welcomeMessage" = "مرحباً بك في Daily Grind، تطبيقك المفضل لتنظيم وترتيب وإدارة مهامك بفعالية.";
+"auth.login.joinWithUs" = "انضم إلينا";
+"auth.login.yourAccount" = "حسابك";
+"auth.login.yourGmail" = "بريدك الإلكتروني";
+"auth.login.yourQrCode" = "رمز QR الخاص بك";
+"auth.login.dontHaveAccount" = "ليس لديك حساب؟";
+"auth.login.username.title" = "اسم المستخدم";
+"auth.login.username.placeholder" = "أدخل اسم المستخدم";
+"auth.login.password.title" = "كلمة المرور";
+"auth.login.password.placeholder" = "***********";
+"auth.login.forgot.password" = "نسيت كلمة المرور";
+"auth.login.facebook" = "متابعة مع فيسبوك";
+"auth.login.google" = "متابعة مع جوجل";
+"auth.login.apple" = "متابعة مع أبل";
+"auth.login.failed" = "فشل تسجيل الدخول";
+
+// Sign Up
+"auth.signup.title" = "إنشاء حساب";
+"auth.signup.subtitle" = "إنشاء حساب جديد";
+"auth.signup.createAccount" = "إنشاء حساب";
+"auth.signup.alreadyHaveAccount" = "لديك حساب بالفعل؟";
+"auth.signup.firstName.title" = "الاسم الأول";
+"auth.signup.firstName.placeholder" = "أدخل اسمك الأول";
+"auth.signup.lastName.title" = "اسم العائلة";
+"auth.signup.lastName.placeholder" = "أدخل اسم العائلة";
+"auth.signup.username.title" = "اسم المستخدم";
+"auth.signup.username.placeholder" = "أدخل اسمك هنا";
+"auth.signup.email.title" = "البريد الإلكتروني";
+"auth.signup.email.placeholder" = "أدخل بريدك الإلكتروني";
+"auth.signup.password.title" = "كلمة المرور";
+"auth.signup.password.placeholder" = "*******";
+"auth.signup.confirmPassword.title" = "تأكيد كلمة المرور";
+"auth.signup.confirmPassword.placeholder" = "*******";
+"auth.signup.phone.title" = "رقم الهاتف";
+"auth.signup.phone.placeholder" = "+(20) 112 201 201";
+
+// Forgot Password
+"auth.forgotPassword.title" = "نسيت كلمة المرور";
+"auth.forgotPassword.subtitle" = "تغيير كلمة المرور";
+"auth.forgotPassword.username.title" = "اسم المستخدم";
+"auth.forgotPassword.username.placeholder" = "أدخل اسمك هنا";
+"auth.forgotPassword.currentPassword.title" = "كلمة المرور الحالية";
+"auth.forgotPassword.currentPassword.placeholder" = "*******";
+"auth.forgotPassword.newPassword.title" = "كلمة المرور الجديدة";
+"auth.forgotPassword.newPassword.placeholder" = "*******";
+"auth.forgotPassword.confirmPassword.title" = "تأكيد كلمة المرور";
+"auth.forgotPassword.confirmPassword.placeholder" = "*******";
+"auth.forgotPassword.resetButton" = "إعادة تعيين كلمة المرور";
+"auth.forgotPassword.error.invalidInput" = "يوجد بيانات غير صحيحة";
+"auth.forgotPassword.error.emptyFields" = "يرجى ملء جميع الحقول";
+
+// Success
+"auth.success.title" = "تم بنجاح!";
+"auth.success.message" = "لقد قمت بالتسجيل بنجاح في\nتطبيقنا ويمكنك البدء بالعمل فيه.";
+"auth.success.startShopping" = "ابدأ التسوق";
+
+// MARK: - General
+"general.ok" = "موافق";
+"general.cancel" = "إلغاء";
+"general.add" = "إضافة";
+"general.edit" = "تعديل";
+"general.delete" = "حذف";
+"general.save" = "حفظ";
+"general.confirm" = "تأكيد";
+"general.male" = "ذكر";
+"general.female" = "أنثى";
+"general.gender" = "الجنس";
+"general.setting" = "الإعدادات";
+"general.update" = "تحديث";
+"general.back" = "رجوع";
+"general.done" = "تم";
+"general.close" = "إغلاق";
+
+// MARK: - Navigation
+"nav.info" = "المعلومات";
+"nav.addReview" = "إضافة تقييم";
+"nav.addAddress" = "إضافة عنوان";
+"nav.addInformation" = "إضافة معلومات";
+"nav.payment" = "الدفع";
+
+// MARK: - Home
+"home.title" = "الرئيسية";
+"home.calendar" = "التقويم";
+"home.todaysTasks" = "مهام اليوم";
+"home.myProjects" = "مشاريعي";
+"home.noTasksToday" = "لا توجد مهام اليوم";
+"home.logout" = "تسجيل الخروج";
+"home.menu.profile" = "الملف الشخصي";
+"home.menu.notifications" = "الإشعارات";
+
+// MARK: - Calendar
+"calendar.sunday" = "الأحد";
+"calendar.monday" = "الاثنين";
+"calendar.tuesday" = "الثلاثاء";
+"calendar.wednesday" = "الأربعاء";
+"calendar.thursday" = "الخميس";
+"calendar.friday" = "الجمعة";
+"calendar.saturday" = "السبت";
+
+// MARK: - Tasks
+"tasks.all" = "الكل";
+"tasks.highPriority" = "أولوية عالية";
+"tasks.mediumPriority" = "أولوية متوسطة";
+"tasks.lowPriority" = "أولوية منخفضة";
+"tasks.notPriority" = "بدون أولوية";
+"tasks.todaysTask" = "مهام اليوم";
+"tasks.seeAll" = "عرض الكل";
+"tasks.clientReview" = "مراجعة العميل وملاحظاته";
+"tasks.clientReviewShort" = "مراجعة العميل";
+"tasks.redesignApp" = "إعادة تصميم التطبيق";
+"tasks.today" = "اليوم";
+"tasks.tomorrow" = "غداً";
+"tasks.saturday" = "السبت";
+"tasks.friday" = "الجمعة";
+"tasks.monday" = "الاثنين";
+"tasks.designSystemUpdates" = "تحديثات نظام التصميم";
+"tasks.uiComponents" = "عناصر الواجهة";
+"tasks.codeReviewSession" = "جلسة مراجعة الكود";
+"tasks.backendAPI" = "API الخلفية";
+"tasks.emptyField" = "يوجد حقل فارغ";
+
+// MARK: - Projects
+"projects.title" = "مشاريعي";
+"projects.addProject" = "إضافة مشروع";
+"projects.toDoList" = "قائمة المهام";
+"projects.bag" = "حقيبة";
+"projects.swift" = "سويفت";
+"projects.tasksCount" = "%d مهام";
+
+// MARK: - Project Details
+"projectDetails.description" = "الوصف";
+"projectDetails.comment" = "تعليق";
+"projectDetails.enterComment" = "أدخل تعليقك";
+"projectDetails.addYourComment" = "أضف تعليقك";
+"projectDetails.submitting" = "جاري الإرسال...";
+
+// MARK: - Profile
+"profile.title" = "الملف الشخصي";
+"profile.myOrder" = "طلباتي";
+"profile.myFavourites" = "مفضلاتي";
+"profile.shippingAddress" = "عنوان الشحن";
+"profile.myCard" = "بطاقتي";
+"profile.setting" = "الإعدادات";
+"profile.logout" = "تسجيل الخروج";
+"profile.faqs" = "الأسئلة الشائعة";
+"profile.privacyPolicy" = "سياسة الخصوصية";
+"profile.fullName" = "الاسم الكامل";
+"profile.email" = "البريد الإلكتروني";
+"profile.phoneNumber" = "رقم الهاتف الكامل";
+"profile.editPhoto" = "تعديل صورتك";
+"profile.yourQRCode" = "رمز QR الخاص بك";
+"profile.download" = "تحميل";
+"profile.saveInfo" = "حفظ المعلومات";
+"profile.saving" = "جاري الحفظ...";
+"profile.enterFullName" = "أدخل اسمك الكامل";
+"profile.enterEmail" = "أدخل بريدك الإلكتروني";
+
+// MARK: - Notifications
+"notifications.title" = "الإشعارات";
+"notifications.today" = "اليوم";
+"notifications.yesterday" = "أمس";
+"notifications.assignedMessage" = "%@ قام بتعيينك في مشروع جديد";
+"notifications.mahmoudAlaa" = "محمود علاء";
+"notifications.mohamedSamy" = "محمد سامي";
+"notifications.sarahSamy" = "سارة سامي";
+"notifications.hossamAlaa" = "حسام علاء";
+
+// MARK: - Comments
+"comments.iThinkGood" = "أعتقد أن هذا جيد";
+"comments.timeAgo.min" = "%d دقيقة";
+
+// MARK: - Time Selection
+"time.selectTime" = "اختيار الوقت";
+"time.sound" = "الصوت";
+"time.snooze" = "الغفوة";
+"time.iphoneSound" = "صوت الآيفون";
+"time.snoozeRange" = "من 10 دقائق إلى 20 دقيقة";
+"time.am" = "صباحاً";
+"time.pm" = "مساءً";
+
+// MARK: - Add Task
+"addTask.title" = "إضافة مهمة";
+"addTask.taskName" = "اسم المهمة";
+"addTask.taskTitle" = "عنوان المهمة";
+"addTask.taskSubtitle" = "عنوان فرعي للمهمة";
+"addTask.taskDescription" = "وصف المهمة";
+"addTask.createTask" = "إنشاء مهمة";
+"addTask.enterTaskName" = "أدخل اسم المهمة";
+"addTask.enterTaskTitle" = "أدخل عنوان المهمة";
+"addTask.enterTaskSubtitle" = "أدخل العنوان الفرعي";
+"addTask.enterDescription" = "أدخل الوصف";
+
+// MARK: - Forms
+"form.name.placeholder" = "أدخل اسمك";
+"form.address.placeholder" = "أدخل عنوانك";
+"form.phone.placeholder" = "أدخل رقم هاتفك";
+"form.comment.placeholder" = "أدخل تعليقك";
+"form.rating.placeholder" = "التقييم (1-5)";
+
+// MARK: - Errors
+"error.invalidCredentials" = "البريد الإلكتروني أو كلمة المرور غير صحيحة";
+"error.missingEmailPassword" = "يرجى إدخال البريد الإلكتروني وكلمة المرور";
+"error.noAccessToken" = "لا يوجد رمز وصول";
+"error.clientIdNotFound" = "لم يتم العثور على معرف العميل";
+"error.googleTokenFailed" = "فشل في الحصول على رمز Google ID";
+"error.passwordsMismatch" = "كلمتا المرور غير متطابقتين";
+"error.registrationFailed" = "فشل التسجيل: يرجى التحقق من البيانات المدخلة";
+"error.emptyField" = "يوجد حقل فارغ";
+
+// MARK: - Assigned Persons
+"assignedPersons.woman" = "امرأة";
+"assignedPersons.teenagerGirl" = "فتاة مراهقة";
+"assignedPersons.youngSmilingMan" = "شاب مبتسم";
+
+// MARK: - Settings
+"settings.uploadImage" = "رفع الصورة";
+"settings.name" = "الاسم";
+"settings.age" = "العمر";
+"settings.email" = "البريد الإلكتروني";
+"settings.language" = "اللغة";
+"settings.notification" = "الإشعارات";
+"settings.helpCenter" = "مركز المساعدة";
