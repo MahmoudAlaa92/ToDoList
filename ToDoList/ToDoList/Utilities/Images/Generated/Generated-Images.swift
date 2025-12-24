@@ -51,6 +51,9 @@ public enum Images {
     public static var sound: Image {
         Image("Sound")
     }
+    public static var splashScreen: Image {
+        Image("Splash screen")
+    }
     public static var addIcon: Image {
         Image("addIcon")
     }

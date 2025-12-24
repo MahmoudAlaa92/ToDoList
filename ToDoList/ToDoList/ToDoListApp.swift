@@ -10,11 +10,20 @@ import SwiftUI
 @main
 struct ToDoListApp: App {
     @StateObject private var taskStore = TaskStore()
+    @State private var showLaunchScreen = true
     
     var body: some Scene {
         WindowGroup {
-            AppCoordinatorView()
-                .environmentObject(taskStore)
+            if showLaunchScreen {
+                SplashScreenView()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            showLaunchScreen = false
+                        }}
+            } else {
+                AppCoordinatorView()
+                    .environmentObject(taskStore)
+            }
         }
     }
 }
