@@ -18,7 +18,7 @@ final class CreatedTaskViewModel: CreatedTaskViewModelType {
     // MARK: - Output Properties
     let taskItem: PlannedModel
     let sourceTab: Tabs
-    let assignedPersons: [String]
+    let assignedPersons: [Image]
     @Published var plannedTasks: [PlannedModel]
     
     // MARK: - Init

@@ -9,16 +9,16 @@ import SwiftUI
 
 struct AssignPersons: View {
     
-    var persons: [String]
+    var persons: [Image]
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Assign To")
+            Text(L10n.AddTask.assignTo)
                 .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
             
             HStack(spacing: 2) {
-                ForEach(persons, id: \.self) { name in
-                    Image(name)
+                ForEach(persons.enumerated(), id: \.offset) { (_,image) in
+                    image
                         .resizable()
                         .scaledToFit()
                         .frame(width: 42 * .deviceFontScale,
@@ -29,7 +29,7 @@ struct AssignPersons: View {
         }
     }
 }
-
+// MARK: - Previews
 #Preview {
-    AssignPersons(persons: ["ProfilePicture", "ProfilePicture2"])
+    AssignPersons(persons: [Images.profilePicture, Images.profilePicture2])
 }

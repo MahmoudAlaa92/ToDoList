@@ -6,6 +6,7 @@
 //
 
 import Combine
+import SwiftUI
 
 // MARK: - Input Protocol
 protocol CreatedTaskViewModelInput: ObservableObject {
@@ -19,7 +20,7 @@ protocol CreatedTaskViewModelInput: ObservableObject {
 protocol CreatedTaskViewModelOutput: ObservableObject {
     var taskItem: PlannedModel { get }
     var plannedTasks: [PlannedModel] { get }
-    var assignedPersons: [String] { get }
+    var assignedPersons: [Image] { get }
 }
 
 // MARK: - Combined Protocol

@@ -54,7 +54,7 @@ extension CreatedTaskView {
         HStack {
             Spacer()
             AddProject(
-                title: "Add project",
+                title:  L10n.Projects.addProject,
                 backGround: Color.primaryApp
             )
             .onTapGesture {
@@ -73,7 +73,7 @@ extension CreatedTaskView {
     
     func tasksListSection() -> some View {
         VStack(alignment: .leading) {
-            HeaderView(name: "Our Tasks for the project", seeAll: "")
+            HeaderView(name: L10n.Tasks.ourTasks, seeAll: "")
             
             List {
                 ForEach(viewModel.plannedTasks.indices, id: \.self) { index in
@@ -95,11 +95,11 @@ extension CreatedTaskView {
 //
 #Preview {
     let taskItem = PlannedModel(
-        title: "To Do List",
-        subTitle: "Redesign",
-        day: "Friday",
-        start: "11:00pm",
-        end: "01:00am",
+        title: L10n.Projects.toDoList,
+        subTitle: L10n.Tasks.redesignApp,
+        day: L10n.Tasks.friday,
+        start: "11:00\(L10n.Time.pm)",
+        end: "01:00\(L10n.Time.am)",
         imageName: "cubes",
         colorSubTitle: Color.LightGray,
         colorCircle: nil,

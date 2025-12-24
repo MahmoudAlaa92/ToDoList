@@ -101,7 +101,7 @@ extension AllTasksView {
     func scheduleTasksView() -> some View {
         List {
             Section {
-                HeaderView(name: "Schedule", seeAll: "")
+                HeaderView(name: L10n.Tasks.schedule, seeAll: "")
                     .listRowInsets(EdgeInsets())    /// remove padding
                     .listRowSeparator(.hidden)
 

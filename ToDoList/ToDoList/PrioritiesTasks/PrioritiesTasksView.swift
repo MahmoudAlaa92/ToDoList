@@ -39,8 +39,8 @@ extension PrioritiesTasksView {
     
     func todaysTaskHeader() -> some View {
         HeaderView(
-            name: "Today's Task",
-            seeAll: "See All"
+            name: L10n.Tasks.todaysTask,
+            seeAll: L10n.Tasks.seeAll
         )
     }
     
@@ -83,8 +83,8 @@ extension PrioritiesTasksView {
     
     func myProjectsSection() -> some View {
         VStack {
-            HeaderView(name: "My projects",
-                       seeAll: "See All") { viewModel.didTapSeeAllProjects() }
+            HeaderView(name: L10n.Projects.title,
+                       seeAll: L10n.Tasks.seeAll) { viewModel.didTapSeeAllProjects() }
             
             ForEach(viewModel.projectItems.enumerated(), id: \.offset) { (index, item) in
                 ProjectCell(projectItem: viewModel.projectItems[index])

@@ -26,33 +26,33 @@ final class PrioritiesTasksDataProvider: PrioritiesTasksDataProviderProtocol {
     // MARK: - Public Methods
     func fetchPriorityItems() -> [PriorityModel] {
         return [
-            .init(title: "All", number: 2),
-            .init(title: "High Priority", number: 1),
-            .init(title: "Medium Priority", number: 2),
-            .init(title: "Low Priority", number: 2),
-            .init(title: "Not Priority", number: 1),
+            .init(title: L10n.Tasks.all, number: 2),
+            .init(title: L10n.Tasks.highPriority, number: 1),
+            .init(title: L10n.Tasks.mediumPriority, number: 2),
+            .init(title: L10n.Tasks.lowPriority, number: 2),
+            .init(title: L10n.Tasks.notPriority, number: 1),
         ]
     }
     
     func fetchPriorityTasks() -> [PlannedModel] {
         return [
             .init(
-                title: "Client Review &Feedback",
-                subTitle: "Redesign App",
-                day: "Today",
-                start: "10:00 am",
-                end: "4:00 pm",
+                title: L10n.Tasks.clientReview,
+                subTitle: L10n.Tasks.redesignApp,
+                day: L10n.Tasks.today,
+                start: "10:00 \(L10n.Time.am)",
+                end: "4:00 \(L10n.Time.pm)",
                 imageName: "Mobile trading",
                 colorSubTitle: Color.LightGray,
                 colorCircle: Color.lightBeige,
                 backgroundColor: Color.lightPink
             ),
             .init(
-                title: "Client Review",
-                subTitle: "Redesign App",
-                day: "Today",
-                start: "10:00 am",
-                end: "4:00 pm",
+                title: L10n.Tasks.clientReviewShort,
+                subTitle: L10n.Tasks.redesignApp,
+                day: L10n.Tasks.today,
+                start: "10:00 \(L10n.Time.am)",
+                end: "4:00 \(L10n.Time.pm)",
                 imageName: "cubes",
                 colorSubTitle: Color.LightGray,
                 colorCircle: Color.lightBeige,
@@ -64,22 +64,22 @@ final class PrioritiesTasksDataProvider: PrioritiesTasksDataProviderProtocol {
     func fetchProjects() -> [PlannedModel] {
         return [
             .init(
-                title: "To Do List",
-                subTitle: "3 tasks",
-                day: "Monday",
-                start: "10:00pm",
-                end: "11:00pm",
+                title: L10n.Projects.toDoList,
+                subTitle: L10n.Projects.tasksCount(3),
+                day: L10n.Tasks.monday,
+                start: "10:00\(L10n.Time.pm)",
+                end: "11:00\(L10n.Time.pm)",
                 imageName: "cubes",
                 colorSubTitle: .darkGray,
                 colorCircle: .white,
                 backgroundColor: .lightGreen
             ),
             .init(
-                title: "bag",
-                subTitle: "5 tasks",
-                day: "Friday",
-                start: "10:00pm",
-                end: "11:00pm",
+                title: L10n.Projects.bag,
+                subTitle: L10n.Projects.tasksCount(5),
+                day: L10n.Tasks.friday,
+                start: "10:00\(L10n.Time.pm)",
+                end: "11:00\(L10n.Time.pm)",
                 imageName: "bag",
                 colorSubTitle: .darkGray,
                 colorCircle: .darkPrimaryApp,
@@ -143,19 +143,19 @@ final class MockPrioritiesTasksDataProvider: PrioritiesTasksDataProviderProtocol
     // MARK: - Private Methods
     private static func defaultPriorityItems() -> [PriorityModel] {
         return [
-            .init(title: "Test All", number: 1),
-            .init(title: "Test High", number: 1),
+            .init(title: L10n.Tasks.all, number: 1),
+            .init(title: L10n.Tasks.highPriority, number: 1),
         ]
     }
     
     private static func defaultPriorityTasks() -> [PlannedModel] {
         return [
             .init(
-                title: "Test Task",
-                subTitle: "Test Subtitle",
-                day: "Today",
-                start: "9:00 am",
-                end: "10:00 am",
+                title: L10n.Tasks.clientReview,
+                subTitle: L10n.Tasks.redesignApp,
+                day: L10n.Tasks.today,
+                start: "9:00 \(L10n.Time.am)",
+                end: "10:00 \(L10n.Time.am)",
                 imageName: "test",
                 colorSubTitle: Color.gray,
                 colorCircle: Color.blue,
@@ -167,11 +167,11 @@ final class MockPrioritiesTasksDataProvider: PrioritiesTasksDataProviderProtocol
     private static func defaultProjects() -> [PlannedModel] {
         return [
             .init(
-                title: "Test Project",
-                subTitle: "2 tasks",
-                day: "Today",
-                start: "10:00am",
-                end: "11:00am",
+                title: L10n.Projects.toDoList,
+                subTitle: L10n.Projects.tasksCount(2),
+                day: L10n.Tasks.today,
+                start: "10:00\(L10n.Time.am)",
+                end: "11:00\(L10n.Time.am)",
                 imageName: "test",
                 colorSubTitle: .gray,
                 colorCircle: .blue,

@@ -38,7 +38,7 @@ struct TaskCard: View {
             Button(role: .destructive) {
                 onDelete?()
             } label: {
-                Label("Delete", systemImage: "trash")
+                Label(L10n.General.delete, systemImage: "trash")
             }
         }
         .padding(.horizontal, 12 * .deviceFontScale)

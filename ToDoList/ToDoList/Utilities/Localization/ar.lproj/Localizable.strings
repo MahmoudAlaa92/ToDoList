@@ -141,6 +141,9 @@
 "tasks.backendAPI" = "API الخلفية";
 "tasks.emptyField" = "يوجد حقل فارغ";
 "tasks.createdTaskSuccessfully" = "تمت الاضافة";
+"tasks.schedule" = "الجدول";
+"tasks.ourTasks" = "مهامنا للمشروع";
+"tasks.to" = "إلى";
 
 // MARK: - Projects
 "projects.title" = "مشاريعي";
@@ -152,10 +155,12 @@
 
 // MARK: - Project Details
 "projectDetails.description" = "الوصف";
+"projectDetails.example" = "أبحاث المستخدم: فهم احتياجات المستخدمين وتفضيلاتهم وسلوكياتهم. مبادئ التصميم: تطبيق إرشادات التصميم المعتمدة وأفضل الممارسات.";
 "projectDetails.comment" = "تعليق";
 "projectDetails.enterComment" = "أدخل تعليقك";
 "projectDetails.addYourComment" = "أضف تعليقك";
 "projectDetails.submitting" = "جاري الإرسال...";
+"projectDetails.comments" = "التعليقات";
 
 // MARK: - Profile
 "profile.title" = "الملف الشخصي";
@@ -213,6 +218,8 @@
 "addTask.enterTaskSubtitle" = "أدخل العنوان الفرعي";
 "addTask.enterDescription" = "أدخل الوصف";
 "addTask.addSubtask" = "إضافة مهمة فرعية";
+"addTask.assignTo" = "إسناد إلى";
+
 
 // MARK: - Forms
 "form.name.placeholder" = "أدخل اسمك";
@@ -244,3 +251,8 @@
 "settings.language" = "اللغة";
 "settings.notification" = "الإشعارات";
 "settings.helpCenter" = "مركز المساعدة";
+// MARK: - Announecment
+"announecment.sentence" = "لقد شارفت على الانتهاء لهذا اليوم";
+"announecment.tasks" = "٤/٣ مهام";
+"announecment.Welcome" = "مرحبا";
+"announecment.there" = "بكم!!";

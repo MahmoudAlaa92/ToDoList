@@ -38,7 +38,7 @@ extension NotificationView {
     }
     
     func headerSection() -> some View {
-        HeaderView(name: "Notifications", seeAll: "")
+        HeaderView(name:  L10n.Notifications.title, seeAll: "")
     }
     
     func notificationList() -> some View {

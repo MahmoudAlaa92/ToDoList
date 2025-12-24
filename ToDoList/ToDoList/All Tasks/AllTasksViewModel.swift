@@ -60,7 +60,7 @@ private extension AllTasksViewModel {
     
     func updatePriorityItemsCount() {
         // Update the count in priority items based on current tasks
-        if let allIndex = prioritieItems.firstIndex(where: { $0.title == "All" }) {
+        if let allIndex = prioritieItems.firstIndex(where: { $0.title == L10n.Tasks.all }) {
             prioritieItems[allIndex].number = prioritiesTasks.count
         }
     }

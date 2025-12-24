@@ -23,22 +23,22 @@ final class CommentsDataProvider: CommentsDataProviderProtocol {
     func fetchComments() -> [CommentsModel] {
         return [
             .init(
-                name: "Mahmoud Alaa",
+                name: L10n.Notifications.mahmoudAlaa,
                 imageName: "ProfilePicture",
-                comment: "I think this is good",
-                time: "5 min"
+                comment: L10n.Comments.iThinkGood,
+                time: L10n.Comments.TimeAgo.min(5)
             ),
             .init(
-                name: "Sara Ahmed",
+                name: L10n.Notifications.sarahSamy,
                 imageName: "ProfilePicture2",
-                comment: "I think this is good",
-                time: "8 min"
+                comment: L10n.Comments.iThinkGood,
+                time: L10n.Comments.TimeAgo.min(8)
             ),
             .init(
-                name: "Hossam Alaa",
+                name: L10n.Notifications.hossamAlaa,
                 imageName: "ProfilePicture3",
-                comment: "I think this is good",
-                time: "10 min"
+                comment: L10n.Comments.iThinkGood,
+                time: L10n.Comments.TimeAgo.min(10)
             ),
         ]
     }
@@ -49,10 +49,10 @@ final class MockCommentsDataProvider: CommentsDataProviderProtocol {
     func fetchComments() -> [CommentsModel] {
         return [
             .init(
-                name: "Mahmoud Alaa",
+                name: L10n.Notifications.mahmoudAlaa,
                 imageName: "ProfilePicture",
-                comment: "I think this is good",
-                time: "5 min"
+                comment: L10n.Comments.iThinkGood,
+                time: L10n.Comments.TimeAgo.min(5)
             )
         ]
     }

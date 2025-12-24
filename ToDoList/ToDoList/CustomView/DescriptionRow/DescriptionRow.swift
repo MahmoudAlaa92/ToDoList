@@ -10,10 +10,10 @@ import SwiftUI
 struct DescriptionRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Description")
+            Text(L10n.ProjectDetails.description)
                 .font(.customfont(.medium, fontSize: 18 * .deviceFontScale))
             
-            Text("User research: Understanding user needs, preferences, and behaviors. Design principles: Applying established design guidelines and best practices. Design principles: Applying established design guidelines and best practices.")
+            Text(L10n.ProjectDetails.example)
                 .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
                 .foregroundStyle(Color.LightGray)
         }

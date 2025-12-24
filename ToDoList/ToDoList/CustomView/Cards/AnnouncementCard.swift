@@ -11,14 +11,14 @@ struct AnnouncementCard: View {
     
     var body: some View {
         ZStack(alignment: .leading) {
-            Image("announcement")
+            Images.announcement
                 .resizable()
                 .scaledToFit()
                 .frame(width: .screenWidth * 0.9 , height: .screenWidth * 0.5)
                 .padding(.top, -30)
             
             VStack(alignment: .leading, spacing: 0) {
-                Text("You’re almost done for\n today!")
+                Text(L10n.Announecment.sentence)
                     .font(.customfont(.medium, fontSize: 15 * .deviceFontScale))
                     .foregroundColor(.white)
                     .shadow(radius: 3)
@@ -26,7 +26,7 @@ struct AnnouncementCard: View {
                     .padding(.leading, 30)
                 
                 HStack(spacing: 30) {
-                    Text("3/5 Tasks")
+                    Text(L10n.Announecment.tasks)
                         .font(.customfont(.regular, fontSize: 14 * .deviceFontScale))
                         .foregroundColor(.white)
                         .shadow(radius: 3)

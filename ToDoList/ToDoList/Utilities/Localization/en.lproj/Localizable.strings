@@ -141,6 +141,9 @@
 "tasks.backendAPI" = "Backend API";
 "tasks.emptyField" = "There is an empty field";
 "tasks.createdTaskSuccessfully" = "Task Created Successfully";
+"tasks.schedule" = "Schedule";
+"tasks.ourTasks" = "Our Tasks for the project";
+"tasks.to" = "to";
 
 // MARK: - Projects
 "projects.title" = "My projects";
@@ -152,10 +155,12 @@
 
 // MARK: - Project Details
 "projectDetails.description" = "Description";
+"projectDetails.example" = "User research: Understanding user needs, preferences, and behaviors. Design principles: Applying established design guidelines and best practices. Design principles: Applying established design guidelines and best practices.";
 "projectDetails.comment" = "Comment";
 "projectDetails.enterComment" = "Enter your comment";
 "projectDetails.addYourComment" = "Add Your Comment";
 "projectDetails.submitting" = "Submitting...";
+"projectDetails.comments" = "Comments";
 
 // MARK: - Profile
 "profile.title" = "Profile";
@@ -213,6 +218,7 @@
 "addTask.enterTaskSubtitle" = "Enter task subtitle";
 "addTask.enterDescription" = "Enter description";
 "addTask.addSubtask" = "Add SubTask";
+"addTask.assignTo" = "Assign To";
 
 // MARK: - Forms
 "form.name.placeholder" = "Enter your name";
@@ -244,3 +250,8 @@
 "settings.language" = "Language";
 "settings.notification" = "Notification";
 "settings.helpCenter" = "Help Center";
+// MARK: - Announecment
+"announecment.sentence" = "You’re almost done for\n today";
+"announecment.tasks" = "3/4 Tasks";
+"announecment.Welcome" = "Welcome";
+"announecment.there" = "there";

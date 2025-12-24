@@ -60,7 +60,7 @@ final class SelectTimeViewModel: SelectTimeViewModelType {
     
     // MARK: - Private Methods
     private func updateFormattedTime() {
-        let period = hour >= 12 ? "pm" : "am"
+        let period = hour >= 12 ? L10n.Time.pm : L10n.Time.am
         let displayHour = hour == 0 ? 12 : (hour > 12 ? hour - 12 : hour)
         formattedTime = String(format: "%02d:%02d %@", displayHour, minute, period)
     }

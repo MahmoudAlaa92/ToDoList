@@ -66,7 +66,7 @@ extension ProfileView {
             }
             .frame(height: 200 * .deviceFontScale)
             
-            Text("Edit your photo")
+            Text(L10n.Profile.editPhoto)
                 .font(.customfont(.medium, fontSize: 16 * .deviceFontScale))
                 .foregroundStyle(Color.darkGray)
         }
@@ -76,8 +76,8 @@ extension ProfileView {
     func profileFieldsSection() -> some View {
         VStack(spacing: 16 * .deviceFontScale) {
             CustomTextField(
-                title: "Full Name",
-                placeholder: "Enter your full name",
+                title: L10n.Profile.fullName,
+                placeholder: L10n.Profile.enterFullName,
                 text: Binding(
                     get: { viewModel.fullName },
                     set: { viewModel.updateFullName($0) }
@@ -85,8 +85,8 @@ extension ProfileView {
             )
             
             CustomTextField(
-                title: "Email",
-                placeholder: "Enter your email",
+                title: L10n.Profile.email,
+                placeholder: L10n.Profile.enterEmail,
                 text: Binding(
                     get: { viewModel.email },
                     set: { viewModel.updateEmail($0) }
@@ -94,7 +94,7 @@ extension ProfileView {
             )
             
             CustomTextField(
-                title: "Full Phone Number",
+                title: L10n.Profile.phoneNumber,
                 placeholder: "+20 1142128919",
                 text: Binding(
                     get: { viewModel.phoneNumber },
@@ -106,10 +106,10 @@ extension ProfileView {
     
     func qrCodeSection() -> some View {
         HStack {
-            Text("Your QR Code")
+            Text(L10n.Profile.yourQRCode)
                 .font(.customfont(.regular, fontSize: 12 * .deviceFontScale))
             
-            Text("download")
+            Text(L10n.Profile.download)
                 .foregroundStyle(Color.primaryApp)
                 .font(.customfont(.regular, fontSize: 12 * .deviceFontScale))
                 .onTapGesture {
@@ -122,7 +122,7 @@ extension ProfileView {
     
     func saveButton() -> some View {
         PrimaryButton(
-            title: viewModel.isSaving ? "Saving..." : "Save info",
+            title: viewModel.isSaving ? L10n.Profile.saving : L10n.Profile.saveInfo,
             action: { viewModel.saveProfile() }
         )
         .padding(.top, 24)

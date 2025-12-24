@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Protocol
 protocol CreatedTaskDataProviderProtocol {
     func fetchPlannedTasks() -> [PlannedModel]
-    func fetchAssignedPersons() -> [String]
+    func fetchAssignedPersons() -> [Image]
 }
 
 // MARK: - Implementation
@@ -26,33 +26,33 @@ final class CreatedTaskDataProvider: CreatedTaskDataProviderProtocol {
     func fetchPlannedTasks() -> [PlannedModel] {
         return [
             .init(
-                title: "Client Review &Feedback",
-                subTitle: "Redesign App",
-                day: "Today",
-                start: "10:00 am",
-                end: "4:00 pm",
+                title: L10n.Tasks.clientReview,
+                subTitle: L10n.Tasks.redesignApp,
+                day: L10n.Tasks.today,
+                start: "10:00 \(L10n.Time.am)",
+                end: "4:00 \(L10n.Time.pm)",
                 imageName: "Mobile trading",
                 colorSubTitle: Color.LightGray,
                 colorCircle: Color.lightBeige,
                 backgroundColor: Color.lightPink
             ),
             .init(
-                title: "Client Review",
-                subTitle: "Redesign App",
-                day: "Today",
-                start: "10:00 am",
-                end: "4:00 pm",
+                title: L10n.Tasks.clientReviewShort,
+                subTitle: L10n.Tasks.redesignApp,
+                day: L10n.Tasks.today,
+                start: "10:00 \(L10n.Time.am)",
+                end: "4:00 \(L10n.Time.pm)",
                 imageName: "cubes",
                 colorSubTitle: Color.LightGray,
                 colorCircle: Color.lightBeige,
                 backgroundColor: Color.lightPink
             ),
             .init(
-                title: "Design System Updates",
-                subTitle: "UI Components",
-                day: "Tomorrow",
-                start: "9:00 am",
-                end: "12:00 pm",
+                title: L10n.Tasks.designSystemUpdates,
+                subTitle: L10n.Tasks.uiComponents,
+                day: L10n.Tasks.tomorrow,
+                start: "9:00 \(L10n.Time.am)",
+                end: "12:00 \(L10n.Time.pm)",
                 imageName: "Mobile trading",
                 colorSubTitle: Color.LightGray,
                 colorCircle: Color.lightBeige,
@@ -61,20 +61,20 @@ final class CreatedTaskDataProvider: CreatedTaskDataProviderProtocol {
         ]
     }
     
-    func fetchAssignedPersons() -> [String] {
-        return ["woman", "teenagerGirl", "youngSmilingMan"]
+    func fetchAssignedPersons() -> [Image] {
+        return [Images.woman, Images.teenagerGirl, Images.youngSmilingMan]
     }
 }
+
 // MARK: - Mock Data Provider (For Testing)
-//
 final class MockCreatedTaskDataProvider: CreatedTaskDataProviderProtocol {
     
     // MARK: - Properties
     var mockTasks: [PlannedModel] = []
-    var mockPersons: [String] = []
+    var mockPersons: [Image] = []
     
     // MARK: - Initialization
-    init(tasks: [PlannedModel]? = nil, persons: [String]? = nil) {
+    init(tasks: [PlannedModel]? = nil, persons: [Image]? = nil) {
         self.mockTasks = tasks ?? defaultMockTasks()
         self.mockPersons = persons ?? defaultMockPersons()
     }
@@ -84,7 +84,7 @@ final class MockCreatedTaskDataProvider: CreatedTaskDataProviderProtocol {
         return mockTasks
     }
     
-    func fetchAssignedPersons() -> [String] {
+    func fetchAssignedPersons() -> [Image] {
         return mockPersons
     }
     
@@ -92,22 +92,22 @@ final class MockCreatedTaskDataProvider: CreatedTaskDataProviderProtocol {
     private func defaultMockTasks() -> [PlannedModel] {
         return [
             .init(
-                title: "Test Task 1",
-                subTitle: "Test Subtitle",
-                day: "Today",
-                start: "9:00 am",
-                end: "10:00 am",
+                title: L10n.Tasks.clientReview,
+                subTitle: L10n.Tasks.redesignApp,
+                day: L10n.Tasks.today,
+                start: "9:00 \(L10n.Time.am)",
+                end: "10:00 \(L10n.Time.am)",
                 imageName: "test",
                 colorSubTitle: Color.gray,
                 colorCircle: Color.blue,
                 backgroundColor: Color.green
             ),
             .init(
-                title: "Test Task 2",
-                subTitle: "Another Test",
-                day: "Tomorrow",
-                start: "2:00 pm",
-                end: "3:00 pm",
+                title: L10n.Tasks.designSystemUpdates,
+                subTitle: L10n.Tasks.uiComponents,
+                day: L10n.Tasks.tomorrow,
+                start: "2:00 \(L10n.Time.pm)",
+                end: "3:00 \(L10n.Time.pm)",
                 imageName: "test2",
                 colorSubTitle: Color.gray,
                 colorCircle: Color.red,
@@ -116,7 +116,7 @@ final class MockCreatedTaskDataProvider: CreatedTaskDataProviderProtocol {
         ]
     }
     
-    private func defaultMockPersons() -> [String] {
-        return ["testPerson1", "testPerson2"]
+    private func defaultMockPersons() -> [Image] {
+        return [Images.profilePicture, Images.profilePicture2]
     }
 }

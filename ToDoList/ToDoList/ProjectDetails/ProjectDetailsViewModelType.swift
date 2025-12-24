@@ -6,7 +6,7 @@
 //
 
 import Combine
-import Foundation
+import SwiftUI
 
 // MARK: - Input Protocol
 protocol ProjectDetailsViewModelInput: ObservableObject {
@@ -20,7 +20,7 @@ protocol ProjectDetailsViewModelInput: ObservableObject {
 // MARK: - Output Protocol
 protocol ProjectDetailsViewModelOutput: ObservableObject {
     var taskCard: PlannedModel { get }
-    var assignedPersons: [String] { get }
+    var assignedPersons: [Image] { get }
     var comment: String { get }
     var sourceTab: Tabs { get }
     var isSubmittingComment: Bool { get }

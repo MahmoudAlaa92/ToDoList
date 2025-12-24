@@ -47,7 +47,7 @@ struct AddTask<VM: AddTaskViewModelType>: View {
             showAlert = true
         }
         .alert(alertTitle, isPresented: $showAlert) {
-            Button("OK", role: .cancel) {}
+            Button(L10n.General.ok, role: .cancel) {}
         }
     }
 }
@@ -105,7 +105,7 @@ extension AddTask {
                 ) {}
                 Spacer()
             }
-            AssignPersons(persons: ["ProfilePicture", "ProfilePicture2"])
+            AssignPersons(persons: [Images.profilePicture, Images.profilePicture2])
         }
     }
 

@@ -52,7 +52,7 @@ extension MyProjectView {
             HStack {
                 Spacer()
                 AddProject(
-                    title: "Add Project",
+                    title: L10n.Projects.addProject,
                     backGround: Color.primaryApp
                 ) {
                     viewModel.didTapAddProject()

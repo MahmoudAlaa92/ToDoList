@@ -50,16 +50,16 @@ final class AddTaskViewModel: AddTaskViewModelType {
 extension AddTaskViewModel {
     func createTaskTapped() {
         guard isFormValid else {
-            errorSubject.send("There is an empty field")
+            errorSubject.send(L10n.Error.emptyField)
             return
         }
 
         let task = PlannedModel(
             title: taskTitle,
             subTitle: taskSubTitle,
-            day: "Friday",
-            start: "8:00pm",
-            end: "10:00pm",
+            day: L10n.Calendar.friday,
+            start: "8:00" + L10n.Time.pm,
+            end: "10:00" + L10n.Time.pm,
             imageName: "cubes",
             colorSubTitle: .gray,
             colorCircle: .white,

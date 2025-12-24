@@ -93,8 +93,8 @@ extension ProjectDetailsView {
     func commentSection() -> some View {
         VStack(spacing: 16) {
             CustomTextField(
-                title: "Comment",
-                placeholder: "Enter your comment",
+                title: L10n.ProjectDetails.comment,
+                placeholder: L10n.ProjectDetails.enterComment,
                 height: 100 * .deviceFontScale,
                 text: Binding(
                     get: { viewModel.comment },
@@ -104,8 +104,7 @@ extension ProjectDetailsView {
 
             PrimaryButton(
                 title: viewModel.isSubmittingComment
-                    ? "Submitting..." : "Add Your Comment",
-                action: { viewModel.submitComment() }
+                ? L10n.ProjectDetails.submitting : L10n.ProjectDetails.addYourComment,                action: { viewModel.submitComment() }
             )
             .disabled(
                 viewModel.isSubmittingComment
@@ -122,15 +121,15 @@ extension ProjectDetailsView {
         }
     }
 }
-
 // MARK: - Preview
+//
 #Preview {
     let taskCard = PlannedModel(
-        title: "Client Review & Feedback",
-        subTitle: "Redesign App",
-        day: "Today",
-        start: "10:00 am",
-        end: "4:00 pm",
+        title: L10n.Tasks.clientReview,
+        subTitle: L10n.Tasks.redesignApp,
+        day: L10n.Tasks.today,
+        start: "10:00 \(L10n.Time.am)",
+        end: "4:00 \(L10n.Time.pm)",
         imageName: "Mobile trading",
         colorSubTitle: Color.LightGray,
         colorCircle: Color.lightBeige,

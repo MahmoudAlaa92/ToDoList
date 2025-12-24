@@ -6,6 +6,7 @@
 //
 
 import Combine
+import SwiftUI
 import Foundation
 
 @MainActor
@@ -18,7 +19,7 @@ final class ProjectDetailsViewModel: ProjectDetailsViewModelType {
     // MARK: - Output Properties
     let taskCard: PlannedModel
     let sourceTab: Tabs
-    @Published var assignedPersons: [String]
+    @Published var assignedPersons: [Image]
     @Published var comment: String = ""
     @Published var isSubmittingComment: Bool = false
     

@@ -13,6 +13,8 @@ internal enum L10n {
   internal enum AddTask {
     /// Add SubTask
     internal static let addSubtask = L10n.tr("Localizable", "addTask.addSubtask", fallback: "Add SubTask")
+    /// Assign To
+    internal static let assignTo = L10n.tr("Localizable", "addTask.assignTo", fallback: "Assign To")
     /// Create Task
     internal static let createTask = L10n.tr("Localizable", "addTask.createTask", fallback: "Create Task")
     /// Enter description
@@ -33,6 +35,17 @@ internal enum L10n {
     internal static let taskTitle = L10n.tr("Localizable", "addTask.taskTitle", fallback: "Task Title")
     /// Add Task
     internal static let title = L10n.tr("Localizable", "addTask.title", fallback: "Add Task")
+  }
+  internal enum Announecment {
+    /// You’re almost done for
+    ///  today
+    internal static let sentence = L10n.tr("Localizable", "announecment.sentence", fallback: "You’re almost done for\n today")
+    /// 3/4 Tasks
+    internal static let tasks = L10n.tr("Localizable", "announecment.tasks", fallback: "3/4 Tasks")
+    /// there
+    internal static let there = L10n.tr("Localizable", "announecment.there", fallback: "there")
+    /// Welcome
+    internal static let welcome = L10n.tr("Localizable", "announecment.Welcome", fallback: "Welcome")
   }
   internal enum AssignedPersons {
     /// teenagerGirl
@@ -401,10 +414,14 @@ internal enum L10n {
     internal static let addYourComment = L10n.tr("Localizable", "projectDetails.addYourComment", fallback: "Add Your Comment")
     /// Comment
     internal static let comment = L10n.tr("Localizable", "projectDetails.comment", fallback: "Comment")
+    /// Comments
+    internal static let comments = L10n.tr("Localizable", "projectDetails.comments", fallback: "Comments")
     /// Description
     internal static let description = L10n.tr("Localizable", "projectDetails.description", fallback: "Description")
     /// Enter your comment
     internal static let enterComment = L10n.tr("Localizable", "projectDetails.enterComment", fallback: "Enter your comment")
+    /// User research: Understanding user needs, preferences, and behaviors. Design principles: Applying established design guidelines and best practices. Design principles: Applying established design guidelines and best practices.
+    internal static let example = L10n.tr("Localizable", "projectDetails.example", fallback: "User research: Understanding user needs, preferences, and behaviors. Design principles: Applying established design guidelines and best practices. Design principles: Applying established design guidelines and best practices.")
     /// Submitting...
     internal static let submitting = L10n.tr("Localizable", "projectDetails.submitting", fallback: "Submitting...")
   }
@@ -469,12 +486,18 @@ internal enum L10n {
     internal static let monday = L10n.tr("Localizable", "tasks.monday", fallback: "Monday")
     /// Not Priority
     internal static let notPriority = L10n.tr("Localizable", "tasks.notPriority", fallback: "Not Priority")
+    /// Our Tasks for the project
+    internal static let ourTasks = L10n.tr("Localizable", "tasks.ourTasks", fallback: "Our Tasks for the project")
     /// Redesign App
     internal static let redesignApp = L10n.tr("Localizable", "tasks.redesignApp", fallback: "Redesign App")
     /// Saturday
     internal static let saturday = L10n.tr("Localizable", "tasks.saturday", fallback: "Saturday")
+    /// Schedule
+    internal static let schedule = L10n.tr("Localizable", "tasks.schedule", fallback: "Schedule")
     /// See All
     internal static let seeAll = L10n.tr("Localizable", "tasks.seeAll", fallback: "See All")
+    /// to
+    internal static let to = L10n.tr("Localizable", "tasks.to", fallback: "to")
     /// Today
     internal static let today = L10n.tr("Localizable", "tasks.today", fallback: "Today")
     /// Today's Task

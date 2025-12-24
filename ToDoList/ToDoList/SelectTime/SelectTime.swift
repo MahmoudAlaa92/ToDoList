@@ -73,13 +73,13 @@ extension SelectTimeView {
         Group {
             AlertRow(
                 imageName: "Alarm",
-                title: "Sound",
+                title: L10n.Time.sound,
                 subTitle: viewModel.soundTitle
             )
             
             AlertRow(
                 imageName: "Sound",
-                title: "Snooze",
+                title: L10n.Time.snooze,
                 subTitle: viewModel.snoozeTitle
             )
         }
@@ -88,7 +88,7 @@ extension SelectTimeView {
     private var actionButtons: some View {
         HStack {
             SecondaryButton(
-                title: "back",
+                title: L10n.General.back,
                 width: (.screenWidth * 0.5 - 30.0),
                 action: { viewModel.backTapped() }
             )
@@ -96,7 +96,7 @@ extension SelectTimeView {
             Spacer()
             
             PrimaryButton(
-                title: "done",
+                title: L10n.General.done,
                 width: (.screenWidth * 0.5 - 30.0),
                 action: { viewModel.doneTapped() }
             )

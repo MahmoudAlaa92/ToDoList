@@ -22,23 +22,23 @@ struct HomeNavBar: View {
             }
             
             
-            Image("ProfilePicture2")
+            Images.profilePicture2
                 .resizable()
                 .scaledToFit()
                 .frame(width: 50 * .deviceFontScale,
                        height: 50 * .deviceFontScale)
                 .onTapGesture { onTappedProfilePicture() }
             
-            Text("Welcome")
+            Text(L10n.Announecment.welcome)
                 .font(.customfont(.semibold, fontSize: 16 * .deviceFontScale))
                 .foregroundStyle(Color.primaryApp)
-            Text("there!")
+            Text(L10n.Announecment.there)
                 .font(.customfont(.medium, fontSize: 16 * .deviceFontScale))
                 .foregroundStyle(Color.primaryText)
             
             Spacer()
             
-            Image("Notification")
+            Images.notification
                 .resizable()
                 .scaledToFit()
                 .frame(width: 26 * .deviceFontScale,

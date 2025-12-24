@@ -32,7 +32,7 @@ struct CommentsView<VM: CommentsViewModelType>: View {
 private extension CommentsView {
 
     var navigationBar: some View {
-        BackAndTitleNavBar(title: "Comments")
+        BackAndTitleNavBar(title: L10n.ProjectDetails.comments)
     }
 
     var commentsList: some View {

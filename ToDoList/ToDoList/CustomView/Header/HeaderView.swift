@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HeaderView: View {
     var name: String = ""
-    var seeAll: String = "See All"
+    var seeAll: String = L10n.Tasks.seeAll
     var onTappedSeeAll: (() -> Void)?
     
     var body: some View {

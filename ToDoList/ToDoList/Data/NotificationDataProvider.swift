@@ -25,41 +25,41 @@ final class NotificationDataProvider: NotificationDataProviderProtocol {
     func fetchNotifications() -> [NotificationSection] {
         return [
             NotificationSection(
-                title: "Today",
+                title: L10n.Notifications.today,
                 notifications: [
                     NotificationItem(
                         profileImageName: "ProfilePicture",
-                        message: "Mohamed Samy assign to you in a new project"
+                        message: L10n.Notifications.assignedMessage(L10n.Notifications.mohamedSamy)
                     )
                 ]
             ),
             NotificationSection(
-                title: "Yesterday",
+                title: L10n.Notifications.yesterday,
                 notifications: [
                     NotificationItem(
                         profileImageName: "ProfilePicture",
-                        message: "Mohamed Samy assign to you in a new project"
+                        message: L10n.Notifications.assignedMessage(L10n.Notifications.mohamedSamy)
                     ),
                     NotificationItem(
                         profileImageName: "ProfilePicture2",
-                        message: "Sarah Samy assign to you in a new project"
+                        message: L10n.Notifications.assignedMessage(L10n.Notifications.sarahSamy)
                     ),
                     NotificationItem(
                         profileImageName: "ProfilePicture3",
-                        message: "Mohamed Samy assign to you in a new project"
+                        message: L10n.Notifications.assignedMessage(L10n.Notifications.mohamedSamy)
                     ),
                 ]
             ),
             NotificationSection(
-                title: "Friday",
+                title: L10n.Tasks.friday,
                 notifications: [
                     NotificationItem(
                         profileImageName: "ProfilePicture",
-                        message: "Mohamed Samy assign to you in a new project"
+                        message: L10n.Notifications.assignedMessage(L10n.Notifications.mohamedSamy)
                     ),
                     NotificationItem(
                         profileImageName: "ProfilePicture2",
-                        message: "Mohamed Samy assign to you in a new project"
+                        message: L10n.Notifications.assignedMessage(L10n.Notifications.mohamedSamy)
                     ),
                 ]
             ),
