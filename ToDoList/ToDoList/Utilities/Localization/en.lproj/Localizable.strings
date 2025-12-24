@@ -140,6 +140,7 @@
 "tasks.codeReviewSession" = "Code Review Session";
 "tasks.backendAPI" = "Backend API";
 "tasks.emptyField" = "There is an empty field";
+"tasks.createdTaskSuccessfully" = "Task Created Successfully";
 
 // MARK: - Projects
 "projects.title" = "My projects";
@@ -211,6 +212,7 @@
 "addTask.enterTaskTitle" = "Enter task title";
 "addTask.enterTaskSubtitle" = "Enter task subtitle";
 "addTask.enterDescription" = "Enter description";
+"addTask.addSubtask" = "Add SubTask";
 
 // MARK: - Forms
 "form.name.placeholder" = "Enter your name";

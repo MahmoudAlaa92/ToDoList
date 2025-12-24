@@ -140,6 +140,7 @@
 "tasks.codeReviewSession" = "جلسة مراجعة الكود";
 "tasks.backendAPI" = "API الخلفية";
 "tasks.emptyField" = "يوجد حقل فارغ";
+"tasks.createdTaskSuccessfully" = "تمت الاضافة";
 
 // MARK: - Projects
 "projects.title" = "مشاريعي";
@@ -211,6 +212,7 @@
 "addTask.enterTaskTitle" = "أدخل عنوان المهمة";
 "addTask.enterTaskSubtitle" = "أدخل العنوان الفرعي";
 "addTask.enterDescription" = "أدخل الوصف";
+"addTask.addSubtask" = "إضافة مهمة فرعية";
 
 // MARK: - Forms
 "form.name.placeholder" = "أدخل اسمك";

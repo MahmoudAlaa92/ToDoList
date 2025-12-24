@@ -70,7 +70,7 @@ extension HomeView {
 extension HomeView {
     @ViewBuilder
     private var calendarSection: some View {
-        HeaderView(name: "Calendar", seeAll: "")
+        HeaderView(name: L10n.Home.calendar, seeAll: "")
         
         ScrollView(.horizontal) {
             HStack(spacing: 24 * .deviceFontScale) {
@@ -90,7 +90,7 @@ extension HomeView {
     
     @ViewBuilder
     private var todaysTasksSection: some View {
-        HeaderView(name: "Today's tasks")
+        HeaderView(name: L10n.Home.todaysTasks)
         
         if viewModel.todaysTasks.isEmpty {
             emptyTasksView
@@ -118,7 +118,7 @@ extension HomeView {
     @ViewBuilder
     private var emptyTasksView: some View {
         VStack(spacing: 12) {
-            Text("No tasks for today")
+            Text(L10n.Home.todaysTasks)
                 .font(.customfont(.medium, fontSize: 16))
                 .foregroundColor(.LightGray)
         }
@@ -127,7 +127,7 @@ extension HomeView {
     
     @ViewBuilder
     private var myProjectsSection: some View {
-        HeaderView(name: "My Projects") {
+        HeaderView(name: L10n.Home.myProjects) {
             coordinator?.myProjectsView(for: .home)
         }
         
@@ -150,7 +150,7 @@ extension HomeView {
             
             Spacer()
             
-            MenuButton(image: "Lock", title: "Logout") {
+            MenuButton(image: Images.lock, title: L10n.Home.logout) {
                 handleLogout()
             }
             
@@ -169,12 +169,12 @@ extension HomeView {
     @ViewBuilder
     private var profileHeader: some View {
         HStack {
-            Image("ProfilePicture2")
+            Images.profilePicture2
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30, height: 30)
             
-            Text("Mahmoud Alaa")
+            Text(L10n.Notifications.mahmoudAlaa)
                 .font(.customfont(.semibold, fontSize: 16))
                 .foregroundColor(.primary)
         }
@@ -182,16 +182,16 @@ extension HomeView {
     
     @ViewBuilder
     private var menuItems: some View {
-        MenuButton(image: "home", title: "Home") {
+        MenuButton(image: Images.home, title: L10n.Home.title) {
             showMenu = false
         }
         
-        MenuButton(image: "Account", title: "Profile") {
+        MenuButton(image: Images.account, title: L10n.Home.Menu.profile) {
             coordinator?.pushProfileView(for: .home)
             showMenu = false
         }
         
-        MenuButton(image: "allTasks", title: "Notifications") {
+        MenuButton(image: Images.allTasks, title: L10n.Home.Menu.notifications) {
             coordinator?.pushNotification(for: .home)
             showMenu = false
         }

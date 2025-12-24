@@ -39,7 +39,7 @@ struct AddTask<VM: AddTaskViewModelType>: View {
         .padding(.horizontal, 20)
         .scrollIndicators(.hidden)
         .onReceive(viewModel.success) { _ in
-            alertTitle = "Task Created Successfully"
+            alertTitle = L10n.Tasks.createdTaskSuccessfully
             showAlert = true
         }
         .onReceive(viewModel.error) { error in
@@ -66,39 +66,39 @@ extension AddTask {
     }
 
     func textFields() -> some View {
-        VStack(spacing: 12) {
-            CustomTextField(
-                title: "Add Your Project Name",
-                placeholder: "Enter your Project Name",
-                text: $viewModel.taskName
-            )
+         VStack(spacing: 12) {
+             CustomTextField(
+                 title: L10n.AddTask.taskName,
+                 placeholder: L10n.AddTask.enterTaskName,
+                 text: $viewModel.taskName
+             )
 
-            CustomTextField(
-                title: "Title",
-                placeholder: "Enter your title",
-                text: $viewModel.taskTitle
-            )
+             CustomTextField(
+                 title: L10n.AddTask.taskTitle,
+                 placeholder: L10n.AddTask.enterTaskTitle,
+                 text: $viewModel.taskTitle
+             )
 
-            CustomTextField(
-                title: "SubTitle",
-                placeholder: "Enter your subTitle",
-                text: $viewModel.taskSubTitle
-            )
+             CustomTextField(
+                 title: L10n.AddTask.taskSubtitle,
+                 placeholder: L10n.AddTask.enterTaskSubtitle,
+                 text: $viewModel.taskSubTitle
+             )
 
-            CustomTextField(
-                title: "Description",
-                placeholder: "Add Description..",
-                height: 100 * .deviceFontScale,
-                text: $viewModel.taskDescription
-            )
-        }
-    }
+             CustomTextField(
+                 title: L10n.AddTask.taskDescription,
+                 placeholder: L10n.AddTask.enterDescription,
+                 height: 100 * .deviceFontScale,
+                 text: $viewModel.taskDescription
+             )
+         }
+     }
 
     func addSubTask() -> some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 AddProject(
-                    title: "Add SubTask",
+                    title: L10n.AddTask.addSubtask,
                     titleColor: .primaryApp,
                     backGround: .white,
                     plusCircleColor: .darkGray
@@ -121,7 +121,7 @@ extension AddTask {
     }
 
     func createTaskButton() -> some View {
-        PrimaryButton(title: "Create Task") {
+        PrimaryButton(title: L10n.AddTask.createTask) {
             viewModel.createTaskTapped()
         }
         .disabled(!viewModel.isFormValid)

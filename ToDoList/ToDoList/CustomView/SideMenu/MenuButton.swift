@@ -9,14 +9,14 @@ import SwiftUI
 
 // MARK: - Menu Button Component
 struct MenuButton: View {
-    let image: String
+    let image: Image
     let title: String
     let action: () -> Void
     
     var body: some View {
         Button(action: action) {
             HStack(spacing: 12) {
-                Image(image)
+                image
                     .font(.title3)
                     .foregroundColor(.primary)
                     .frame(width: 30)

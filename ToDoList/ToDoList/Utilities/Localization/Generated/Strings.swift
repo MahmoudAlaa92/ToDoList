@@ -11,6 +11,8 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   internal enum AddTask {
+    /// Add SubTask
+    internal static let addSubtask = L10n.tr("Localizable", "addTask.addSubtask", fallback: "Add SubTask")
     /// Create Task
     internal static let createTask = L10n.tr("Localizable", "addTask.createTask", fallback: "Create Task")
     /// Enter description
@@ -449,6 +451,8 @@ internal enum L10n {
     internal static let clientReviewShort = L10n.tr("Localizable", "tasks.clientReviewShort", fallback: "Client Review")
     /// Code Review Session
     internal static let codeReviewSession = L10n.tr("Localizable", "tasks.codeReviewSession", fallback: "Code Review Session")
+    /// Task Created Successfully
+    internal static let createdTaskSuccessfully = L10n.tr("Localizable", "tasks.createdTaskSuccessfully", fallback: "Task Created Successfully")
     /// Design System Updates
     internal static let designSystemUpdates = L10n.tr("Localizable", "tasks.designSystemUpdates", fallback: "Design System Updates")
     /// There is an empty field
