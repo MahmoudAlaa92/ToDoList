@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum CoordintorRouteFactory {
-    static func NotificationRouteFactory(for tab: Tabs) -> any (Route & ViewBuildable & TabIdentifiable) {
+    static func notificationRouteFactory(for tab: Tabs) -> any (Route & ViewBuildable & TabIdentifiable) {
         switch tab {
         case .home:
             return HomeTabRoute.notification
@@ -23,7 +23,7 @@ enum CoordintorRouteFactory {
         }
     }
     
-    static func ProjectDetailsRoutFactory(for tab: Tabs, taskCard: PlannedModel) -> any (Route & ViewBuildable & TabIdentifiable) {
+    static func projectDetailsRoutFactory(for tab: Tabs, taskCard: PlannedModel) -> any (Route & ViewBuildable & TabIdentifiable) {
         switch tab {
         case .home:
             return HomeTabRoute.projectDetails(taskCard: taskCard)
@@ -39,7 +39,7 @@ enum CoordintorRouteFactory {
         return PlannedTabRoute.projectDetails(taskCard: taskCard)
     }
     
-    static func CreatedTaskViewRoutFactory(for tab: Tabs, taskCard: PlannedModel) -> any (Route & ViewBuildable & TabIdentifiable) {
+    static func createdTaskViewRoutFactory(for tab: Tabs, taskCard: PlannedModel) -> any (Route & ViewBuildable & TabIdentifiable) {
         switch tab {
         case .home:
             return HomeTabRoute.createdTaskView(taskCard: taskCard)
@@ -55,7 +55,7 @@ enum CoordintorRouteFactory {
         return HomeTabRoute.createdTaskView(taskCard: taskCard)
     }
     
-    static func CreatedProfileRoutFactory(for tab: Tabs) -> any (Route & ViewBuildable & TabIdentifiable) {
+    static func createdProfileRoutFactory(for tab: Tabs) -> any (Route & ViewBuildable & TabIdentifiable) {
         switch tab {
         case .home:
             return HomeTabRoute.profilePicture
@@ -71,7 +71,7 @@ enum CoordintorRouteFactory {
         return HomeTabRoute.profilePicture
     }
     
-    static func MyProjectsRoutFactory(for tab: Tabs) -> any (Route & ViewBuildable & TabIdentifiable) {
+    static func myProjectsRoutFactory(for tab: Tabs) -> any (Route & ViewBuildable & TabIdentifiable) {
         switch tab {
         case .home:
             return HomeTabRoute.myProjectsView

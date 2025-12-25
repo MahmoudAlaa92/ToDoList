@@ -196,31 +196,31 @@ extension AppCoordinator {
 extension AppCoordinator {
     /// Push notification route for any tab
     func pushNotification(for tab: Tabs) {
-        let route = CoordintorRouteFactory.NotificationRouteFactory(for: tab)
+        let route = CoordintorRouteFactory.notificationRouteFactory(for: tab)
         push(route)
     }
     
     /// Push project details route for any tab
     func pushProjectDetails(for tab: Tabs, taskCard: PlannedModel) {
-        let route = CoordintorRouteFactory.ProjectDetailsRoutFactory(for: tab, taskCard: taskCard)
+        let route = CoordintorRouteFactory.projectDetailsRoutFactory(for: tab, taskCard: taskCard)
         push(route)
     }
     
     /// Push project details route for any tab
     func pushCreatedTaskView(for tab: Tabs, taskCard: PlannedModel) {
-        let route = CoordintorRouteFactory.CreatedTaskViewRoutFactory(for: tab, taskCard: taskCard)
+        let route = CoordintorRouteFactory.createdTaskViewRoutFactory(for: tab, taskCard: taskCard)
         push(route)
     }
     
     /// Push profile route for any tab
     func pushProfileView(for tab: Tabs) {
-        let route = CoordintorRouteFactory.CreatedProfileRoutFactory(for: tab)
+        let route = CoordintorRouteFactory.createdProfileRoutFactory(for: tab)
         push(route)
     }
     
     /// Push ProjectsView route for any tab
     func myProjectsView(for tab: Tabs) {
-        let route = CoordintorRouteFactory.MyProjectsRoutFactory(for: tab)
+        let route = CoordintorRouteFactory.myProjectsRoutFactory(for: tab)
         push(route)
     }
 }

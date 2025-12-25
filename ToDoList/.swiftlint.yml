@@ -1,0 +1,15 @@
+# Enable only the rules you want
+only_rules:
+  - force_unwrapping
+  - file_header
+  - line_length
+
+# Rule configurations
+force_unwrapping:
+  severity: warning
+
+line_length:
+  warning: 140
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
