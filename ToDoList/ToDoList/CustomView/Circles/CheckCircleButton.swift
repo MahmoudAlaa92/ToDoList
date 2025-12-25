@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CheckCircleButton: View {
-    @State var isChecked = false
+    @Binding var isChecked: Bool
 
     var body: some View {
         Button {
@@ -38,5 +38,5 @@ struct CheckCircleButton: View {
 }
 
 #Preview {
-    CheckCircleButton()
+//    CheckCircleButton()
 }

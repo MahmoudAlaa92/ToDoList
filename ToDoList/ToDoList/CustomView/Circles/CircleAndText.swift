@@ -10,7 +10,6 @@ import SwiftUI
 struct CircleAndText: View {
     var circleItem: PlannedModel
     var showCheckCircle: Bool = true
-    var showStrikeLine: Bool = false
     @State var isChecked = false
 
     var body: some View {
@@ -43,7 +42,7 @@ struct CircleAndText: View {
                                 fontSize: 16 * .deviceFontScale
                             )
                         )
-                        .strikethrough(showStrikeLine, color: .gray)
+                        .strikethrough(isChecked, color: .gray)
 
                     Text(circleItem.subTitle)
                         .foregroundStyle(circleItem.colorSubTitle ?? .primary)
@@ -57,7 +56,7 @@ struct CircleAndText: View {
                 if showCheckCircle {
                     Spacer()
                     VStack {
-                        CheckCircleButton(isChecked: isChecked)
+                        CheckCircleButton(isChecked: $isChecked)
                         Spacer().frame(width: 10, height: 20)
                     }
                 }

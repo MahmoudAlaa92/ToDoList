@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TaskCard: View {
     var taskCardModel: PlannedModel
-    var showStrikeLine: Bool = false
     @State var isChecked = false
     var onDelete: (() -> Void)?
 
@@ -17,7 +16,6 @@ struct TaskCard: View {
         VStack {
             CircleAndText(
                 circleItem: taskCardModel,
-                showStrikeLine: showStrikeLine,
                 isChecked: isChecked
             )
             Divider()
