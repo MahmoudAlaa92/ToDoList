@@ -92,6 +92,8 @@
 "general.back" = "رجوع";
 "general.done" = "تم";
 "general.close" = "إغلاق";
+"general.planned" = "مخطط له";
+"general.priorities" = "الأولويات";
 
 // MARK: - Navigation
 "nav.info" = "المعلومات";

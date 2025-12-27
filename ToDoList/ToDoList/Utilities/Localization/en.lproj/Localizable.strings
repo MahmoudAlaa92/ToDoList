@@ -92,6 +92,8 @@
 "general.back" = "back";
 "general.done" = "done";
 "general.close" = "Close";
+"general.planned" = "Planned";
+"general.priorities" = "Priorities";
 
 // MARK: - Navigation
 "nav.info" = "Info";

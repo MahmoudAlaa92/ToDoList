@@ -1,6 +1,6 @@
 
 ## Generate Colors
-xcassets:
+#xcassets:
 #   inputs:
 #       - Herfety/Resources/SwiftGen/Colors/Colors.xcassets
 #   outputs:
@@ -10,20 +10,20 @@ xcassets:
 #         forceFileNameEnum: true
 #       output: Herfety/Resources/SwiftGen/Colors/Generated-Colors.swift
 # Generate Images
-   inputs:
-       - ToDoList/ToDoList/Utilities/Images/Images.xcassets
-   outputs:
-       templatePath: ToDoList/ToDoList/Utilities/StencilFile/images.stencil
-       params:
-         forceProvidesNamespaces: true
-         forceFileNameEnum: true
-       output: ToDoList/ToDoList/Utilities/Images/Generated/Generated-Images.swift
+#   inputs:
+#       - ToDoList/ToDoList/Utilities/Images/Images.xcassets
+#   outputs:
+#       templatePath: ToDoList/ToDoList/Utilities/StencilFile/images.stencil
+#       params:
+#         forceProvidesNamespaces: true
+#         forceFileNameEnum: true
+#       output: ToDoList/ToDoList/Utilities/Images/Generated/Generated-Images.swift
 
-#strings:
-#  inputs:
-#    - ToDoList/ToDoList/Utilities/Localization/en.lproj/Localizable.strings
-#  outputs:
-#    - templateName: structured-swift5
-#      output: ToDoList/ToDoList/Utilities/Localization/Generated/Strings.swift
-#  
-#
+strings:
+  inputs:
+    - ToDoList/ToDoList/Utilities/Localization/en.lproj/Localizable.strings
+  outputs:
+    - templateName: structured-swift5
+      output: ToDoList/ToDoList/Utilities/Localization/Generated/Strings.swift
+  
+

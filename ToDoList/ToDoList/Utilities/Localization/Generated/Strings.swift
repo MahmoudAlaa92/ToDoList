@@ -310,6 +310,10 @@ internal enum L10n {
     internal static let male = L10n.tr("Localizable", "general.male", fallback: "Male")
     /// OK
     internal static let ok = L10n.tr("Localizable", "general.ok", fallback: "OK")
+    /// Planned
+    internal static let planned = L10n.tr("Localizable", "general.planned", fallback: "Planned")
+    /// Priorities
+    internal static let priorities = L10n.tr("Localizable", "general.priorities", fallback: "Priorities")
     /// Save
     internal static let save = L10n.tr("Localizable", "general.save", fallback: "Save")
     /// Setting

@@ -18,7 +18,7 @@ struct CustomTabBar: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            Tab("Home", image: "home", value: .home) {
+            Tab(L10n.Home.title, image: "home", value: .home) {
                 NavigationStack(path: $coordinator.homeTabPath) {
                     HomeView(
                         viewModel: HomeViewModel(
@@ -33,7 +33,7 @@ struct CustomTabBar: View {
                 }
             }
 
-            Tab("Today", image: "calender2", value: .today) {
+            Tab(L10n.Tasks.today, image: "calender2", value: .today) {
                 NavigationStack(path: $coordinator.todayTabPath) {
                     AllTasksView(
                         viewModel: AllTasksViewModel(
@@ -47,7 +47,7 @@ struct CustomTabBar: View {
                 }
             }
 
-            Tab("AddTask", image: "addIcon", value: .addTask) {
+            Tab(L10n.AddTask.title, image: "addIcon", value: .addTask) {
                 NavigationStack(path: $coordinator.addTaskPath) {
                     AddTask(
                         coordinator: coordinator,
@@ -59,7 +59,7 @@ struct CustomTabBar: View {
                 }
             }
 
-            Tab("Priorities", image: "flag2", value: .prioritiesTask) {
+            Tab(L10n.General.priorities, image: "flag2", value: .prioritiesTask) {
                 NavigationStack(path: $coordinator.prioritiesTabPath) {
                     PrioritiesTasksView(
                         viewModel: PrioritiesTasksViewModel(
@@ -75,7 +75,7 @@ struct CustomTabBar: View {
                 }
             }
 
-            Tab("Planned", image: "planned", value: .planned) {
+            Tab(L10n.General.planned, image: "planned", value: .planned) {
                 NavigationStack(path: $coordinator.plannedTabPath) {
                     PlannedView(
                         viewModel: PlannedViewModel(
