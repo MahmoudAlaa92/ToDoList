@@ -101,7 +101,7 @@ MVVM • Combine
 
 ## 📚 Behance To Preview
 
-### Link: https://www.behance.net/gallery/207117637/To-Do-List-APP-Case-Study
+### -[ Figma Link](https://www.behance.net/gallery/207117637/To-Do-List-APP-Case-Study)
 
 <img width="5760" height="4096" alt="Desktop - 14" src="https://github.com/user-attachments/assets/b456fc17-11ce-4388-9188-4e7dbc54e416" />
 
