@@ -1,6 +1,6 @@
 # 📝 TaskFlow – iOS App
 
-A modern **iOS To-Do List application** built with **SwiftUI** that helps users organize and remember tasks for **today or any day throughout the month**.
+A modern **iOS TaskFlow application** built with **SwiftUI** that helps users organize and remember tasks for **today or any day throughout the month**.
 
 The app is designed with **clean architecture**, **scalable patterns**, and **Apple design guidelines**, focusing on maintainability, performance, and user experience.
 
@@ -76,7 +76,7 @@ This project follows a **professional iOS architecture**:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/MahmoudAlaa92/ToDoList.git
+   git clone https://github.com/MahmoudAlaa92/TaskFlow.git
    ```
 2. Open the project in **Xcode**
 3. Run the app on a simulator or device 🚀
